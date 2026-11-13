@@ -18,6 +18,37 @@
       border: 4px solid #ffffff;
       margin-bottom: 1rem;
     }
+
+    /* Hero section layout with featured photo */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-banner-img {
+      width: 100%;
+      max-height: 360px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(3, 4, 94, 0.12);
+    }
+
+    /* Portfolio card images */
+    .project-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -50,16 +81,21 @@
 
   <main id="main">
     <section id="home" class="section hero">
-      <div class="container hero-copy">
-        <p class="eyebrow blue">ICT • TRAINING • TECHNICAL SUPPORT</p>
-        <h2>Technology made practical.</h2>
-        <p>I am an ICT professional and technical trainer focused on helping learners, institutions and businesses use technology effectively.</p>
-        <div class="actions">
-          <a class="button" href="#contact">Contact me</a>
-          <a class="button button-outline" href="#services">Explore services</a>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow blue">ICT • TRAINING • TECHNICAL SUPPORT</p>
+          <h2>Technology made practical.</h2>
+          <p>I am an ICT professional and technical trainer focused on helping learners, institutions and businesses use technology effectively.</p>
+          <div class="actions">
+            <a class="button" href="#contact">Contact me</a>
+            <a class="button button-outline" href="#services">Explore services</a>
+          </div>
+          <div class="quick-facts">
+            <span>TVET / CBET training</span><span>Computer maintenance</span><span>Networking</span>
+          </div>
         </div>
-        <div class="quick-facts">
-          <span>TVET / CBET training</span><span>Computer maintenance</span><span>Networking</span>
+        <div class="hero-media">
+          <img src="assets/hero-work.jpg" alt="ICT training and technical support session" class="hero-banner-img">
         </div>
       </div>
     </section>
@@ -97,9 +133,21 @@
         <h2 class="section-heading">Selected project areas</h2>
         <p class="section-lead">Examples of the types of practical ICT work and learning projects I develop.</p>
         <div class="cards three">
-          <article class="card project"><div class="project-art art-one">WEB</div><h3>Institutional websites</h3><p>Responsive websites for presenting institutional information, courses and services.</p></article>
-          <article class="card project"><div class="project-art art-two">DATA</div><h3>Database prototypes</h3><p>Database structures and interfaces for records, reporting and information management.</p></article>
-          <article class="card project"><div class="project-art art-three">NET</div><h3>Small-office networks</h3><p>Network planning, connectivity setup, device configuration and troubleshooting.</p></article>
+          <article class="card project">
+            <img src="assets/project-web.jpg" alt="Institutional website design preview" class="project-img">
+            <h3>Institutional websites</h3>
+            <p>Responsive websites for presenting institutional information, courses and services.</p>
+          </article>
+          <article class="card project">
+            <img src="assets/project-data.jpg" alt="Database prototype interface" class="project-img">
+            <h3>Database prototypes</h3>
+            <p>Database structures and interfaces for records, reporting and information management.</p>
+          </article>
+          <article class="card project">
+            <img src="assets/project-net.jpg" alt="Small-office network setup" class="project-img">
+            <h3>Small-office networks</h3>
+            <p>Network planning, connectivity setup, device configuration and troubleshooting.</p>
+          </article>
         </div>
         <p class="note">Add links to your completed GitHub projects and replace these examples with screenshots of your own work.</p>
         <a class="text-link" href="https://github.com/njoroo-tech" target="_blank" rel="noopener noreferrer">Visit my GitHub profile ↗</a>
