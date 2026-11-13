@@ -4,30 +4,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Harrison Ndungu — ICT Services Specialist and Technical Trainer in Kenya. ICT training, computer maintenance, networking, web development and digital solutions.">
-  <img src="assets/profile.jpg" alt="Harrison Ndungu"
-     class="profile-photo"><style>
-    /* Put your CSS code right here */
-    body {
-      font-family: Arial, sans-serif;
-    }
-    .profile-photo {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-  </style>
   <meta name="keywords" content="Harrison Ndungu, ICT Trainer, ICT Technician, TVET CDACC, computer repair, networking, web development, Kenya">
   <meta name="author" content="Harrison Ndungu">
   <meta name="theme-color" content="#03045e">
   <title>Harrison Ndungu | ICT Services Specialist &amp; Technical Trainer</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .profile-photo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #ffffff;
+      margin-bottom: 1rem;
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="top-banner">
     <div class="container">
-     <img src="profile.jpg" alt="Harrison Ndungu" class="profile-photo">
+      <img src="assets/profile.jpg" alt="Harrison Ndungu" class="profile-photo">
       <p class="eyebrow">#OPENTOWORK</p>
       <h1>Harrison Ndungu</h1>
       <p class="tagline">ICT Services Specialist &amp; Technical Trainer</p>
@@ -53,7 +50,7 @@
 
   <main id="main">
     <section id="home" class="section hero">
-      <div class="hero-copy">
+      <div class="container hero-copy">
         <p class="eyebrow blue">ICT • TRAINING • TECHNICAL SUPPORT</p>
         <h2>Technology made practical.</h2>
         <p>I am an ICT professional and technical trainer focused on helping learners, institutions and businesses use technology effectively.</p>
@@ -64,10 +61,6 @@
         <div class="quick-facts">
           <span>TVET / CBET training</span><span>Computer maintenance</span><span>Networking</span>
         </div>
-      </div>
-      <div class="hero-photo">
-        <img src="assets/profile.jpg" alt="Harrison Ndungu profile photograph" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
-        <div class="photo-placeholder">Add your profile photo<br><small>assets/profile.jpg</small></div>
       </div>
     </section>
 
@@ -85,7 +78,8 @@
     </section>
 
     <section id="services" class="section container">
-      <p class="eyebrow blue">SERVICES</p><h2 class="section-heading">Technical services &amp; training areas</h2>
+      <p class="eyebrow blue">SERVICES</p>
+      <h2 class="section-heading">Technical services &amp; training areas</h2>
       <p class="section-lead">Support and instruction for individuals, businesses and training institutions.</p>
       <div class="cards three">
         <article class="card"><h3>Computer repair &amp; maintenance</h3><ul><li>Hardware diagnostics and component replacement</li><li>Operating system and application installation</li><li>Preventive maintenance and troubleshooting</li><li>Basic security and malware-removal support</li></ul></article>
@@ -99,7 +93,8 @@
 
     <section id="portfolio" class="section section-soft">
       <div class="container">
-        <p class="eyebrow blue">PORTFOLIO</p><h2 class="section-heading">Selected project areas</h2>
+        <p class="eyebrow blue">PORTFOLIO</p>
+        <h2 class="section-heading">Selected project areas</h2>
         <p class="section-lead">Examples of the types of practical ICT work and learning projects I develop.</p>
         <div class="cards three">
           <article class="card project"><div class="project-art art-one">WEB</div><h3>Institutional websites</h3><p>Responsive websites for presenting institutional information, courses and services.</p></article>
@@ -112,7 +107,8 @@
     </section>
 
     <section id="experience" class="section container">
-      <p class="eyebrow blue">EXPERIENCE</p><h2 class="section-heading">Professional experience &amp; training</h2>
+      <p class="eyebrow blue">EXPERIENCE</p>
+      <h2 class="section-heading">Professional experience &amp; training</h2>
       <div class="timeline">
         <article class="timeline-item"><span class="timeline-date">Aug – Dec 2025</span><h3>Kandara Technical and Vocational College</h3><p><strong>ICT Teaching Practice</strong> — CBET and modularised TVET instruction, lesson preparation, practical demonstrations and learner assessment.</p></article>
         <article class="timeline-item"><span class="timeline-date">Jun 2023 – Sept 2024</span><h3>Nairobi South Training Institute, Kitengela</h3><p><strong>ICT &amp; Business Studies Trainer</strong> — delivery of ICT and related units, computer packages and practical short-course training.</p></article>
@@ -120,33 +116,46 @@
         <article class="timeline-item"><span class="timeline-date">Jul – Dec 2021</span><h3>Jodan College of Technology, Thika</h3><p><strong>ICT Trainer.</strong></p></article>
         <article class="timeline-item"><span class="timeline-date">2017 – 2020</span><h3>Success Professionals Institute, Thika &amp; Makongeni</h3><p><strong>ICT &amp; Accounting Packages Instructor</strong> — training in computer applications and accounting packages including Sage, Pastel and QuickBooks.</p></article>
       </div>
-      <div class="education-box"><h3>Education &amp; professional development</h3><ul><li>Diploma in Technical Trainer Education (Computer Studies), KSTVET, 2024–2025</li><li>Diploma in ICT, Thika Technical Training Institute, 2016–2017</li><li>Certificate in ICT / IT, 2014–2015</li></ul></div>
-      <div class="actions"><a class="button" href="assets/cv.pdf" download>Download CV (PDF)</a><span class="small-muted">Upload your CV as assets/cv.pdf to activate this link.</span></div>
+      <div class="education-box">
+        <h3>Education &amp; professional development</h3>
+        <ul>
+          <li>Diploma in Technical Trainer Education (Computer Studies), KSTVET, 2024–2025</li>
+          <li>Diploma in ICT, Thika Technical Training Institute, 2016–2017</li>
+          <li>Certificate in ICT / IT, 2014–2015</li>
+        </ul>
+      </div>
+      <div class="actions">
+        <a class="button" href="assets/cv.pdf" download>Download CV (PDF)</a>
+        <span class="small-muted">Upload your CV as assets/cv.pdf to activate this link.</span>
+      </div>
     </section>
 
     <section id="about" class="section section-soft">
       <div class="container about-grid">
-        <div><p class="eyebrow blue">ABOUT</p><h2 class="section-heading">About Harrison Ndungu</h2>
+        <div>
+          <p class="eyebrow blue">ABOUT</p>
+          <h2 class="section-heading">About Harrison Ndungu</h2>
           <p>I am an ICT Services Specialist and Technical Trainer with more than seven years of experience across ICT instruction, computer applications, technical support and digital solutions.</p>
           <p>My approach focuses on simplifying ICT concepts and translating them into practical learning activities. My training background supports delivery to learners at different levels, including craft and diploma programmes.</p>
           <p>I am interested in opportunities in TVET training, ICT support, computer maintenance, networking and related technical roles.</p>
           <a class="text-link" href="https://sites.google.com/view/ndush/home" target="_blank" rel="noopener noreferrer">View academic e-portfolio ↗</a>
         </div>
-        <aside class="about-panel"><h3>Core strengths</h3><ul><li>CBET-oriented instruction</li><li>Practical demonstrations and assessment</li><li>Computer hardware and software support</li><li>Office and accounting applications</li><li>Communication and learner support</li></ul></aside>
+        <aside class="about-panel">
+          <h3>Core strengths</h3>
+          <ul>
+            <li>CBET-oriented instruction</li>
+            <li>Practical demonstrations and assessment</li>
+            <li>Computer hardware and software support</li>
+            <li>Office and accounting applications</li>
+            <li>Communication and learner support</li>
+          </ul>
+        </aside>
       </div>
     </section>
-    .profile-photo {
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid #0077b6;
-    display: block;
-    margin: 20px auto;
-}
 
     <section id="contact" class="section container">
-      <p class="eyebrow blue">CONTACT</p><h2 class="section-heading">Let's connect</h2>
+      <p class="eyebrow blue">CONTACT</p>
+      <h2 class="section-heading">Let's connect</h2>
       <p class="section-lead">For ICT services, training engagements and professional opportunities.</p>
       <div class="contact-grid">
         <div class="card contact-card">
@@ -172,7 +181,12 @@
     </section>
   </main>
 
-  <footer><div class="container footer-inner"><p>© <span id="year"></span> Harrison Ndungu. All rights reserved.</p><a href="#home">Back to top ↑</a></div></footer>
+  <footer>
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Harrison Ndungu. All rights reserved.</p>
+      <a href="#home">Back to top ↑</a>
+    </div>
+  </footer>
   <script src="script.js"></script>
 </body>
 </html>
