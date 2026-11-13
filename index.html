@@ -10,57 +10,28 @@
   <title>Harrison Ndungu | ICT Services Specialist &amp; Technical Trainer</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Profile Avatar in Top Banner */
     .profile-photo {
-      width: 145px;
-      height: 145px;
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
       object-fit: cover;
       border: 4px solid #ffffff;
-      margin: 0 auto 1rem auto;
-      display: block;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+      margin-bottom: 1rem;
     }
 
-    /* Structured Grid Layouts for Tabs/Sections */
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 2.5rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
       align-items: center;
     }
 
     .hero-banner-img {
       width: 100%;
-      height: 340px;
+      max-height: 360px;
       object-fit: cover;
       border-radius: 12px;
       box-shadow: 0 8px 24px rgba(3, 4, 94, 0.12);
-    }
-
-    /* Uniform 3-Column Cards for Services & Portfolio */
-    .cards.three {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      align-items: stretch;
-    }
-
-    .card {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 1.5rem;
-      border-radius: 10px;
-    }
-
-    .card ul {
-      margin-top: 0.75rem;
-      padding-left: 1.2rem;
-    }
-
-    .card ul li {
-      margin-bottom: 0.45rem;
     }
 
     .project-img {
@@ -71,43 +42,17 @@
       margin-bottom: 1rem;
     }
 
-    /* About Section 2-Column Split */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.3fr 0.7fr;
-      gap: 2.5rem;
-      align-items: start;
-    }
-
     .about-portrait {
       width: 100%;
-      height: 300px;
+      max-height: 340px;
       object-fit: cover;
       object-position: top;
       border-radius: 10px;
       margin-bottom: 1.25rem;
     }
 
-    /* Contact Section 2-Column Split */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 0.85fr 1.15fr;
-      gap: 2rem;
-      align-items: start;
-    }
-
-    /* Responsive Adjustments for Tablets & Phones */
-    @media (max-width: 900px) {
-      .cards.three {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
     @media (max-width: 768px) {
-      .hero-grid,
-      .about-grid,
-      .contact-grid,
-      .cards.three {
+      .hero-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -115,8 +60,6 @@
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-
-  <!-- TOP IDENTITY BANNER -->
   <div class="top-banner">
     <div class="container">
       <img src="assets/profile-banner.jpg" alt="Harrison Ndungu" class="profile-photo">
@@ -127,7 +70,6 @@
     </div>
   </div>
 
-  <!-- NAVIGATION BAR -->
   <header class="site-header">
     <nav class="container nav" aria-label="Main navigation">
       <a class="brand" href="#home">HN<span>.</span></a>
@@ -145,7 +87,6 @@
   </header>
 
   <main id="main">
-    <!-- TAB 1: HOME -->
     <section id="home" class="section hero">
       <div class="container hero-grid">
         <div class="hero-copy">
@@ -157,9 +98,7 @@
             <a class="button button-outline" href="#services">Explore services</a>
           </div>
           <div class="quick-facts">
-            <span>TVET / CBET training</span>
-            <span>Computer maintenance</span>
-            <span>Networking</span>
+            <span>TVET / CBET training</span><span>Computer maintenance</span><span>Networking</span>
           </div>
         </div>
         <div class="hero-media">
@@ -168,114 +107,33 @@
       </div>
     </section>
 
-    <!-- CORE PILLARS OVERVIEW -->
     <section class="section section-soft" aria-labelledby="focus-title">
       <div class="container">
         <p class="eyebrow blue">WHAT I DO</p>
         <h2 id="focus-title" class="section-heading">ICT solutions and expertise</h2>
         <p class="section-lead">Combining technical knowledge with practical, learner-centred training.</p>
         <div class="cards three">
-          <article class="card">
-            <div>
-              <div class="card-icon">01</div>
-              <h3>Technical training</h3>
-              <p>Practical delivery of ICT concepts, CBET activities, demonstrations and competency-based assessment.</p>
-            </div>
-          </article>
-          <article class="card">
-            <div>
-              <div class="card-icon">02</div>
-              <h3>ICT support</h3>
-              <p>Computer diagnostics, software installation, troubleshooting, maintenance and user support.</p>
-            </div>
-          </article>
-          <article class="card">
-            <div>
-              <div class="card-icon">03</div>
-              <h3>Digital solutions</h3>
-              <p>Web design, database work, office productivity tools, networking and business software support.</p>
-            </div>
-          </article>
+          <article class="card"><div class="card-icon">01</div><h3>Technical training</h3><p>Practical delivery of ICT concepts, CBET activities, demonstrations and competency-based assessment.</p></article>
+          <article class="card"><div class="card-icon">02</div><h3>ICT support</h3><p>Computer diagnostics, software installation, troubleshooting, maintenance and user support.</p></article>
+          <article class="card"><div class="card-icon">03</div><h3>Digital solutions</h3><p>Web design, database work, office productivity tools, networking and business software support.</p></article>
         </div>
       </div>
     </section>
 
-    <!-- TAB 2: SERVICES -->
     <section id="services" class="section container">
       <p class="eyebrow blue">SERVICES</p>
       <h2 class="section-heading">Technical services &amp; training areas</h2>
       <p class="section-lead">Support and instruction for individuals, businesses and training institutions.</p>
       <div class="cards three">
-        <article class="card">
-          <div>
-            <h3>Computer repair &amp; maintenance</h3>
-            <ul>
-              <li>Hardware diagnostics and component replacement</li>
-              <li>Operating system and application installation</li>
-              <li>Preventive maintenance and troubleshooting</li>
-              <li>Basic security and malware-removal support</li>
-            </ul>
-          </div>
-        </article>
-        <article class="card">
-          <div>
-            <h3>Networking &amp; Wi-Fi</h3>
-            <ul>
-              <li>LAN setup and troubleshooting</li>
-              <li>Router, switch and access-point configuration</li>
-              <li>Structured cabling fundamentals</li>
-              <li>Network security and connectivity checks</li>
-            </ul>
-          </div>
-        </article>
-        <article class="card">
-          <div>
-            <h3>Web &amp; database technologies</h3>
-            <ul>
-              <li>HTML, CSS and JavaScript websites</li>
-              <li>PHP and MySQL fundamentals</li>
-              <li>Database design and management</li>
-              <li>Website deployment and maintenance</li>
-            </ul>
-          </div>
-        </article>
-        <article class="card">
-          <div>
-            <h3>TVET / CBET ICT training</h3>
-            <ul>
-              <li>Computer operations and essentials</li>
-              <li>Computer maintenance and software installation</li>
-              <li>Database and network fundamentals</li>
-              <li>Programming and web application concepts</li>
-            </ul>
-          </div>
-        </article>
-        <article class="card">
-          <div>
-            <h3>Computer applications</h3>
-            <ul>
-              <li>Microsoft Office and advanced Excel</li>
-              <li>Computer packages and digital literacy</li>
-              <li>Statistical packages: SPSS and Stata</li>
-              <li>Accounting packages: QuickBooks, Sage and Pastel</li>
-            </ul>
-          </div>
-        </article>
-        <article class="card">
-          <div>
-            <h3>Design &amp; digital skills</h3>
-            <ul>
-              <li>Web and graphic design</li>
-              <li>Digital marketing fundamentals</li>
-              <li>Presentation and document design</li>
-              <li>Practical ICT skills development</li>
-            </ul>
-          </div>
-        </article>
+        <article class="card"><h3>Computer repair &amp; maintenance</h3><ul><li>Hardware diagnostics and component replacement</li><li>Operating system and application installation</li><li>Preventive maintenance and troubleshooting</li><li>Basic security and malware-removal support</li></ul></article>
+        <article class="card"><h3>Networking &amp; Wi-Fi</h3><ul><li>LAN setup and troubleshooting</li><li>Router, switch and access-point configuration</li><li>Structured cabling fundamentals</li><li>Network security and connectivity checks</li></ul></article>
+        <article class="card"><h3>Web &amp; database technologies</h3><ul><li>HTML, CSS and JavaScript websites</li><li>PHP and MySQL fundamentals</li><li>Database design and management</li><li>Website deployment and maintenance</li></ul></article>
+        <article class="card"><h3>TVET / CBET ICT training</h3><ul><li>Computer operations and essentials</li><li>Computer maintenance and software installation</li><li>Database and network fundamentals</li><li>Programming and web application concepts</li></ul></article>
+        <article class="card"><h3>Computer applications</h3><ul><li>Microsoft Office and advanced Excel</li><li>Computer packages and digital literacy</li><li>Statistical packages: SPSS and Stata</li><li>Accounting packages: QuickBooks, Sage and Pastel</li></ul></article>
+        <article class="card"><h3>Design &amp; digital skills</h3><ul><li>Web and graphic design</li><li>Digital marketing fundamentals</li><li>Presentation and document design</li><li>Practical ICT skills development</li></ul></article>
       </div>
     </section>
 
-    <!-- TAB 3: PORTFOLIO -->
     <section id="portfolio" class="section section-soft">
       <div class="container">
         <p class="eyebrow blue">PORTFOLIO</p>
@@ -283,70 +141,42 @@
         <p class="section-lead">Examples of the types of practical ICT work and learning projects I develop.</p>
         <div class="cards three">
           <article class="card project">
-            <div>
-              <img src="assets/CC.jpeg" alt="Institutional website design preview" class="project-img">
-              <h3>Institutional websites</h3>
-              <p>Responsive websites for presenting institutional information, courses and services.</p>
-            </div>
+            <img src="assets/CC.jpeg" alt="Institutional website design preview" class="project-img">
+            <h3>Institutional websites</h3>
+            <p>Responsive websites for presenting institutional information, courses and services.</p>
           </article>
           <article class="card project">
-            <div>
-              <img src="assets/project-showcase.jpg" alt="Featured project showcase" class="project-img">
-              <h3>Digital &amp; Media Showcase</h3>
-              <p>Visual presentation, digital marketing assets and client solution deployments.</p>
-            </div>
+            <img src="assets/project-showcase.jpg" alt="Featured project showcase" class="project-img">
+            <h3>Digital &amp; Media Showcase</h3>
+            <p>Visual presentation, digital marketing assets and client solution deployments.</p>
           </article>
           <article class="card project">
-            <div>
-              <div class="project-art art-three">NET</div>
-              <h3>Small-office networks</h3>
-              <p>Network planning, connectivity setup, device configuration and troubleshooting.</p>
-            </div>
+            <div class="project-art art-three">NET</div>
+            <h3>Small-office networks</h3>
+            <p>Network planning, connectivity setup, device configuration and troubleshooting.</p>
           </article>
         </div>
-        <div style="margin-top: 1.5rem;">
-          <a class="text-link" href="https://github.com/njoroo-tech" target="_blank" rel="noopener noreferrer">Visit my GitHub profile ↗</a>
-        </div>
+        <p class="note">Add links to your completed GitHub projects and replace these examples with screenshots of your own work.</p>
+        <a class="text-link" href="https://github.com/njoroo-tech" target="_blank" rel="noopener noreferrer">Visit my GitHub profile ↗</a>
       </div>
     </section>
 
-    <!-- TAB 4: EXPERIENCE -->
     <section id="experience" class="section container">
       <p class="eyebrow blue">EXPERIENCE</p>
       <h2 class="section-heading">Professional experience &amp; training</h2>
       <div class="timeline">
-        <article class="timeline-item">
-          <span class="timeline-date">Aug – Dec 2025</span>
-          <h3>Kandara Technical and Vocational College</h3>
-          <p><strong>ICT Teaching Practice</strong> — CBET and modularised TVET instruction, lesson preparation, practical demonstrations and learner assessment.</p>
-        </article>
-        <article class="timeline-item">
-          <span class="timeline-date">Jun 2023 – Sept 2024</span>
-          <h3>Nairobi South Training Institute, Kitengela</h3>
-          <p><strong>ICT &amp; Business Studies Trainer</strong> — delivery of ICT and related units, computer packages and practical short-course training.</p>
-        </article>
-        <article class="timeline-item">
-          <span class="timeline-date">Jan 2022 – May 2023</span>
-          <h3>Goshen Medical &amp; Technical College, Makongeni</h3>
-          <p><strong>ICT Trainer / Exams Officer / Digital Marketing Lead</strong> — instructional delivery, examination administration and digital outreach.</p>
-        </article>
-        <article class="timeline-item">
-          <span class="timeline-date">Jul – Dec 2021</span>
-          <h3>Jodan College of Technology, Thika</h3>
-          <p><strong>ICT Trainer</strong> — classroom and computer laboratory instruction in core ICT modules.</p>
-        </article>
-        <article class="timeline-item">
-          <span class="timeline-date">2017 – 2020</span>
-          <h3>Success Professionals Institute, Thika &amp; Makongeni</h3>
-          <p><strong>ICT &amp; Accounting Packages Instructor</strong> — training in computer applications and accounting packages including Sage, Pastel and QuickBooks.</p>
-        </article>
+        <article class="timeline-item"><span class="timeline-date">Aug – Dec 2025</span><h3>Kandara Technical and Vocational College</h3><p><strong>ICT Teaching Practice</strong> — CBET and modularised TVET instruction, lesson preparation, practical demonstrations and learner assessment.</p></article>
+        <article class="timeline-item"><span class="timeline-date">Jun 2023 – Sept 2024</span><h3>Nairobi South Training Institute, Kitengela</h3><p><strong>ICT &amp; Business Studies Trainer</strong> — delivery of ICT and related units, computer packages and practical short-course training.</p></article>
+        <article class="timeline-item"><span class="timeline-date">Jan 2022 – May 2023</span><h3>Goshen Medical &amp; Technical College, Makongeni</h3><p><strong>ICT Trainer / Exams Officer / Digital Marketing Lead.</strong></p></article>
+        <article class="timeline-item"><span class="timeline-date">Jul – Dec 2021</span><h3>Jodan College of Technology, Thika</h3><p><strong>ICT Trainer.</strong></p></article>
+        <article class="timeline-item"><span class="timeline-date">2017 – 2020</span><h3>Success Professionals Institute, Thika &amp; Makongeni</h3><p><strong>ICT &amp; Accounting Packages Instructor</strong> — training in computer applications and accounting packages including Sage, Pastel and QuickBooks.</p></article>
       </div>
-      <div class="actions" style="margin-top: 1.5rem;">
+      <div class="actions">
         <a class="button" href="assets/cv.pdf" download>Download CV (PDF)</a>
+        <span class="small-muted">Upload your CV as assets/cv.pdf to activate this link.</span>
       </div>
     </section>
 
-    <!-- TAB 5: ABOUT -->
     <section id="about" class="section section-soft">
       <div class="container about-grid">
         <div>
@@ -355,11 +185,9 @@
           <p>I am an ICT Services Specialist and Technical Trainer with more than seven years of experience across ICT instruction, computer applications, technical support and digital solutions.</p>
           <p>My approach focuses on simplifying ICT concepts and translating them into practical learning activities. My training background supports delivery to learners at different levels, including craft and diploma programmes.</p>
           <p>I am interested in opportunities in TVET training, ICT support, computer maintenance, networking and related technical roles.</p>
-          <div style="margin-top: 1rem;">
-            <a class="text-link" href="https://sites.google.com/view/ndush/home" target="_blank" rel="noopener noreferrer">View academic e-portfolio ↗</a>
-          </div>
+          <a class="text-link" href="https://sites.google.com/view/ndush/home" target="_blank" rel="noopener noreferrer">View academic e-portfolio ↗</a>
         </div>
-        <aside class="about-panel card">
+        <aside class="about-panel">
           <img src="assets/about-photo.jpg" alt="Harrison Ndungu formal portrait" class="about-portrait">
           <h3>Core strengths</h3>
           <ul>
@@ -373,40 +201,34 @@
       </div>
     </section>
 
-    <!-- TAB 6: CONTACT -->
     <section id="contact" class="section container">
       <p class="eyebrow blue">CONTACT</p>
       <h2 class="section-heading">Let's connect</h2>
       <p class="section-lead">For ICT services, training engagements and professional opportunities.</p>
       <div class="contact-grid">
         <div class="card contact-card">
-          <div>
-            <h3>Contact details</h3>
-            <p><strong>Phone / WhatsApp</strong><br><a href="tel:+254705976233">+254 705 976 233</a></p>
-            <p><strong>Email</strong><br><a href="mailto:njorogeharrisonwanjiru@gmail.com">njorogeharrisonwanjiru@gmail.com</a></p>
-            <p><strong>Location</strong><br>Kenya</p>
-            <p><strong>GitHub</strong><br><a href="https://github.com/njoroo-tech" target="_blank" rel="noopener noreferrer">github.com/njoroo-tech</a></p>
-          </div>
+          <h3>Contact details</h3>
+          <p><strong>Phone / WhatsApp</strong><br><a href="tel:+254705976233">+254 705 976 233</a></p>
+          <p><strong>Email</strong><br><a href="mailto:njorogeharrisonwanjiru@gmail.com">njorogeharrisonwanjiru@gmail.com</a></p>
+          <p><strong>Location</strong><br>Kenya</p>
+          <p><strong>GitHub</strong><br><a href="https://github.com/njoroo-tech" target="_blank" rel="noopener noreferrer">github.com/njoroo-tech</a></p>
         </div>
         <div class="card">
           <h3>Send a message</h3>
+          <p class="small-muted">This form uses FormSubmit. The first submission may require email confirmation.</p>
           <form action="https://formsubmit.co/njorogeharrisonwanjiru@gmail.com" method="POST">
             <input type="hidden" name="_subject" value="New message from Harrison Ndungu portfolio">
             <input type="hidden" name="_captcha" value="true">
-            <label for="name">Full name</label>
-            <input id="name" name="name" autocomplete="name" required>
-            <label for="email">Email address</label>
-            <input id="email" name="email" type="email" autocomplete="email" required>
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-            <button class="button" type="submit" style="margin-top: 1rem;">Send message</button>
+            <label for="name">Full name</label><input id="name" name="name" autocomplete="name" required>
+            <label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" required>
+            <label for="message">Message</label><textarea id="message" name="message" rows="5" required></textarea>
+            <button class="button" type="submit">Send message</button>
           </form>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <div class="container footer-inner">
       <p>© <span id="year"></span> Harrison Ndungu. All rights reserved.</p>
