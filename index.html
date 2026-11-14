@@ -10,13 +10,22 @@
   <title>Harrison Ndungu | ICT Services Specialist &amp; Technical Trainer</title>
   <link rel="stylesheet" href="style.css">
   <style>
+    /* Ensure all photos are strictly visible and properly sized */
+    img {
+      display: block;
+      max-width: 100%;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+
     .profile-photo {
       width: 150px;
       height: 150px;
       border-radius: 50%;
       object-fit: cover;
       border: 4px solid #ffffff;
-      margin-bottom: 1rem;
+      margin: 0 auto 1rem auto;
+      background-color: #e0e7ff;
     }
 
     .hero-grid {
@@ -28,10 +37,11 @@
 
     .hero-banner-img {
       width: 100%;
-      max-height: 360px;
+      height: 340px;
       object-fit: cover;
       border-radius: 12px;
       box-shadow: 0 8px 24px rgba(3, 4, 94, 0.12);
+      background-color: #e0e7ff;
     }
 
     .project-img {
@@ -40,15 +50,17 @@
       object-fit: cover;
       border-radius: 8px;
       margin-bottom: 1rem;
+      background-color: #e0e7ff;
     }
 
     .about-portrait {
       width: 100%;
-      max-height: 340px;
+      height: 320px;
       object-fit: cover;
       object-position: top;
       border-radius: 10px;
       margin-bottom: 1.25rem;
+      background-color: #e0e7ff;
     }
 
     @media (max-width: 768px) {
@@ -62,7 +74,12 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="top-banner">
     <div class="container">
-      <img src="assets/profile-banner.jpg" alt="Harrison Ndungu" class="profile-photo">
+      <img
+        src="assets/profile-banner.jpg"
+        onerror="this.onerror=null;this.src='https://placehold.co/300x300/03045e/ffffff?text=HN';"
+        alt="Harrison Ndungu"
+        class="profile-photo"
+      >
       <p class="eyebrow">#OPENTOWORK</p>
       <h1>Harrison Ndungu</h1>
       <p class="tagline">ICT Services Specialist &amp; Technical Trainer</p>
@@ -102,7 +119,12 @@
           </div>
         </div>
         <div class="hero-media">
-          <img src="assets/CC.jpeg" alt="Laptop workspace for ICT training" class="hero-banner-img">
+          <img
+            src="assets/CC.jpeg"
+            onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80';"
+            alt="Laptop workspace for ICT training"
+            class="hero-banner-img"
+          >
         </div>
       </div>
     </section>
@@ -141,17 +163,32 @@
         <p class="section-lead">Examples of the types of practical ICT work and learning projects I develop.</p>
         <div class="cards three">
           <article class="card project">
-            <img src="assets/CC.jpeg" alt="Institutional website design preview" class="project-img">
+            <img
+              src="assets/CC.jpeg"
+              onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80';"
+              alt="Institutional website design preview"
+              class="project-img"
+            >
             <h3>Institutional websites</h3>
             <p>Responsive websites for presenting institutional information, courses and services.</p>
           </article>
           <article class="card project">
-            <img src="assets/project-showcase.jpg" alt="Featured project showcase" class="project-img">
+            <img
+              src="assets/project-showcase.jpg"
+              onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80';"
+              alt="Featured project showcase"
+              class="project-img"
+            >
             <h3>Digital &amp; Media Showcase</h3>
             <p>Visual presentation, digital marketing assets and client solution deployments.</p>
           </article>
           <article class="card project">
-            <div class="project-art art-three">NET</div>
+            <img
+              src="assets/network-setup.jpg"
+              onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80';"
+              alt="Small-office network setup"
+              class="project-img"
+            >
             <h3>Small-office networks</h3>
             <p>Network planning, connectivity setup, device configuration and troubleshooting.</p>
           </article>
@@ -188,7 +225,12 @@
           <a class="text-link" href="https://sites.google.com/view/ndush/home" target="_blank" rel="noopener noreferrer">View academic e-portfolio ↗</a>
         </div>
         <aside class="about-panel">
-          <img src="assets/about-photo.jpg" alt="Harrison Ndungu formal portrait" class="about-portrait">
+          <img
+            src="assets/about-photo.jpg"
+            onerror="this.onerror=null;this.src='https://placehold.co/600x400/03045e/ffffff?text=Harrison+Ndungu';"
+            alt="Harrison Ndungu formal portrait"
+            class="about-portrait"
+          >
           <h3>Core strengths</h3>
           <ul>
             <li>CBET-oriented instruction</li>
