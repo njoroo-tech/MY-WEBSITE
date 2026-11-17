@@ -18,18 +18,42 @@
       visibility: visible !important;
     }
 
-    /* Top Banner with profile-banner.jpg as the Background Picture */
+    /* Layered Top Banner Container */
     .top-banner {
-      background-color: #03045e;
-      background-image: linear-gradient(rgba(3, 4, 94, 0.72), rgba(2, 62, 138, 0.80)), 
-                        url('assets/profile-banner.jpg'), 
-                        url('profile-banner.jpg');
-      background-size: cover;
-      background-position: center 20%;
-      background-repeat: no-repeat;
-      color: #ffffff;
-      padding: 3.5rem 1rem;
-      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+      position: relative !important;
+      overflow: hidden !important;
+      background-color: #03045e !important;
+      color: #ffffff !important;
+      padding: 3.5rem 1rem !important;
+      isolation: isolate;
+    }
+
+    /* Actual Background Image Layer */
+    .banner-bg-img {
+      position: absolute !important;
+      inset: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: cover !important;
+      object-position: center 20% !important;
+      z-index: -2 !important;
+      filter: brightness(0.45);
+    }
+
+    /* Navy Tint Layer Over Background Image */
+    .top-banner::after {
+      content: "" !important;
+      position: absolute !important;
+      inset: 0 !important;
+      background: linear-gradient(rgba(3, 4, 94, 0.55), rgba(2, 62, 138, 0.65)) !important;
+      z-index: -1 !important;
+      pointer-events: none;
+    }
+
+    .top-banner .container {
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.55);
     }
 
     /* Subtle Laptop Background Picture for the Hero Section */
@@ -98,6 +122,15 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="top-banner">
+    <!-- Background Image Layer -->
+    <img
+      src="assets/profile-banner.jpg"
+      onerror="if(!this.dataset.step){this.dataset.step=1;this.src='profile-banner.jpg';}else if(this.dataset.step==1){this.dataset.step=2;this.src='assets/CC.jpeg';}else{this.onerror=null;this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80';}"
+      alt=""
+      aria-hidden="true"
+      class="banner-bg-img"
+    >
+
     <div class="container">
       <img
         src="assets/profile-banner.jpg"
