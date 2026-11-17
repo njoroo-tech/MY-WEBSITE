@@ -296,7 +296,7 @@
       height: 100%;
       object-fit: cover;
       opacity: 0;
-      transition: opacity 1s ease-in-out;
+      transition: opacity 0.6s ease-in-out;
     }
 
     .slide-img.active {
@@ -600,7 +600,7 @@
           </div>
         </div>
         <div class="hero-media">
-          <!-- 5-Second Automatic Rotating Photo Slideshow -->
+          <!-- 2-Second Automatic Rotating Photo Slideshow -->
           <div class="slideshow-container" id="heroSlideshow">
             <img src="assets/CC.jpeg" class="slide-img active" alt="Workspace 1" onerror="this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80';">
             <img src="assets/about-photo.jpg" class="slide-img" alt="Workspace 2" onerror="this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80';">
@@ -753,7 +753,7 @@
 
   <!-- JavaScript for Slideshow & Active Navigation Highlighting -->
   <script>
-    // 1. 5-Second Image Slideshow
+    // 1. 2-Second Image Slideshow
     const slides = document.querySelectorAll('.slide-img');
     let currentSlide = 0;
 
@@ -763,7 +763,8 @@
       currentSlide = (currentSlide + 1) % slides.length;
       slides[currentSlide].classList.add('active');
     }
-    setInterval(nextSlide, 5000);
+    // Automatically change photo every 2 seconds (2000 milliseconds)
+    setInterval(nextSlide, 2000);
 
     // 2. Active Tab Highlighting on Click & Scroll
     const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
