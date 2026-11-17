@@ -112,6 +112,23 @@
       background-color: #e0e7ff;
     }
 
+    /* Marquee Styling */
+    .bottom-marquee {
+      background-color: #03045e;
+      color: #ffffff;
+      padding: 0.75rem 0;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border-top: 2px solid rgba(255, 255, 255, 0.15);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .bottom-marquee marquee {
+      width: 100%;
+    }
+
     @media (max-width: 768px) {
       .hero-grid {
         grid-template-columns: 1fr;
@@ -324,6 +341,13 @@
       </div>
     </section>
   </main>
+
+  <!-- Scrolling Marquee Text -->
+  <div class="bottom-marquee">
+    <marquee scrollamount="6">
+      🚀 #OPENTOWORK • ICT Services Specialist &amp; Technical Trainer • TVET / CBET Training • Computer Repair &amp; Maintenance • Networking • Web Development • Accounting Packages (Sage, Pastel, QuickBooks) • Statistical Packages (SPSS, Stata, Advanced Excel) • Get in touch today! 🚀
+    </marquee>
+  </div>
 
   <footer>
     <div class="container footer-inner">
