@@ -20,7 +20,7 @@
     body {
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      color: #334155;
+      color: #1e293b;
       background-color: #f8fafc;
       line-height: 1.6;
     }
@@ -33,14 +33,15 @@
       visibility: visible !important;
     }
 
-    /* Standout Top Navigation Bar Styling */
+    /* Standout Top Navigation Bar Styling with Dynamic Glassmorphism */
     .site-header {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: linear-gradient(135deg, #03045e 0%, #023e8a 100%);
+      background: linear-gradient(135deg, rgba(3, 4, 94, 0.95) 0%, rgba(2, 62, 138, 0.95) 100%);
+      backdrop-filter: blur(8px);
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-      border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+      border-bottom: 2px solid rgba(0, 180, 216, 0.3);
     }
 
     .site-header .nav {
@@ -58,6 +59,11 @@
       color: #ffffff;
       text-decoration: none;
       letter-spacing: 1px;
+      transition: transform 0.2s ease;
+    }
+
+    .site-header .brand:hover {
+      transform: scale(1.05);
     }
 
     .site-header .brand span {
@@ -67,7 +73,7 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 1.25rem;
+      gap: 1rem;
       list-style: none;
       margin: 0;
       padding: 0;
@@ -87,7 +93,8 @@
     .nav-link.active {
       color: #ffffff;
       background-color: rgba(0, 180, 216, 0.35);
-      box-shadow: inset 0 0 0 1px rgba(0, 180, 216, 0.6);
+      box-shadow: inset 0 0 0 1px rgba(0, 180, 216, 0.8);
+      transform: translateY(-1px);
     }
 
     .nav-link.eportfolio {
@@ -95,7 +102,7 @@
       color: #ffffff !important;
       padding: 0.5rem 1rem;
       border-radius: 6px;
-      box-shadow: 0 2px 8px rgba(0, 180, 216, 0.4);
+      box-shadow: 0 2px 10px rgba(0, 180, 216, 0.4);
     }
 
     .nav-link.eportfolio:hover {
@@ -146,39 +153,39 @@
 
     .section-lead {
       font-size: 1.1rem;
-      color: #64748b;
+      color: #475569;
       margin-bottom: 2.5rem;
     }
 
-    /* Layered Top Banner Container */
+    /* Vibrant & Brightened Top Banner Container */
     .top-banner {
       position: relative !important;
       overflow: hidden !important;
-      background-color: #03045e !important;
+      background-color: #023e8a !important;
       color: #ffffff !important;
-      padding: 4.5rem 1rem !important;
+      padding: 5rem 1rem !important;
       text-align: center;
       isolation: isolate;
     }
 
-    /* Actual Background Image Layer */
+    /* Brighter Background Image Layer */
     .banner-bg-img {
       position: absolute !important;
       inset: 0 !important;
       width: 100% !important;
       height: 100% !important;
       object-fit: cover !important;
-      object-position: center 20% !important;
+      object-position: center 25% !important;
       z-index: -2 !important;
-      filter: brightness(0.45);
+      filter: brightness(0.75) contrast(1.05);
     }
 
-    /* Navy Tint Layer Over Background Image */
+    /* Lighter, Brighter Blue Gradient Tint Layer */
     .top-banner::after {
       content: "" !important;
       position: absolute !important;
       inset: 0 !important;
-      background: linear-gradient(rgba(3, 4, 94, 0.55), rgba(2, 62, 138, 0.65)) !important;
+      background: linear-gradient(135deg, rgba(3, 4, 94, 0.65) 0%, rgba(0, 119, 182, 0.5) 100%) !important;
       z-index: -1 !important;
       pointer-events: none;
     }
@@ -186,41 +193,49 @@
     .top-banner .container {
       position: relative;
       z-index: 1;
-      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.55);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     }
 
     .top-banner h1 {
-      font-size: 2.75rem;
+      font-size: 3rem;
       margin: 0.5rem 0;
       color: #ffffff;
+      font-weight: 800;
+      letter-spacing: -0.5px;
     }
 
     .top-banner .tagline {
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: #93c5fd;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #7dd3fc;
       margin-bottom: 0.5rem;
     }
 
     .top-banner .intro {
-      font-size: 1rem;
-      color: #e2e8f0;
+      font-size: 1.05rem;
+      color: #f1f5f9;
+      font-weight: 500;
     }
 
     .profile-photo {
-      width: 150px;
-      height: 150px;
+      width: 155px;
+      height: 155px;
       border-radius: 50%;
       object-fit: cover;
       border: 4px solid #ffffff;
       margin: 0 auto 1rem auto;
       background-color: #e0e7ff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+      transition: transform 0.3s ease;
     }
 
-    /* Hero Section & Slideshow */
+    .profile-photo:hover {
+      transform: scale(1.04);
+    }
+
+    /* Hero Section & Dynamic Slideshow */
     .hero {
-      background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(248, 250, 252, 0.95)), 
+      background: linear-gradient(rgba(255, 255, 255, 0.94), rgba(248, 250, 252, 0.96)), 
                   url('assets/laptop-bg.jpg');
       background-size: cover;
       background-position: center;
@@ -246,27 +261,31 @@
     }
 
     .button {
-      background-color: #03045e;
+      background-color: #023e8a;
       color: #ffffff;
       padding: 0.75rem 1.5rem;
       border-radius: 6px;
       text-decoration: none;
       font-weight: 600;
-      transition: background 0.2s;
+      box-shadow: 0 4px 12px rgba(2, 62, 138, 0.3);
+      transition: all 0.25s ease;
     }
 
     .button:hover {
-      background-color: #023e8a;
+      background-color: #0077b6;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(2, 62, 138, 0.4);
     }
 
     .button-outline {
       background-color: transparent;
-      border: 2px solid #03045e;
-      color: #03045e;
+      border: 2px solid #023e8a;
+      color: #023e8a;
+      box-shadow: none;
     }
 
     .button-outline:hover {
-      background-color: #03045e;
+      background-color: #023e8a;
       color: #ffffff;
     }
 
@@ -275,18 +294,19 @@
       gap: 1rem;
       font-size: 0.85rem;
       font-weight: 600;
-      color: #64748b;
+      color: #475569;
     }
 
-    /* Slideshow Container Styling */
+    /* Dynamic Slideshow Container Styling */
     .slideshow-container {
       position: relative;
       width: 100%;
       height: 340px;
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 8px 24px rgba(3, 4, 94, 0.15);
+      box-shadow: 0 12px 30px rgba(3, 4, 94, 0.2);
       background-color: #03045e;
+      border: 2px solid rgba(0, 180, 216, 0.3);
     }
 
     .slide-img {
@@ -296,14 +316,16 @@
       height: 100%;
       object-fit: cover;
       opacity: 0;
-      transition: opacity 0.6s ease-in-out;
+      transform: scale(1.03);
+      transition: opacity 0.8s ease-in-out, transform 1.5s ease-in-out;
     }
 
     .slide-img.active {
       opacity: 1;
+      transform: scale(1);
     }
 
-    /* Cards & Grids */
+    /* Dynamic Interactive Cards & Grids */
     .cards {
       display: grid;
       gap: 1.5rem;
@@ -319,6 +341,13 @@
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       border: 1px solid #e2e8f0;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px rgba(3, 4, 94, 0.1);
+      border-color: #00b4d8;
     }
 
     .card h3 {
@@ -346,12 +375,14 @@
     .text-link {
       display: inline-block;
       margin-top: 1rem;
-      color: #0077b6;
+      color: #023e8a;
       font-weight: 600;
       text-decoration: none;
+      transition: color 0.2s;
     }
 
     .text-link:hover {
+      color: #0077b6;
       text-decoration: underline;
     }
 
@@ -377,13 +408,14 @@
       border-radius: 50%;
       background-color: #03045e;
       border: 2px solid #ffffff;
+      box-shadow: 0 0 0 2px #00b4d8;
     }
 
     .timeline-date {
       display: inline-block;
       font-size: 0.85rem;
       font-weight: 700;
-      color: #00b4d8;
+      color: #023e8a;
       margin-bottom: 0.25rem;
     }
 
@@ -412,7 +444,7 @@
       object-position: top;
       border-radius: 10px;
       margin-bottom: 1.25rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
 
     .about-panel {
@@ -450,7 +482,7 @@
     }
 
     .contact-card a {
-      color: #0077b6;
+      color: #023e8a;
       text-decoration: none;
     }
 
@@ -473,6 +505,13 @@
       border: 1px solid #cbd5e1;
       border-radius: 6px;
       font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #00b4d8;
+      box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.15);
     }
 
     .small-muted {
@@ -483,15 +522,16 @@
 
     /* Red Marquee Styling */
     .bottom-marquee {
-      background-color: #b91c1c;
+      background-color: #dc2626;
       color: #ffffff;
-      padding: 0.75rem 0;
+      padding: 0.85rem 0;
       font-size: 0.95rem;
-      font-weight: 500;
-      border-top: 2px solid rgba(255, 255, 255, 0.2);
-      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      font-weight: 600;
+      border-top: 2px solid rgba(255, 255, 255, 0.25);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.25);
       overflow: hidden;
       white-space: nowrap;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .bottom-marquee marquee {
@@ -500,9 +540,9 @@
 
     /* Red Footer Styling */
     footer {
-      background-color: #991b1b;
+      background-color: #b91c1c;
       color: #fee2e2;
-      padding: 2rem 0;
+      padding: 2.5rem 0;
       text-align: center;
     }
 
@@ -518,6 +558,7 @@
     footer a {
       color: #fee2e2;
       text-decoration: none;
+      font-weight: 500;
     }
 
     footer a:hover {
@@ -562,7 +603,7 @@
     </nav>
   </header>
 
-  <!-- Top Banner Section -->
+  <!-- Vibrant Top Banner Section -->
   <div class="top-banner">
     <img
       src="assets/profile-banner.jpg"
@@ -578,10 +619,10 @@
         alt="Harrison Ndungu"
         class="profile-photo"
       >
-      <p class="eyebrow">#OPENTOWORK</p>
+      <p class="eyebrow" style="color:#7dd3fc;">#OPENTOWORK</p>
       <h1>Harrison Ndungu</h1>
       <p class="tagline">ICT Services Specialist &amp; Technical Trainer</p>
-      <p class="intro">Practical ICT training, technical support and digital solutions.</p>
+      <p class="intro">Practical ICT training, technical support and dynamic digital solutions.</p>
     </div>
   </div>
 
@@ -589,7 +630,7 @@
     <section id="home" class="section hero">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow" style="color:#0077b6;">ICT • TRAINING • TECHNICAL SUPPORT</p>
+          <p class="eyebrow">ICT • TRAINING • TECHNICAL SUPPORT</p>
           <h2>Technology made practical.</h2>
           <p>I am an ICT professional and technical trainer focused on helping learners, institutions and businesses use technology effectively.</p>
           <div class="actions">
@@ -601,7 +642,7 @@
           </div>
         </div>
         <div class="hero-media">
-          <!-- 2-Second Automatic Rotating Photo Slideshow -->
+          <!-- Dynamic 2-Second Automatic Rotating Photo Slideshow -->
           <div class="slideshow-container" id="heroSlideshow">
             <img src="assets/CC.jpeg" class="slide-img active" alt="Workspace 1" onerror="this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80';">
             <img src="assets/about-photo.jpg" class="slide-img" alt="Workspace 2" onerror="this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80';">
@@ -631,7 +672,7 @@
         <h2 class="section-heading">Selected project areas</h2>
         <p class="section-lead">Examples of the types of practical ICT work and learning projects I develop.</p>
         <div class="cards three">
-          <article class="card project">
+          <article class="card project-card">
             <img
               src="assets/CC.jpeg"
               onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80';"
@@ -641,7 +682,7 @@
             <h3>Institutional websites</h3>
             <p>Responsive websites for presenting institutional information, courses and services.</p>
           </article>
-          <article class="card project">
+          <article class="card project-card">
             <img
               src="assets/project-showcase.jpg"
               onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80';"
@@ -651,7 +692,7 @@
             <h3>Digital &amp; Media Showcase</h3>
             <p>Visual presentation, digital marketing assets and client solution deployments.</p>
           </article>
-          <article class="card project">
+          <article class="card project-card">
             <img
               src="assets/network-setup.jpg"
               onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80';"
@@ -765,7 +806,6 @@
       currentSlide = (currentSlide + 1) % slides.length;
       slides[currentSlide].classList.add('active');
     }
-    // Rotates photos every 2 seconds (2000 milliseconds)
     setInterval(nextSlide, 2000);
 
     // 2. Active Tab Highlighting on Click & Scroll
@@ -783,7 +823,7 @@
       let scrollY = window.pageYOffset;
       sections.forEach(section => {
         const sectionHeight = section.offsetHeight;
-        const sectionTop = section.offsetTop - 100;
+        const sectionTop = section.offsetTop - 120;
         const sectionId = section.getAttribute('id');
         
         if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
