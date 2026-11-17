@@ -481,15 +481,15 @@
       margin-bottom: 1rem;
     }
 
-    /* Marquee Styling */
+    /* Red Marquee Styling */
     .bottom-marquee {
-      background-color: #03045e;
+      background-color: #b91c1c;
       color: #ffffff;
       padding: 0.75rem 0;
       font-size: 0.95rem;
       font-weight: 500;
-      border-top: 2px solid rgba(255, 255, 255, 0.15);
-      border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+      border-top: 2px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
       overflow: hidden;
       white-space: nowrap;
     }
@@ -498,10 +498,10 @@
       width: 100%;
     }
 
-    /* Footer */
+    /* Red Footer Styling */
     footer {
-      background-color: #020617;
-      color: #94a3b8;
+      background-color: #991b1b;
+      color: #fee2e2;
       padding: 2rem 0;
       text-align: center;
     }
@@ -516,12 +516,13 @@
     }
 
     footer a {
-      color: #94a3b8;
+      color: #fee2e2;
       text-decoration: none;
     }
 
     footer a:hover {
       color: #ffffff;
+      text-decoration: underline;
     }
 
     @media (max-width: 768px) {
@@ -737,13 +738,14 @@
     </section>
   </main>
 
-  <!-- Scrolling Marquee Text -->
+  <!-- Scrolling Marquee Text (Red Background) -->
   <div class="bottom-marquee">
     <marquee scrollamount="6">
       #OPENTOWORK • ICT Services Specialist &amp; Technical Trainer • TVET / CBET Training • Computer Repair &amp; Maintenance • Networking • Web Development • Accounting Packages (Sage, Pastel, QuickBooks) • Statistical Packages (SPSS, Stata, Advanced Excel) • Get in touch today!
     </marquee>
   </div>
 
+  <!-- Footer (Red Background) -->
   <footer>
     <div class="container footer-inner">
       <p>© <span id="year">2026</span> Harrison Ndungu. All rights reserved.</p>
@@ -763,14 +765,12 @@
       currentSlide = (currentSlide + 1) % slides.length;
       slides[currentSlide].classList.add('active');
     }
-    // Automatically change photo every 2 seconds (2000 milliseconds)
     setInterval(nextSlide, 2000);
 
     // 2. Active Tab Highlighting on Click & Scroll
     const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
     const sections = document.querySelectorAll('main section[id]');
 
-    // Highlight clicked link immediately
     navLinks.forEach(link => {
       link.addEventListener('click', function() {
         navLinks.forEach(l => l.classList.remove('active'));
@@ -778,7 +778,6 @@
       });
     });
 
-    // Highlight current section on scroll
     window.addEventListener('scroll', () => {
       let scrollY = window.pageYOffset;
       sections.forEach(section => {
