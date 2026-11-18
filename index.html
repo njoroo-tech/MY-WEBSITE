@@ -104,8 +104,10 @@
       box-shadow: 0 2px 10px rgba(37, 211, 102, 0.4);
     }
 
-    .nav-link.cta-quote:hover {
+    .nav-link.cta-quote:hover,
+    .nav-link.cta-quote.active {
       background-color: #1ebe5d;
+      box-shadow: inset 0 0 0 1.5px #ffffff, 0 2px 12px rgba(37, 211, 102, 0.6);
     }
 
     .menu-toggle {
@@ -1034,7 +1036,7 @@
     </div>
   </footer>
 
-  <!-- Combined JavaScript for Navigation, Smooth Scrolling, Slideshow, Filter & Form Submissions -->
+  <!-- Combined JavaScript for Navigation, Active Highlighting, Slideshow, Filter & Form Submissions -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       // Set current year in footer
@@ -1165,18 +1167,53 @@
         });
       });
 
-      // 5. "Get Quote" & Request Buttons Smooth Scroll + Form Focus
-      const quoteLinks = document.querySelectorAll('a[href="#contact"]');
-      quoteLinks.forEach(link => {
+      // 5. Active Nav Tab Highlighting on Click & Scroll
+      const navItems = document.querySelectorAll(".nav-link");
+      
+      navItems.forEach(link => {
         link.addEventListener("click", function (e) {
-          e.preventDefault();
-          const contactSection = document.getElementById("contact");
-          if (contactSection) {
-            contactSection.scrollIntoView({ behavior: "smooth" });
-            const nameInput = document.getElementById("name");
-            if (nameInput) {
-              setTimeout(() => nameInput.focus(), 600);
+          const targetId = this.getAttribute("href");
+          
+          // Handle smooth scroll for anchor links
+          if (targetId && targetId.startsWith("#")) {
+            e.preventDefault();
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+              targetSection.scrollIntoView({ behavior: "smooth" });
+              
+              // If it's the contact section via Get Quote, focus on the name input
+              if (targetId === "#contact") {
+                const nameInput = document.getElementById("name");
+                if (nameInput) {
+                  setTimeout(() => nameInput.focus(), 600);
+                }
+              }
             }
+          }
+
+          // Highlight clicked tab immediately
+          navItems.forEach(item => item.classList.remove("active"));
+          this.classList.add("active");
+        });
+      });
+
+      // Scroll Observer to highlight nav tabs as the user scrolls through sections
+      const sections = document.querySelectorAll("section[id], div.top-banner[id]");
+      window.addEventListener("scroll", () => {
+        let scrollY = window.pageYOffset;
+
+        sections.forEach(section => {
+          const sectionHeight = section.offsetHeight;
+          const sectionTop = section.offsetTop - 120;
+          const sectionId = section.getAttribute("id");
+
+          if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+            navItems.forEach(link => {
+              link.classList.remove("active");
+              if (link.getAttribute("href") === `#${sectionId}`) {
+                link.classList.add("active");
+              }
+            });
           }
         });
       });
