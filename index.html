@@ -1055,7 +1055,6 @@
           menuToggle.setAttribute("aria-expanded", isOpen);
         });
 
-        // Close mobile menu when clicking any nav link
         navLinks.querySelectorAll(".nav-link").forEach(link => {
           link.addEventListener("click", () => {
             navLinks.classList.remove("open");
@@ -1090,7 +1089,7 @@
         let typeSpeed = isDeleting ? 40 : 80;
 
         if (!isDeleting && charIndex === currentRole.length) {
-          typeSpeed = 2000; // Pause at full text
+          typeSpeed = 2000;
           isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
           isDeleting = false;
@@ -1174,14 +1173,11 @@
         link.addEventListener("click", function (e) {
           const targetId = this.getAttribute("href");
           
-          // Handle smooth scroll for anchor links
           if (targetId && targetId.startsWith("#")) {
             e.preventDefault();
             const targetSection = document.querySelector(targetId);
             if (targetSection) {
               targetSection.scrollIntoView({ behavior: "smooth" });
-              
-              // If it's the contact section via Get Quote, focus on the name input
               if (targetId === "#contact") {
                 const nameInput = document.getElementById("name");
                 if (nameInput) {
@@ -1191,13 +1187,11 @@
             }
           }
 
-          // Highlight clicked tab immediately
           navItems.forEach(item => item.classList.remove("active"));
           this.classList.add("active");
         });
       });
 
-      // Scroll Observer to highlight nav tabs as the user scrolls through sections
       const sections = document.querySelectorAll("section[id], div.top-banner[id]");
       window.addEventListener("scroll", () => {
         let scrollY = window.pageYOffset;
@@ -1218,7 +1212,7 @@
         });
       });
 
-      // 6. WhatsApp Form & Email Form Submission Handlers
+      // 6. WhatsApp Form & Direct Email Submission Handlers
       const inquiryForm = document.getElementById("inquiryForm");
       const whatsappSubmitBtn = document.getElementById("whatsappSubmitBtn");
 
@@ -1247,16 +1241,25 @@
           const contactInfo = document.getElementById("contactInfo").value.trim();
           const serviceType = document.getElementById("serviceType").value;
           const message = document.getElementById("message").value.trim();
+          const statusEl = document.getElementById("formStatus");
 
+          if (!name || !contactInfo || !message) {
+            alert("Please fill in all required fields before sending.");
+            return;
+          }
+
+          // Opens default email client pre-filled with inquiry details addressed to Harrison
           const subject = encodeURIComponent(`Service Inquiry: ${serviceType} - from ${name}`);
           const body = encodeURIComponent(`Name: ${name}\nContact: ${contactInfo}\nService Needed: ${serviceType}\n\nMessage:\n${message}`);
           
           window.location.href = `mailto:njorogeharrisonwanjiru@gmail.com?subject=${subject}&body=${body}`;
           
-          const statusEl = document.getElementById("formStatus");
           if (statusEl) {
             statusEl.style.display = "block";
-            statusEl.textContent = "Opening your email client to send your inquiry!";
+            statusEl.style.backgroundColor = "#dcfce7";
+            statusEl.style.color = "#15803d";
+            statusEl.style.borderColor = "#86efac";
+            statusEl.textContent = "Opening your email app to send your inquiry to njorogeharrisonwanjiru@gmail.com!";
           }
         });
       }
