@@ -282,6 +282,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      font-size: 0.95rem;
+      font-family: inherit;
       box-shadow: 0 4px 12px rgba(2, 62, 138, 0.3);
       transition: all 0.25s ease;
     }
@@ -569,6 +571,11 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
+    .contact-card h3 {
+      color: #03045e;
+      margin-top: 0;
+    }
+
     .contact-card p {
       margin: 0.75rem 0;
       color: #475569;
@@ -590,7 +597,7 @@
       gap: 0.4rem;
       background-color: #dcfce7;
       color: #15803d !important;
-      padding: 0.35rem 0.85rem;
+      padding: 0.45rem 0.95rem;
       border-radius: 6px;
       font-weight: 700;
       font-size: 0.9rem;
@@ -612,20 +619,47 @@
       font-size: 0.9rem;
     }
 
-    input, textarea {
+    input, select, textarea {
       width: 100%;
       padding: 0.75rem;
       margin-bottom: 1rem;
       border: 1px solid #cbd5e1;
       border-radius: 6px;
       font-family: inherit;
+      font-size: 0.95rem;
+      background-color: #ffffff;
+      color: #1e293b;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    input:focus, textarea:focus {
+    input:focus, select:focus, textarea:focus {
       outline: none;
       border-color: #00b4d8;
       box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.15);
+    }
+
+    .form-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .form-buttons .button {
+      flex: 1;
+      justify-content: center;
+      min-width: 160px;
+    }
+
+    .form-status {
+      margin-top: 0.85rem;
+      padding: 0.65rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      background-color: #dcfce7;
+      color: #15803d;
+      border: 1px solid #86efac;
+      display: none;
     }
 
     /* Floating WhatsApp Button */
@@ -739,7 +773,7 @@
         <li><a class="nav-link" href="#portfolio">Solutions</a></li>
         <li><a class="nav-link" href="#about">About Us</a></li>
         <li><a class="nav-link" href="#contact">Contact</a></li>
-        <li><a class="nav-link cta-quote" href="https://wa.me/254705976233?text=Hello%20Harrison,%20I%20would%20like%20to%20request%20a%20service%20quote." target="_blank" rel="noopener noreferrer">Get Quote ↗</a></li>
+        <li><a class="nav-link cta-quote" href="#contact">Get Quote ↗</a></li>
       </ul>
     </nav>
   </header>
@@ -941,26 +975,45 @@
             <p><strong>Postal Address:</strong> P.O. Box 6619, Thika</p>
             <p><strong>Phone / WhatsApp:</strong> <a href="tel:+254705976233">+254 705 976 233</a></p>
             <p><strong>Email:</strong> <a href="mailto:njorogeharrisonwanjiru@gmail.com">njorogeharrisonwanjiru@gmail.com</a></p>
-            <p style="margin-top: 1rem;">
+            <p style="margin-top: 1.25rem;">
               <a class="whatsapp-badge" href="https://wa.me/254705976233?text=Hello%20Harrison,%20I%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer">
-                💬 Chat with us on WhatsApp
+                💬 Direct WhatsApp Chat
               </a>
             </p>
           </div>
           
           <div class="contact-card">
-            <h3>Send a Message</h3>
-            <form action="https://formspree.io/f/your-form-id" method="POST">
-              <label for="name">Your Name</label>
+            <h3>Send an Inquiry</h3>
+            <form id="inquiryForm">
+              <label for="name">Your Name *</label>
               <input type="text" id="name" name="name" required placeholder="Enter your full name">
               
-              <label for="email">Your Email / Phone</label>
-              <input type="text" id="email" name="email" required placeholder="Enter email or phone number">
+              <label for="contactInfo">Your Email or Phone Number *</label>
+              <input type="text" id="contactInfo" name="contactInfo" required placeholder="e.g. 0712 345 678 or name@email.com">
               
-              <label for="message">Message / Service Needed</label>
-              <textarea id="message" name="message" rows="4" required placeholder="Describe what service you require..."></textarea>
+              <label for="serviceType">Service Needed</label>
+              <select id="serviceType" name="serviceType">
+                <option value="Computer Repair & Maintenance">Computer Repair &amp; Maintenance</option>
+                <option value="Network Setup & Wi-Fi">Network Setup &amp; Wi-Fi Configuration</option>
+                <option value="Software Installation (AutoCAD/ArchiCAD/etc.)">Software Installation (AutoCAD, ArchiCAD, etc.)</option>
+                <option value="Accounting & Statistical Packages Training">Accounting &amp; Statistical Packages (Sage, QuickBooks, SPSS, STATA)</option>
+                <option value="Web Design / Graphic Branding">Web Design &amp; Graphic Branding</option>
+                <option value="TVET / Corporate ICT Training">TVET / Corporate ICT Training</option>
+                <option value="General ICT Consultation">General ICT Consultation</option>
+              </select>
+
+              <label for="message">Message / Project Details *</label>
+              <textarea id="message" name="message" rows="4" required placeholder="Describe the service or quotation you need..."></textarea>
               
-              <button type="submit" class="button" style="width: 100%; justify-content: center;">Send Inquiry</button>
+              <div class="form-buttons">
+                <button type="button" id="whatsappSubmitBtn" class="button button-whatsapp">
+                  💬 Send via WhatsApp
+                </button>
+                <button type="submit" class="button">
+                  ✉️ Send via Email
+                </button>
+              </div>
+              <div id="formStatus" class="form-status"></div>
             </form>
           </div>
         </div>
@@ -981,9 +1034,9 @@
     </div>
   </footer>
 
-  <!-- JavaScript for Navigation, Active Tab Highlighting, Filtering & Slideshow -->
+  <!-- JavaScript for Navigation, Active Tabs, Working Form, Filtering & Slideshow -->
   <script>
-    // Mobile Menu Toggle & Active Tab Highlighting
+    // 1. Mobile Menu Toggle & Active Tab Highlighting
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     const navItems = document.querySelectorAll('.nav-link:not(.cta-quote)');
@@ -995,18 +1048,15 @@
       navLinks.classList.toggle('open');
     });
 
-    // Highlight clicked tab & close mobile menu
     navItems.forEach(link => {
       link.addEventListener('click', function() {
         navItems.forEach(item => item.classList.remove('active'));
         this.classList.add('active');
-
         navLinks.classList.remove('open');
         menuToggle.setAttribute('aria-expanded', 'false');
       });
     });
 
-    // Automatically highlight active tab on scroll
     window.addEventListener('scroll', () => {
       let current = '';
       const scrollPosition = window.scrollY + 150;
@@ -1029,7 +1079,7 @@
       }
     });
 
-    // Typing Effect in Banner
+    // 2. Typing Effect in Banner
     const roles = [
       "Empowering Businesses & Learners with Reliable Tech",
       "Professional Computer Repair & Network Setup",
@@ -1064,7 +1114,7 @@
     }
     setTimeout(typeEffect, 1000);
 
-    // Hero Slideshow
+    // 3. Hero Slideshow
     const slides = document.querySelectorAll('.slide-img');
     const dots = document.querySelectorAll('.dot');
     let currentSlide = 0;
@@ -1111,7 +1161,7 @@
     }
     slideInterval = setInterval(nextSlideFunc, 3500);
 
-    // Service Filtering
+    // 4. Service Filtering
     const filterButtons = document.querySelectorAll('.filter-btn');
     const serviceCards = document.querySelectorAll('#servicesGrid .card');
 
@@ -1131,6 +1181,62 @@
           }
         });
       });
+    });
+
+    // 5. Working Contact Form (WhatsApp & Email)
+    const inquiryForm = document.getElementById('inquiryForm');
+    const whatsappSubmitBtn = document.getElementById('whatsappSubmitBtn');
+    const formStatus = document.getElementById('formStatus');
+
+    function getFormData() {
+      return {
+        name: document.getElementById('name').value.trim(),
+        contact: document.getElementById('contactInfo').value.trim(),
+        service: document.getElementById('serviceType').value,
+        message: document.getElementById('message').value.trim()
+      };
+    }
+
+    function showStatus(msg) {
+      formStatus.textContent = msg;
+      formStatus.style.display = 'block';
+    }
+
+    // Handle Email Submission
+    inquiryForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = getFormData();
+      const subject = encodeURIComponent(`Service Inquiry: ${data.service} - ${data.name}`);
+      const body = encodeURIComponent(
+        `Hello Harrison,\n\n` +
+        `Name: ${data.name}\n` +
+        `Contact Info: ${data.contact}\n` +
+        `Service Requested: ${data.service}\n\n` +
+        `Details:\n${data.message}`
+      );
+
+      showStatus("✓ Opening your email app to send the message...");
+      window.location.href = `mailto:njorogeharrisonwanjiru@gmail.com?subject=${subject}&body=${body}`;
+    });
+
+    // Handle WhatsApp Submission
+    whatsappSubmitBtn.addEventListener('click', function() {
+      const data = getFormData();
+      if (!data.name || !data.contact || !data.message) {
+        inquiryForm.reportValidity();
+        return;
+      }
+
+      const text = encodeURIComponent(
+        `*New Website Inquiry*\n` +
+        `*Name:* ${data.name}\n` +
+        `*Contact:* ${data.contact}\n` +
+        `*Service:* ${data.service}\n` +
+        `*Details:* ${data.message}`
+      );
+
+      showStatus("✓ Opening WhatsApp to send your inquiry...");
+      window.open(`https://wa.me/254705976233?text=${text}`, '_blank', 'noopener,noreferrer');
     });
   </script>
 </body>
