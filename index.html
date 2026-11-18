@@ -469,10 +469,6 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .card.hidden-card {
-      display: none;
-    }
-
     .card:hover {
       transform: translateY(-5px);
       box-shadow: 0 12px 26px rgba(3, 4, 94, 0.12);
@@ -690,25 +686,6 @@
       width: 30px;
       height: 30px;
       fill: #ffffff;
-    }
-
-    /* Bottom Scrolling Marquee Banner */
-    .bottom-marquee {
-      background-color: #dc2626;
-      color: #ffffff;
-      padding: 0.65rem 0;
-      font-size: 0.92rem;
-      font-weight: 600;
-      border-top: 2px solid rgba(255, 255, 255, 0.25);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      overflow: hidden;
-      white-space: nowrap;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12);
-    }
-
-    .bottom-marquee marquee {
-      width: 100%;
-      display: block;
     }
 
     /* Footer Styling */
@@ -1046,227 +1023,206 @@
 
   <!-- Floating WhatsApp Widget -->
   <a class="floating-whatsapp" href="https://wa.me/254705976233?text=Hello%20Harrison,%20I%20visited%20your%20website%20and%20need%20IT%20assistance." target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
-    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+    <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.124-.669-1.612-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
   </a>
-
-  <!-- Bottom Scrolling Marquee Banner -->
-  <div class="bottom-marquee">
-    <marquee behavior="scroll" direction="left" scrollamount="6" onmouseover="this.stop();" onmouseout="this.start();">
-      🚀 Harrison Ndungu ICT Solutions • Computer Repair &amp; Maintenance • LAN &amp; Wi-Fi Network Setup • ArchiCAD &amp; AutoCAD Software Installation • Web &amp; App Development • Accounting Packages (Sage, Pastel, QuickBooks) • Statistical Analysis (SPSS, STATA, Advanced Excel) • Call / WhatsApp: +254 705 976 233 📍 Thika, Kenya
-    </marquee>
-  </div>
 
   <!-- Footer -->
   <footer>
     <div class="footer-inner">
-      <p>&copy; 2026 Harrison Ndungu ICT Solutions. All rights reserved.</p>
-      <p>Professional IT Services &amp; Training in Kenya | <a href="#home">Back to Top ↑</a></p>
+      <p>&copy; <span id="currentYear"></span> Harrison Ndungu ICT Solutions. All rights reserved.</p>
+      <p>Thika, Kenya | <a href="#home">Back to Top ↑</a></p>
     </div>
   </footer>
 
-  <!-- JavaScript for Navigation, Active Tabs, Working Form, Filtering & Slideshow -->
+  <!-- Combined JavaScript for Navigation, Smooth Scrolling, Slideshow, Filter & Form Submissions -->
   <script>
-    // 1. Mobile Menu Toggle & Active Tab Highlighting
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    const navItems = document.querySelectorAll('.nav-link:not(.cta-quote)');
-    const sections = document.querySelectorAll('main section[id]');
+    document.addEventListener("DOMContentLoaded", function () {
+      // Set current year in footer
+      const yearSpan = document.getElementById("currentYear");
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
 
-    menuToggle.addEventListener('click', () => {
-      const expanded = menuToggle.getAttribute('aria-expanded') === 'true' || false;
-      menuToggle.setAttribute('aria-expanded', !expanded);
-      navLinks.classList.toggle('open');
-    });
+      // 1. Mobile Menu Toggle
+      const menuToggle = document.getElementById("menuToggle");
+      const navLinks = document.getElementById("navLinks");
 
-    navItems.forEach(link => {
-      link.addEventListener('click', function() {
-        navItems.forEach(item => item.classList.remove('active'));
-        this.classList.add('active');
-        navLinks.classList.remove('open');
-        menuToggle.setAttribute('aria-expanded', 'false');
-      });
-    });
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener("click", () => {
+          const isOpen = navLinks.classList.toggle("open");
+          menuToggle.setAttribute("aria-expanded", isOpen);
+        });
 
-    window.addEventListener('scroll', () => {
-      let current = '';
-      const scrollPosition = window.scrollY + 150;
+        // Close mobile menu when clicking any nav link
+        navLinks.querySelectorAll(".nav-link").forEach(link => {
+          link.addEventListener("click", () => {
+            navLinks.classList.remove("open");
+            menuToggle.setAttribute("aria-expanded", "false");
+          });
+        });
+      }
 
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          current = section.getAttribute('id');
+      // 2. Typing Effect for Tagline
+      const roles = [
+        "Empowering Businesses & Learners with Reliable Tech",
+        "Expert Computer Repair, Networking & Software Setup",
+        "Professional Training in Sage, QuickBooks, SPSS & STATA"
+      ];
+      let roleIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      const typedRole = document.getElementById("typedRole");
+
+      function typeEffect() {
+        if (!typedRole) return;
+        const currentRole = roles[roleIndex];
+        
+        if (isDeleting) {
+          typedRole.textContent = currentRole.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          typedRole.textContent = currentRole.substring(0, charIndex + 1);
+          charIndex++;
         }
-      });
 
-      if (current) {
-        navItems.forEach(item => {
-          item.classList.remove('active');
-          if (item.getAttribute('href') === `#${current}`) {
-            item.classList.add('active');
-          }
+        let typeSpeed = isDeleting ? 40 : 80;
+
+        if (!isDeleting && charIndex === currentRole.length) {
+          typeSpeed = 2000; // Pause at full text
+          isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          roleIndex = (roleIndex + 1) % roles.length;
+          typeSpeed = 500;
+        }
+
+        setTimeout(typeEffect, typeSpeed);
+      }
+      typeEffect();
+
+      // 3. Hero Slideshow
+      const slides = document.querySelectorAll(".slide-img");
+      const dots = document.querySelectorAll(".dot");
+      const prevBtn = document.getElementById("prevSlide");
+      const nextBtn = document.getElementById("nextSlide");
+      let currentSlide = 0;
+      let slideInterval;
+
+      function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove("active"));
+        dots.forEach(dot => dot.classList.remove("active"));
+        
+        currentSlide = (index + slides.length) % slides.length;
+        if (slides[currentSlide]) slides[currentSlide].classList.add("active");
+        if (dots[currentSlide]) dots[currentSlide].classList.add("active");
+      }
+
+      function nextSlideFunc() {
+        showSlide(currentSlide + 1);
+      }
+
+      if (prevBtn && nextBtn) {
+        prevBtn.addEventListener("click", () => {
+          showSlide(currentSlide - 1);
+          resetTimer();
+        });
+        nextBtn.addEventListener("click", () => {
+          nextSlideFunc();
+          resetTimer();
+        });
+
+        dots.forEach((dot, idx) => {
+          dot.addEventListener("click", () => {
+            showSlide(idx);
+            resetTimer();
+          });
         });
       }
-    });
 
-    // 2. Typing Effect in Banner
-    const roles = [
-      "Empowering Businesses & Learners with Reliable Tech",
-      "Professional Computer Repair & Network Setup",
-      "Expert Software Installation & TVET Training"
-    ];
-    let roleIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typedRole = document.getElementById("typedRole");
-
-    function typeEffect() {
-      const currentRole = roles[roleIndex];
-      if (isDeleting) {
-        typedRole.textContent = currentRole.substring(0, charIndex - 1);
-        charIndex--;
-      } else {
-        typedRole.textContent = currentRole.substring(0, charIndex + 1);
-        charIndex++;
+      function resetTimer() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlideFunc, 5000);
       }
+      slideInterval = setInterval(nextSlideFunc, 5000);
 
-      let typingSpeed = isDeleting ? 40 : 80;
+      // 4. Service Filter Buttons
+      const filterBtns = document.querySelectorAll(".filter-btn");
+      const serviceCards = document.querySelectorAll("#servicesGrid .card");
 
-      if (!isDeleting && charIndex === currentRole.length) {
-        typingSpeed = 2000;
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        roleIndex = (roleIndex + 1) % roles.length;
-        typingSpeed = 500;
-      }
-      setTimeout(typeEffect, typingSpeed);
-    }
-    setTimeout(typeEffect, 1000);
+      filterBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          filterBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          const filter = btn.getAttribute("data-filter");
 
-    // 3. Hero Slideshow
-    const slides = document.querySelectorAll('.slide-img');
-    const dots = document.querySelectorAll('.dot');
-    let currentSlide = 0;
-    let slideInterval;
-
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === index);
-        dots[i].classList.toggle('active', i === index);
+          serviceCards.forEach(card => {
+            if (filter === "all" || card.getAttribute("data-category") === filter) {
+              card.style.display = "block";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        });
       });
-      currentSlide = index;
-    }
 
-    function nextSlideFunc() {
-      let next = (currentSlide + 1) % slides.length;
-      showSlide(next);
-    }
-
-    function prevSlideFunc() {
-      let prev = (currentSlide - 1 + slides.length) % slides.length;
-      showSlide(prev);
-    }
-
-    document.getElementById('nextSlide').addEventListener('click', () => {
-      nextSlideFunc();
-      resetTimer();
-    });
-
-    document.getElementById('prevSlide').addEventListener('click', () => {
-      prevSlideFunc();
-      resetTimer();
-    });
-
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        showSlide(index);
-        resetTimer();
-      });
-    });
-
-    function resetTimer() {
-      clearInterval(slideInterval);
-      slideInterval = setInterval(nextSlideFunc, 3500);
-    }
-    slideInterval = setInterval(nextSlideFunc, 3500);
-
-    // 4. Service Filtering
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const serviceCards = document.querySelectorAll('#servicesGrid .card');
-
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-
-        const filterValue = button.getAttribute('data-filter');
-
-        serviceCards.forEach(card => {
-          const category = card.getAttribute('data-category');
-          if (filterValue === 'all' || category === filterValue) {
-            card.classList.remove('hidden-card');
-          } else {
-            card.classList.add('hidden-card');
+      // 5. "Get Quote" & Request Buttons Smooth Scroll + Form Focus
+      const quoteLinks = document.querySelectorAll('a[href="#contact"]');
+      quoteLinks.forEach(link => {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          const contactSection = document.getElementById("contact");
+          if (contactSection) {
+            contactSection.scrollIntoView({ behavior: "smooth" });
+            const nameInput = document.getElementById("name");
+            if (nameInput) {
+              setTimeout(() => nameInput.focus(), 600);
+            }
           }
         });
       });
-    });
 
-    // 5. Working Contact Form (WhatsApp & Email)
-    const inquiryForm = document.getElementById('inquiryForm');
-    const whatsappSubmitBtn = document.getElementById('whatsappSubmitBtn');
-    const formStatus = document.getElementById('formStatus');
+      // 6. WhatsApp Form & Email Form Submission Handlers
+      const inquiryForm = document.getElementById("inquiryForm");
+      const whatsappSubmitBtn = document.getElementById("whatsappSubmitBtn");
 
-    function getFormData() {
-      return {
-        name: document.getElementById('name').value.trim(),
-        contact: document.getElementById('contactInfo').value.trim(),
-        service: document.getElementById('serviceType').value,
-        message: document.getElementById('message').value.trim()
-      };
-    }
+      if (whatsappSubmitBtn) {
+        whatsappSubmitBtn.addEventListener("click", function () {
+          const name = document.getElementById("name").value.trim();
+          const contactInfo = document.getElementById("contactInfo").value.trim();
+          const serviceType = document.getElementById("serviceType").value;
+          const message = document.getElementById("message").value.trim();
 
-    function showStatus(msg) {
-      formStatus.textContent = msg;
-      formStatus.style.display = 'block';
-    }
+          if (!name || !contactInfo || !message) {
+            alert("Please fill in your Name, Contact Info, and Message before sending via WhatsApp.");
+            return;
+          }
 
-    // Handle Email Submission
-    inquiryForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const data = getFormData();
-      const subject = encodeURIComponent(`Service Inquiry: ${data.service} - ${data.name}`);
-      const body = encodeURIComponent(
-        `Hello Harrison,\n\n` +
-        `Name: ${data.name}\n` +
-        `Contact Info: ${data.contact}\n` +
-        `Service Requested: ${data.service}\n\n` +
-        `Details:\n${data.message}`
-      );
-
-      showStatus("✓ Opening your email app to send the message...");
-      window.location.href = `mailto:njorogeharrisonwanjiru@gmail.com?subject=${subject}&body=${body}`;
-    });
-
-    // Handle WhatsApp Submission
-    whatsappSubmitBtn.addEventListener('click', function() {
-      const data = getFormData();
-      if (!data.name || !data.contact || !data.message) {
-        inquiryForm.reportValidity();
-        return;
+          const whatsappText = `Hello Harrison, my name is ${name} (${contactInfo}). I would like a quote/service for *${serviceType}*.\n\nDetails: ${message}`;
+          const encodedUrl = `https://wa.me/254705976233?text=${encodeURIComponent(whatsappText)}`;
+          window.open(encodedUrl, "_blank");
+        });
       }
 
-      const text = encodeURIComponent(
-        `*New Website Inquiry*\n` +
-        `*Name:* ${data.name}\n` +
-        `*Contact:* ${data.contact}\n` +
-        `*Service:* ${data.service}\n` +
-        `*Details:* ${data.message}`
-      );
+      if (inquiryForm) {
+        inquiryForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const name = document.getElementById("name").value.trim();
+          const contactInfo = document.getElementById("contactInfo").value.trim();
+          const serviceType = document.getElementById("serviceType").value;
+          const message = document.getElementById("message").value.trim();
 
-      showStatus("✓ Opening WhatsApp to send your inquiry...");
-      window.open(`https://wa.me/254705976233?text=${text}`, '_blank', 'noopener,noreferrer');
+          const subject = encodeURIComponent(`Service Inquiry: ${serviceType} - from ${name}`);
+          const body = encodeURIComponent(`Name: ${name}\nContact: ${contactInfo}\nService Needed: ${serviceType}\n\nMessage:\n${message}`);
+          
+          window.location.href = `mailto:njorogeharrisonwanjiru@gmail.com?subject=${subject}&body=${body}`;
+          
+          const statusEl = document.getElementById("formStatus");
+          if (statusEl) {
+            statusEl.style.display = "block";
+            statusEl.textContent = "Opening your email client to send your inquiry!";
+          }
+        });
+      }
     });
   </script>
 </body>
