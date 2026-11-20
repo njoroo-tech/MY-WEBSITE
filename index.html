@@ -184,7 +184,7 @@
       object-position: center 25%;
       z-index: -2;
       filter: brightness(0.75) contrast(1.05);
-      transition: opacity 0.4s ease-in-out;
+      transition: opacity 0.35s ease-in-out;
     }
 
     .top-banner::after {
@@ -1043,45 +1043,44 @@
         yearSpan.textContent = new Date().getFullYear();
       }
 
-      // Helper: Preload local photo with instant fallback so rotations never flash blank
-      function setupPhotoRotator(imgElement, photoList, intervalMs) {
-        if (!imgElement || !photoList.length) return;
-        const resolvedUrls = new Array(photoList.length);
+      // Helper: Rotate photos every intervalMs with reliable fallback
+      function startRotator(imgId, slides, intervalMs, label) {
+        const img = document.getElementById(imgId);
+        if (!img || !slides.length) return;
 
-        photoList.forEach(function (item, idx) {
-          resolvedUrls[idx] = item.fallback;
-          const tester = new Image();
-          tester.onload = function () {
-            resolvedUrls[idx] = item.local;
-            if (idx === 0) {
-              imgElement.src = item.local;
-            }
+        let index = 0;
+
+        function renderSlide(i) {
+          const item = slides[i];
+          img.style.opacity = "0.25";
+          img.onerror = function () {
+            this.onerror = null;
+            this.src = item.fallback;
+            this.style.opacity = "1";
           };
-          tester.src = item.local;
-        });
+          if (item.alt !== undefined) {
+            img.alt = item.alt;
+          }
+          img.src = item.local;
+          setTimeout(function () {
+            img.style.opacity = "1";
+          }, 120);
+          console.log(label + " -> slide " + (i + 1) + ":", item.local);
+        }
 
-        let currentIdx = 0;
-        imgElement.src = resolvedUrls[0];
-        if (photoList[0].alt) imgElement.alt = photoList[0].alt;
+        renderSlide(0);
 
-        if (photoList.length > 1) {
+        if (slides.length > 1) {
           setInterval(function () {
-            currentIdx = (currentIdx + 1) % photoList.length;
-            imgElement.style.opacity = "0.35";
-            setTimeout(function () {
-              imgElement.src = resolvedUrls[currentIdx];
-              if (photoList[currentIdx].alt) {
-                imgElement.alt = photoList[currentIdx].alt;
-              }
-              imgElement.style.opacity = "1";
-            }, 150);
+            index = (index + 1) % slides.length;
+            renderSlide(index);
           }, intervalMs);
         }
       }
 
-      // 0a. Top Banner Background Image Rotation (every 2 seconds) using profile-banner.jpg & about-photo.jpg
-      setupPhotoRotator(
-        document.getElementById("bannerBgImg"),
+      // Top Banner Background Rotation (every 2 seconds)
+      startRotator(
+        "bannerBgImg",
         [
           {
             local: "assets/profile-banner.jpg",
@@ -1104,12 +1103,13 @@
             alt: ""
           }
         ],
-        2000
+        2000,
+        "Banner BG"
       );
 
-      // 0b. "Why Choose Us" Photo Rotation (every 2 seconds) using about-photo.jpg & profile-banner.jpg
-      setupPhotoRotator(
-        document.getElementById("whyChooseImg"),
+      // "Why Choose Us" Photo Rotation (every 2 seconds)
+      startRotator(
+        "whyChooseImg",
         [
           {
             local: "assets/about-photo.jpg",
@@ -1132,7 +1132,8 @@
             alt: "Reliable Network & Wi-Fi Setup"
           }
         ],
-        2000
+        2000,
+        "Why Choose Us"
       );
 
       // 1. Mobile Menu Toggle
