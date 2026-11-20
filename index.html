@@ -1023,7 +1023,7 @@
   <div class="announcement-banner-bottom">
     <div class="container">
       <marquee behavior="scroll" direction="left" scrollamount="5">
-        Welcome to Harrison Ndungu ICT Solutions. Professional Computer Repair, Networking, Web Development, and Training in Sage 50 Accounts, Pastel, QuickBooks, SPSS, STATA, AutoCAD, and ArchiCAD. Contact us today via WhatsApp or Email.
+        Welcome to Harrison Ndungu ICT Solutions. Computer Repair &amp; Maintenance, Network Setup &amp; Wi-Fi, AutoCAD &amp; ArchiCAD, Sage 50 Accounts, Pastel &amp; QuickBooks, SPSS, STATA &amp; Advanced Excel, TVET / CBET ICT Training, Web &amp; App Development, and Graphic Branding. Contact us today via WhatsApp or Email.
       </marquee>
     </div>
   </div>
@@ -1045,13 +1045,17 @@
         yearSpan.textContent = new Date().getFullYear();
       }
 
-      // Continuous Typewriter Loop for Banner / Home Tagline
+      // Continuous Typewriter Loop Covering All Services
       const typedRoleEl = document.getElementById("typedRole");
       const phrases = [
         "Empowering Businesses & Learners with Reliable Tech",
+        "Computer Repair, Diagnostics & OS Maintenance",
+        "Network Setup, LAN Cabling, Wi-Fi & Cisco Packet Tracer",
         "AutoCAD & ArchiCAD Drafting & Software Setup",
-        "Sage 50 Accounts & Pastel Accounting Solutions",
-        "Computer Repair, Networking, SPSS, STATA & Web Development"
+        "Sage 50 Accounts, Pastel & QuickBooks Solutions",
+        "SPSS, STATA & Advanced Excel Data Analysis",
+        "TVET / CBET ICT Training & Corporate Workshops",
+        "Websites, Mobile App Prototypes, Databases & Branding"
       ];
 
       if (typedRoleEl && phrases.length > 0) {
@@ -1067,20 +1071,20 @@
             typedRoleEl.textContent = currentPhrase.slice(0, charIndex);
             if (charIndex === currentPhrase.length) {
               isDeleting = true;
-              setTimeout(tickTypewriter, 1800);
+              setTimeout(tickTypewriter, 1700);
               return;
             }
-            setTimeout(tickTypewriter, 55);
+            setTimeout(tickTypewriter, 50);
           } else {
             charIndex--;
             typedRoleEl.textContent = currentPhrase.slice(0, Math.max(charIndex, 0));
             if (charIndex <= 0) {
               isDeleting = false;
               phraseIndex = (phraseIndex + 1) % phrases.length;
-              setTimeout(tickTypewriter, 350);
+              setTimeout(tickTypewriter, 300);
               return;
             }
-            setTimeout(tickTypewriter, 30);
+            setTimeout(tickTypewriter, 25);
           }
         }
 
