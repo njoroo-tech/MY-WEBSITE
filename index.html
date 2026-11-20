@@ -164,7 +164,7 @@
       margin-bottom: 2rem;
     }
 
-    /* Top Banner Container */
+    /* Top Banner Container & Rotating Background Images */
     .top-banner {
       position: relative !important;
       overflow: hidden !important;
@@ -175,7 +175,7 @@
       isolation: isolate;
     }
 
-    .banner-bg-img {
+    .top-banner .banner-bg-img {
       position: absolute !important;
       inset: 0 !important;
       width: 100% !important;
@@ -184,6 +184,13 @@
       object-position: center 25% !important;
       z-index: -2 !important;
       filter: brightness(0.75) contrast(1.05);
+      opacity: 0;
+      transition: opacity 0.8s ease-in-out;
+    }
+
+    .top-banner .banner-bg-img.active {
+      opacity: 1;
+      z-index: -1 !important;
     }
 
     .top-banner::after {
@@ -191,7 +198,7 @@
       position: absolute !important;
       inset: 0 !important;
       background: linear-gradient(135deg, rgba(3, 4, 94, 0.62) 0%, rgba(0, 119, 182, 0.48) 100%) !important;
-      z-index: -1 !important;
+      z-index: 0 !important;
       pointer-events: none;
     }
 
@@ -759,15 +766,44 @@
     </nav>
   </header>
 
-  <!-- Top Banner Section -->
+  <!-- Top Banner Section (Background rotates every 2 seconds) -->
   <div class="top-banner">
     <img
       src="assets/profile-banner.jpg"
       onerror="if(!this.dataset.step){this.dataset.step=1;this.src='profile-banner.jpg';}else{this.onerror=null;this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80';}"
       alt=""
       aria-hidden="true"
+      class="banner-bg-img active"
+    >
+    <img
+      src="assets/CC.jpeg"
+      onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80';"
+      alt=""
+      aria-hidden="true"
       class="banner-bg-img"
     >
+    <img
+      src="assets/network-setup.jpg"
+      onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1600&q=80';"
+      alt=""
+      aria-hidden="true"
+      class="banner-bg-img"
+    >
+    <img
+      src="assets/project-showcase.jpg"
+      onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80';"
+      alt=""
+      aria-hidden="true"
+      class="banner-bg-img"
+    >
+    <img
+      src="assets/about-photo.jpg"
+      onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80';"
+      alt=""
+      aria-hidden="true"
+      class="banner-bg-img"
+    >
+
     <div class="container">
       <img
         src="assets/profile-banner.jpg"
@@ -1019,7 +1055,7 @@
     </div>
   </footer>
 
-  <!-- Combined JavaScript for Navigation, Active Highlighting, Slideshow, Filter & Form Submissions -->
+  <!-- Combined JavaScript for Navigation, Active Highlighting, Banner Rotation, Slideshow, Filter & Form Submissions -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       // Set current year in footer
@@ -1028,120 +1064,155 @@
         yearSpan.textContent = new Date().getFullYear();
       }
 
+      // 0. Top Banner Background Image Rotation (every 2 seconds)
+      const bannerBgImages = document.querySelectorAll(".top-banner .banner-bg-img");
+      let currentBannerIndex = 0;
+
+      if (bannerBgImages.length > 1) {
+        setInterval(function () {
+          bannerBgImages[currentBannerIndex].classList.remove("active");
+          currentBannerIndex = (currentBannerIndex + 1) % bannerBgImages.length;
+          bannerBgImages[currentBannerIndex].classList.add("active");
+        }, 2000);
+      }
+
       // 1. Mobile Menu Toggle
       const menuToggle = document.getElementById("menuToggle");
       const navLinks = document.getElementById("navLinks");
 
       if (menuToggle && navLinks) {
-        menuToggle.addEventListener("click", () => {
+        menuToggle.addEventListener("click", function () {
           const isOpen = navLinks.classList.toggle("open");
-          menuToggle.setAttribute("aria-expanded", isOpen);
+          menuToggle.setAttribute("aria-expanded", String(isOpen));
         });
 
-        navLinks.querySelectorAll(".nav-link").forEach(link => {
-          link.addEventListener("click", () => {
+        navLinks.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () {
             navLinks.classList.remove("open");
             menuToggle.setAttribute("aria-expanded", "false");
           });
         });
       }
 
-      // 2. Typing Effect for Tagline
-      const roles = [
-        "Empowering Businesses & Learners with Reliable Tech",
-        "Expert Computer Repair, Networking & Software Setup",
-        "Professional Training in Sage, QuickBooks, SPSS & STATA"
-      ];
-      let roleIndex = 0;
-      let charIndex = 0;
-      let isDeleting = false;
-      const typedRole = document.getElementById("typedRole");
+      // 2. Active Navigation Highlighting on Scroll
+      const sections = document.querySelectorAll("section[id]");
+      const navItems = document.querySelectorAll("#navLinks .nav-link:not(.cta-quote)");
 
-      function typeEffect() {
-        if (!typedRole) return;
-        const currentRole = roles[roleIndex];
-        
-        if (isDeleting) {
-          typedRole.textContent = currentRole.substring(0, charIndex - 1);
-          charIndex--;
-        } else {
-          typedRole.textContent = currentRole.substring(0, charIndex + 1);
-          charIndex++;
-        }
+      function updateActiveNav() {
+        const scrollPos = window.scrollY + 140;
+        let currentId = "home";
 
-        let typeSpeed = isDeleting ? 40 : 80;
+        sections.forEach(function (section) {
+          const top = section.offsetTop;
+          const height = section.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            currentId = section.getAttribute("id");
+          }
+        });
 
-        if (!isDeleting && charIndex === currentRole.length) {
-          typeSpeed = 2000;
-          isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-          isDeleting = false;
-          roleIndex = (roleIndex + 1) % roles.length;
-          typeSpeed = 500;
-        }
-
-        setTimeout(typeEffect, typeSpeed);
+        navItems.forEach(function (link) {
+          const href = link.getAttribute("href");
+          if (href === "#" + currentId) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
       }
-      typeEffect();
+
+      window.addEventListener("scroll", updateActiveNav, { passive: true });
+      updateActiveNav();
 
       // 3. Hero Slideshow
-      const slides = document.querySelectorAll(".slide-img");
-      const dots = document.querySelectorAll(".dot");
+      const slides = document.querySelectorAll("#heroSlideshow .slide-img");
+      const dots = document.querySelectorAll("#slideDots .dot");
       const prevBtn = document.getElementById("prevSlide");
       const nextBtn = document.getElementById("nextSlide");
       let currentSlide = 0;
-      let slideInterval;
+      let slideTimer = null;
 
       function showSlide(index) {
-        slides.forEach(slide => slide.classList.remove("active"));
-        dots.forEach(dot => dot.classList.remove("active"));
-        
+        if (!slides.length) return;
         currentSlide = (index + slides.length) % slides.length;
-        if (slides[currentSlide]) slides[currentSlide].classList.add("active");
-        if (dots[currentSlide]) dots[currentSlide].classList.add("active");
+
+        slides.forEach(function (slide, i) {
+          slide.classList.toggle("active", i === currentSlide);
+        });
+
+        dots.forEach(function (dot, i) {
+          dot.classList.toggle("active", i === currentSlide);
+        });
       }
 
-      function nextSlideFunc() {
+      function nextSlide() {
         showSlide(currentSlide + 1);
       }
 
-      if (prevBtn && nextBtn) {
-        prevBtn.addEventListener("click", () => {
-          showSlide(currentSlide - 1);
-          resetTimer();
-        });
-        nextBtn.addEventListener("click", () => {
-          nextSlideFunc();
-          resetTimer();
-        });
+      function prevSlide() {
+        showSlide(currentSlide - 1);
+      }
 
-        dots.forEach((dot, idx) => {
-          dot.addEventListener("click", () => {
+      function startAutoSlide() {
+        stopAutoSlide();
+        slideTimer = setInterval(nextSlide, 5000);
+      }
+
+      function stopAutoSlide() {
+        if (slideTimer) {
+          clearInterval(slideTimer);
+          slideTimer = null;
+        }
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener("click", function () {
+          nextSlide();
+          startAutoSlide();
+        });
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener("click", function () {
+          prevSlide();
+          startAutoSlide();
+        });
+      }
+
+      dots.forEach(function (dot) {
+        dot.addEventListener("click", function () {
+          const idx = parseInt(dot.getAttribute("data-index"), 10);
+          if (!Number.isNaN(idx)) {
             showSlide(idx);
-            resetTimer();
-          });
+            startAutoSlide();
+          }
         });
+      });
+
+      const slideshowEl = document.getElementById("heroSlideshow");
+      if (slideshowEl) {
+        slideshowEl.addEventListener("mouseenter", stopAutoSlide);
+        slideshowEl.addEventListener("mouseleave", startAutoSlide);
       }
 
-      function resetTimer() {
-        clearInterval(slideInterval);
-        slideInterval = setInterval(nextSlideFunc, 5000);
-      }
-      slideInterval = setInterval(nextSlideFunc, 5000);
+      startAutoSlide();
 
-      // 4. Service Filter Buttons
-      const filterBtns = document.querySelectorAll(".filter-btn");
+      // 4. Service Category Filtering
+      const filterButtons = document.querySelectorAll(".filter-btn");
       const serviceCards = document.querySelectorAll("#servicesGrid .card");
 
-      filterBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-          filterBtns.forEach(b => b.classList.remove("active"));
-          btn.classList.add("active");
+      filterButtons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
           const filter = btn.getAttribute("data-filter");
 
-          serviceCards.forEach(card => {
-            if (filter === "all" || card.getAttribute("data-category") === filter) {
-              card.style.display = "block";
+          filterButtons.forEach(function (b) {
+            b.classList.remove("active");
+          });
+          btn.classList.add("active");
+
+          serviceCards.forEach(function (card) {
+            const category = card.getAttribute("data-category");
+            if (filter === "all" || category === filter) {
+              card.style.display = "";
             } else {
               card.style.display = "none";
             }
@@ -1149,100 +1220,75 @@
         });
       });
 
-      // 5. Active Nav Tab Highlighting on Click & Scroll
-      const navItems = document.querySelectorAll(".nav-link");
-      
-      navItems.forEach(link => {
-        link.addEventListener("click", function (e) {
-          const targetId = this.getAttribute("href");
-          
-          if (targetId && targetId.startsWith("#")) {
-            e.preventDefault();
-            const targetSection = document.querySelector(targetId);
-            if (targetSection) {
-              targetSection.scrollIntoView({ behavior: "smooth" });
-              if (targetId === "#contact") {
-                const nameInput = document.getElementById("name");
-                if (nameInput) {
-                  setTimeout(() => nameInput.focus(), 600);
-                }
-              }
-            }
-          }
-
-          navItems.forEach(item => item.classList.remove("active"));
-          this.classList.add("active");
-        });
-      });
-
-      const sections = document.querySelectorAll("section[id], div.top-banner[id]");
-      window.addEventListener("scroll", () => {
-        let scrollY = window.pageYOffset;
-
-        sections.forEach(section => {
-          const sectionHeight = section.offsetHeight;
-          const sectionTop = section.offsetTop - 120;
-          const sectionId = section.getAttribute("id");
-
-          if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            navItems.forEach(link => {
-              link.classList.remove("active");
-              if (link.getAttribute("href") === `#${sectionId}`) {
-                link.classList.add("active");
-              }
-            });
-          }
-        });
-      });
-
-      // 6. WhatsApp Form & Direct Email Submission Handlers
+      // 5. Inquiry Form (WhatsApp & Email)
       const inquiryForm = document.getElementById("inquiryForm");
-      const whatsappSubmitBtn = document.getElementById("whatsappSubmitBtn");
+      const whatsappBtn = document.getElementById("whatsappSubmitBtn");
+      const formStatus = document.getElementById("formStatus");
 
-      if (whatsappSubmitBtn) {
-        whatsappSubmitBtn.addEventListener("click", function () {
-          const name = document.getElementById("name").value.trim();
-          const contactInfo = document.getElementById("contactInfo").value.trim();
-          const serviceType = document.getElementById("serviceType").value;
-          const message = document.getElementById("message").value.trim();
+      function showStatus(msg, isError) {
+        if (!formStatus) return;
+        formStatus.textContent = msg;
+        formStatus.style.display = "block";
+        if (isError) {
+          formStatus.style.backgroundColor = "#fee2e2";
+          formStatus.style.color = "#991b1b";
+          formStatus.style.borderColor = "#fca5a5";
+        } else {
+          formStatus.style.backgroundColor = "#dcfce7";
+          formStatus.style.color = "#15803d";
+          formStatus.style.borderColor = "#86efac";
+        }
+      }
 
-          if (!name || !contactInfo || !message) {
-            alert("Please fill in your Name, Contact Info, and Message before sending via WhatsApp.");
-            return;
-          }
+      function getFormValues() {
+        const name = (document.getElementById("name")?.value || "").trim();
+        const contactInfo = (document.getElementById("contactInfo")?.value || "").trim();
+        const serviceType = (document.getElementById("serviceType")?.value || "").trim();
+        const message = (document.getElementById("message")?.value || "").trim();
+        return { name, contactInfo, serviceType, message };
+      }
 
-          const whatsappText = `Hello Harrison, my name is ${name} (${contactInfo}). I would like a quote/service for *${serviceType}*.\n\nDetails: ${message}`;
-          const encodedUrl = `https://wa.me/254705976233?text=${encodeURIComponent(whatsappText)}`;
-          window.open(encodedUrl, "_blank");
+      function validateForm(data) {
+        if (!data.name || !data.contactInfo || !data.message) {
+          showStatus("Please fill in your name, contact info, and message details.", true);
+          return false;
+        }
+        return true;
+      }
+
+      if (whatsappBtn) {
+        whatsappBtn.addEventListener("click", function () {
+          const data = getFormValues();
+          if (!validateForm(data)) return;
+
+          const text =
+            "Hello Harrison, my name is " + data.name + ".\n" +
+            "Contact: " + data.contactInfo + "\n" +
+            "Service Needed: " + data.serviceType + "\n" +
+            "Details: " + data.message;
+
+          const waUrl = "https://wa.me/254705976233?text=" + encodeURIComponent(text);
+          window.open(waUrl, "_blank", "noopener,noreferrer");
+          showStatus("Opening WhatsApp with your inquiry pre-filled...", false);
         });
       }
 
       if (inquiryForm) {
         inquiryForm.addEventListener("submit", function (e) {
           e.preventDefault();
-          const name = document.getElementById("name").value.trim();
-          const contactInfo = document.getElementById("contactInfo").value.trim();
-          const serviceType = document.getElementById("serviceType").value;
-          const message = document.getElementById("message").value.trim();
-          const statusEl = document.getElementById("formStatus");
+          const data = getFormValues();
+          if (!validateForm(data)) return;
 
-          if (!name || !contactInfo || !message) {
-            alert("Please fill in all required fields before sending.");
-            return;
-          }
+          const subject = encodeURIComponent("ICT Service Inquiry: " + data.serviceType);
+          const body = encodeURIComponent(
+            "Name: " + data.name + "\n" +
+            "Contact: " + data.contactInfo + "\n" +
+            "Service Needed: " + data.serviceType + "\n\n" +
+            "Message / Project Details:\n" + data.message
+          );
 
-          const subject = encodeURIComponent(`Service Inquiry: ${serviceType} - from ${name}`);
-          const body = encodeURIComponent(`Name: ${name}\nContact: ${contactInfo}\nService Needed: ${serviceType}\n\nMessage:\n${message}`);
-          
-          window.location.href = `mailto:njorogeharrisonwanjiru@gmail.com?subject=${subject}&body=${body}`;
-          
-          if (statusEl) {
-            statusEl.style.display = "block";
-            statusEl.style.backgroundColor = "#dcfce7";
-            statusEl.style.color = "#15803d";
-            statusEl.style.borderColor = "#86efac";
-            statusEl.textContent = "Opening your email app to send your inquiry to njorogeharrisonwanjiru@gmail.com!";
-          }
+          window.location.href = "mailto:njorogeharrisonwanjiru@gmail.com?subject=" + subject + "&body=" + body;
+          showStatus("Opening your email client with your inquiry ready to send...", false);
         });
       }
     });
