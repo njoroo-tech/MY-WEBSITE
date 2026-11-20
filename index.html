@@ -164,41 +164,35 @@
       margin-bottom: 2rem;
     }
 
-    /* Top Banner Container & Rotating Background Images */
+    /* Top Banner Container & Rotating Background */
     .top-banner {
-      position: relative !important;
-      overflow: hidden !important;
-      background-color: #023e8a !important;
-      color: #ffffff !important;
-      padding: 5rem 1rem !important;
+      position: relative;
+      overflow: hidden;
+      background-color: #023e8a;
+      color: #ffffff;
+      padding: 5rem 1rem;
       text-align: center;
       isolation: isolate;
     }
 
-    .top-banner .banner-bg-img {
-      position: absolute !important;
-      inset: 0 !important;
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: cover !important;
-      object-position: center 25% !important;
-      z-index: -2 !important;
+    .banner-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 25%;
+      z-index: -2;
       filter: brightness(0.75) contrast(1.05);
-      opacity: 0;
-      transition: opacity 0.8s ease-in-out;
-    }
-
-    .top-banner .banner-bg-img.active {
-      opacity: 1;
-      z-index: -1 !important;
+      transition: opacity 0.4s ease-in-out;
     }
 
     .top-banner::after {
-      content: "" !important;
-      position: absolute !important;
-      inset: 0 !important;
-      background: linear-gradient(135deg, rgba(3, 4, 94, 0.62) 0%, rgba(0, 119, 182, 0.48) 100%) !important;
-      z-index: 0 !important;
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(3, 4, 94, 0.62) 0%, rgba(0, 119, 182, 0.48) 100%);
+      z-index: -1;
       pointer-events: none;
     }
 
@@ -520,7 +514,7 @@
       text-decoration: underline;
     }
 
-    /* About Section Grid & Rotating "Why Choose Us" Photos */
+    /* About Section Grid & Rotating "Why Choose Us" Photo */
     .about-grid {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
@@ -528,30 +522,22 @@
       align-items: start;
     }
 
-    .why-choose-slideshow {
-      position: relative;
+    .why-choose-box {
       width: 100%;
-      height: 260px;
+      height: 270px;
       border-radius: 10px;
       overflow: hidden;
       margin-bottom: 1.25rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
       background-color: #03045e;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
     }
 
-    .why-choose-img {
-      position: absolute;
-      inset: 0;
+    .why-choose-photo {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center 25%;
-      opacity: 0;
-      transition: opacity 0.6s ease-in-out;
-    }
-
-    .why-choose-img.active {
-      opacity: 1;
+      transition: opacity 0.35s ease-in-out;
     }
 
     .about-panel {
@@ -785,45 +771,16 @@
   <!-- Top Banner Section (Background rotates every 2 seconds) -->
   <div class="top-banner">
     <img
-      src="assets/profile-banner.jpg"
-      onerror="if(!this.dataset.step){this.dataset.step=1;this.src='profile-banner.jpg';}else{this.onerror=null;this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80';}"
-      alt=""
-      aria-hidden="true"
-      class="banner-bg-img active"
-    >
-    <img
-      src="assets/CC.jpeg"
-      onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80';"
+      id="bannerBgImg"
+      src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80"
       alt=""
       aria-hidden="true"
       class="banner-bg-img"
     >
-    <img
-      src="assets/network-setup.jpg"
-      onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1600&q=80';"
-      alt=""
-      aria-hidden="true"
-      class="banner-bg-img"
-    >
-    <img
-      src="assets/project-showcase.jpg"
-      onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80';"
-      alt=""
-      aria-hidden="true"
-      class="banner-bg-img"
-    >
-    <img
-      src="assets/about-photo.jpg"
-      onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80';"
-      alt=""
-      aria-hidden="true"
-      class="banner-bg-img"
-    >
-
     <div class="container">
       <img
         src="assets/profile-banner.jpg"
-        onerror="this.onerror=null;this.src='profile-banner.jpg';"
+        onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=400&q=80';"
         alt="Harrison Ndungu"
         class="profile-photo"
       >
@@ -852,9 +809,9 @@
         </div>
         <div class="hero-media">
           <div class="slideshow-container" id="heroSlideshow">
-            <img src="assets/CC.jpeg" class="slide-img active" alt="IT Setup 1" onerror="this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80';">
-            <img src="assets/about-photo.jpg" class="slide-img" alt="IT Setup 2" onerror="this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80';">
-            <img src="assets/profile-banner.jpg" class="slide-img" alt="IT Setup 3" onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80';">
+            <img src="assets/CC.jpeg" class="slide-img active" alt="IT Setup 1" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80';">
+            <img src="assets/about-photo.jpg" class="slide-img" alt="IT Setup 2" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80';">
+            <img src="assets/profile-banner.jpg" class="slide-img" alt="IT Setup 3" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80';">
             
             <button class="slide-btn prev" id="prevSlide" aria-label="Previous photo">❮</button>
             <button class="slide-btn next" id="nextSlide" aria-label="Next photo">❯</button>
@@ -947,17 +904,17 @@
         <p class="section-lead">Explore examples of our custom deployments and project implementations.</p>
         <div class="cards three">
           <article class="card project-card">
-            <img src="assets/CC.jpeg" alt="Web Development" class="project-img" onerror="this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80';">
+            <img src="assets/CC.jpeg" alt="Web Development" class="project-img" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80';">
             <h3>Websites &amp; Portfolios</h3>
             <p>Responsive, fast-loading business and institutional websites built for maximum impact.</p>
           </article>
           <article class="card project-card">
-            <img src="assets/project-showcase.jpg" alt="Database Systems" class="project-img" onerror="this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80';">
+            <img src="assets/project-showcase.jpg" alt="Database Systems" class="project-img" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80';">
             <h3>Management Systems</h3>
             <p>Custom library and school management databases built in Python, SQL, and PHP.</p>
           </article>
           <article class="card project-card">
-            <img src="assets/network-setup.jpg" alt="Network Setup" class="project-img" onerror="this.src='https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80';">
+            <img src="assets/network-setup.jpg" alt="Network Setup" class="project-img" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80';">
             <h3>Office Networking</h3>
             <p>Reliable wired and wireless network deployments to keep your business connected.</p>
           </article>
@@ -976,30 +933,12 @@
           <a class="text-link" href="https://sites.google.com/view/ndush/home" target="_blank" rel="noopener noreferrer">View Professional E-Portfolio ↗</a>
         </div>
         <aside class="about-panel">
-          <div class="why-choose-slideshow" id="whyChooseSlideshow">
+          <div class="why-choose-box">
             <img
-              src="assets/about-photo.jpg"
-              onerror="if(!this.dataset.tried){this.dataset.tried=true;this.src='profile picture.jpg';}else{this.onerror=null;this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80';}"
-              alt="Harrison Ndungu"
-              class="why-choose-img active"
-            >
-            <img
-              src="assets/CC.jpeg"
-              onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80';"
-              alt="ICT Support & Training"
-              class="why-choose-img"
-            >
-            <img
-              src="assets/network-setup.jpg"
-              onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80';"
-              alt="Network Configuration"
-              class="why-choose-img"
-            >
-            <img
-              src="assets/project-showcase.jpg"
-              onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80';"
-              alt="Software & Data Solutions"
-              class="why-choose-img"
+              id="whyChooseImg"
+              src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80"
+              alt="Harrison Ndungu - Trusted ICT Partner"
+              class="why-choose-photo"
             >
           </div>
           <h3>Why Choose Us?</h3>
@@ -1091,7 +1030,7 @@
     </div>
   </footer>
 
-  <!-- Combined JavaScript for Navigation, Active Highlighting, Banner Rotation, Why Choose Us Rotation, Slideshow, Filter & Form Submissions -->
+  <!-- Combined JavaScript -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       // Set current year in footer
@@ -1100,29 +1039,102 @@
         yearSpan.textContent = new Date().getFullYear();
       }
 
-      // 0a. Top Banner Background Image Rotation (every 2 seconds)
-      const bannerBgImages = document.querySelectorAll(".top-banner .banner-bg-img");
-      let currentBannerIndex = 0;
+      // Helper: Preload local photo with instant fallback so rotations never flash blank
+      function setupPhotoRotator(imgElement, photoList, intervalMs) {
+        if (!imgElement || !photoList.length) return;
+        const resolvedUrls = new Array(photoList.length);
 
-      if (bannerBgImages.length > 1) {
-        setInterval(function () {
-          bannerBgImages[currentBannerIndex].classList.remove("active");
-          currentBannerIndex = (currentBannerIndex + 1) % bannerBgImages.length;
-          bannerBgImages[currentBannerIndex].classList.add("active");
-        }, 2000);
+        photoList.forEach(function (item, idx) {
+          resolvedUrls[idx] = item.fallback;
+          const tester = new Image();
+          tester.onload = function () {
+            resolvedUrls[idx] = item.local;
+            if (idx === 0) {
+              imgElement.src = item.local;
+            }
+          };
+          tester.src = item.local;
+        });
+
+        let currentIdx = 0;
+        imgElement.src = resolvedUrls[0];
+        if (photoList[0].alt) imgElement.alt = photoList[0].alt;
+
+        if (photoList.length > 1) {
+          setInterval(function () {
+            currentIdx = (currentIdx + 1) % photoList.length;
+            imgElement.style.opacity = "0.35";
+            setTimeout(function () {
+              imgElement.src = resolvedUrls[currentIdx];
+              if (photoList[currentIdx].alt) {
+                imgElement.alt = photoList[currentIdx].alt;
+              }
+              imgElement.style.opacity = "1";
+            }, 150);
+          }, intervalMs);
+        }
       }
+
+      // 0a. Top Banner Background Image Rotation (every 2 seconds)
+      setupPhotoRotator(
+        document.getElementById("bannerBgImg"),
+        [
+          {
+            local: "assets/profile-banner.jpg",
+            fallback: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80",
+            alt: ""
+          },
+          {
+            local: "assets/CC.jpeg",
+            fallback: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
+            alt: ""
+          },
+          {
+            local: "assets/network-setup.jpg",
+            fallback: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1600&q=80",
+            alt: ""
+          },
+          {
+            local: "assets/project-showcase.jpg",
+            fallback: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
+            alt: ""
+          },
+          {
+            local: "assets/about-photo.jpg",
+            fallback: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80",
+            alt: ""
+          }
+        ],
+        2000
+      );
 
       // 0b. "Why Choose Us" Photo Rotation (every 2 seconds)
-      const whyChooseImages = document.querySelectorAll("#whyChooseSlideshow .why-choose-img");
-      let currentWhyIndex = 0;
-
-      if (whyChooseImages.length > 1) {
-        setInterval(function () {
-          whyChooseImages[currentWhyIndex].classList.remove("active");
-          currentWhyIndex = (currentWhyIndex + 1) % whyChooseImages.length;
-          whyChooseImages[currentWhyIndex].classList.add("active");
-        }, 2000);
-      }
+      setupPhotoRotator(
+        document.getElementById("whyChooseImg"),
+        [
+          {
+            local: "assets/about-photo.jpg",
+            fallback: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80",
+            alt: "Harrison Ndungu - Trusted ICT Partner"
+          },
+          {
+            local: "assets/CC.jpeg",
+            fallback: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
+            alt: "Computer Repair & Software Support"
+          },
+          {
+            local: "assets/network-setup.jpg",
+            fallback: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80",
+            alt: "Reliable Network & Wi-Fi Setup"
+          },
+          {
+            local: "assets/project-showcase.jpg",
+            fallback: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+            alt: "Systems, Data & Training Solutions"
+          }
+        ],
+        2000
+      );
 
       // 1. Mobile Menu Toggle
       const menuToggle = document.getElementById("menuToggle");
@@ -1250,3 +1262,96 @@
 
       filterButtons.forEach(function (btn) {
         btn.addEventListener("click", function () {
+          const filter = btn.getAttribute("data-filter");
+
+          filterButtons.forEach(function (b) {
+            b.classList.remove("active");
+          });
+          btn.classList.add("active");
+
+          serviceCards.forEach(function (card) {
+            const category = card.getAttribute("data-category");
+            if (filter === "all" || category === filter) {
+              card.style.display = "";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        });
+      });
+
+      // 5. Inquiry Form (WhatsApp & Email)
+      const inquiryForm = document.getElementById("inquiryForm");
+      const whatsappBtn = document.getElementById("whatsappSubmitBtn");
+      const formStatus = document.getElementById("formStatus");
+
+      function showStatus(msg, isError) {
+        if (!formStatus) return;
+        formStatus.textContent = msg;
+        formStatus.style.display = "block";
+        if (isError) {
+          formStatus.style.backgroundColor = "#fee2e2";
+          formStatus.style.color = "#991b1b";
+          formStatus.style.borderColor = "#fca5a5";
+        } else {
+          formStatus.style.backgroundColor = "#dcfce7";
+          formStatus.style.color = "#15803d";
+          formStatus.style.borderColor = "#86efac";
+        }
+      }
+
+      function getFormValues() {
+        const name = (document.getElementById("name")?.value || "").trim();
+        const contactInfo = (document.getElementById("contactInfo")?.value || "").trim();
+        const serviceType = (document.getElementById("serviceType")?.value || "").trim();
+        const message = (document.getElementById("message")?.value || "").trim();
+        return { name, contactInfo, serviceType, message };
+      }
+
+      function validateForm(data) {
+        if (!data.name || !data.contactInfo || !data.message) {
+          showStatus("Please fill in your name, contact info, and message details.", true);
+          return false;
+        }
+        return true;
+      }
+
+      if (whatsappBtn) {
+        whatsappBtn.addEventListener("click", function () {
+          const data = getFormValues();
+          if (!validateForm(data)) return;
+
+          const text =
+            "Hello Harrison, my name is " + data.name + ".\n" +
+            "Contact: " + data.contactInfo + "\n" +
+            "Service Needed: " + data.serviceType + "\n" +
+            "Details: " + data.message;
+
+          const waUrl = "https://wa.me/254705976233?text=" + encodeURIComponent(text);
+          window.open(waUrl, "_blank", "noopener,noreferrer");
+          showStatus("Opening WhatsApp with your inquiry pre-filled...", false);
+        });
+      }
+
+      if (inquiryForm) {
+        inquiryForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const data = getFormValues();
+          if (!validateForm(data)) return;
+
+          const subject = encodeURIComponent("ICT Service Inquiry: " + data.serviceType);
+          const body = encodeURIComponent(
+            "Name: " + data.name + "\n" +
+            "Contact: " + data.contactInfo + "\n" +
+            "Service Needed: " + data.serviceType + "\n\n" +
+            "Message / Project Details:\n" + data.message
+          );
+
+          window.location.href = "mailto:njorogeharrisonwanjiru@gmail.com?subject=" + subject + "&body=" + body;
+          showStatus("Opening your email client with your inquiry ready to send...", false);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
