@@ -520,7 +520,7 @@
       text-decoration: underline;
     }
 
-    /* About Section Grid */
+    /* About Section Grid & Rotating "Why Choose Us" Photos */
     .about-grid {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
@@ -528,14 +528,30 @@
       align-items: start;
     }
 
-    .about-portrait {
+    .why-choose-slideshow {
+      position: relative;
       width: 100%;
-      height: 320px;
-      object-fit: cover;
-      object-position: top;
+      height: 260px;
       border-radius: 10px;
+      overflow: hidden;
       margin-bottom: 1.25rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      background-color: #03045e;
+    }
+
+    .why-choose-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 25%;
+      opacity: 0;
+      transition: opacity 0.6s ease-in-out;
+    }
+
+    .why-choose-img.active {
+      opacity: 1;
     }
 
     .about-panel {
@@ -960,12 +976,32 @@
           <a class="text-link" href="https://sites.google.com/view/ndush/home" target="_blank" rel="noopener noreferrer">View Professional E-Portfolio ↗</a>
         </div>
         <aside class="about-panel">
-          <img
-            src="assets/about-photo.jpg"
-            onerror="if(!this.dataset.tried){this.dataset.tried=true;this.src='profile picture.jpg';}else{this.onerror=null;this.src='https://placehold.co/600x400/03045e/ffffff?text=Harrison+Ndungu';}"
-            alt="Harrison Ndungu"
-            class="about-portrait"
-          />
+          <div class="why-choose-slideshow" id="whyChooseSlideshow">
+            <img
+              src="assets/about-photo.jpg"
+              onerror="if(!this.dataset.tried){this.dataset.tried=true;this.src='profile picture.jpg';}else{this.onerror=null;this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80';}"
+              alt="Harrison Ndungu"
+              class="why-choose-img active"
+            >
+            <img
+              src="assets/CC.jpeg"
+              onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80';"
+              alt="ICT Support & Training"
+              class="why-choose-img"
+            >
+            <img
+              src="assets/network-setup.jpg"
+              onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80';"
+              alt="Network Configuration"
+              class="why-choose-img"
+            >
+            <img
+              src="assets/project-showcase.jpg"
+              onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80';"
+              alt="Software & Data Solutions"
+              class="why-choose-img"
+            >
+          </div>
           <h3>Why Choose Us?</h3>
           <ul>
             <li>7+ years of professional industry experience</li>
@@ -1055,7 +1091,7 @@
     </div>
   </footer>
 
-  <!-- Combined JavaScript for Navigation, Active Highlighting, Banner Rotation, Slideshow, Filter & Form Submissions -->
+  <!-- Combined JavaScript for Navigation, Active Highlighting, Banner Rotation, Why Choose Us Rotation, Slideshow, Filter & Form Submissions -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       // Set current year in footer
@@ -1064,7 +1100,7 @@
         yearSpan.textContent = new Date().getFullYear();
       }
 
-      // 0. Top Banner Background Image Rotation (every 2 seconds)
+      // 0a. Top Banner Background Image Rotation (every 2 seconds)
       const bannerBgImages = document.querySelectorAll(".top-banner .banner-bg-img");
       let currentBannerIndex = 0;
 
@@ -1073,6 +1109,18 @@
           bannerBgImages[currentBannerIndex].classList.remove("active");
           currentBannerIndex = (currentBannerIndex + 1) % bannerBgImages.length;
           bannerBgImages[currentBannerIndex].classList.add("active");
+        }, 2000);
+      }
+
+      // 0b. "Why Choose Us" Photo Rotation (every 2 seconds)
+      const whyChooseImages = document.querySelectorAll("#whyChooseSlideshow .why-choose-img");
+      let currentWhyIndex = 0;
+
+      if (whyChooseImages.length > 1) {
+        setInterval(function () {
+          whyChooseImages[currentWhyIndex].classList.remove("active");
+          currentWhyIndex = (currentWhyIndex + 1) % whyChooseImages.length;
+          whyChooseImages[currentWhyIndex].classList.add("active");
         }, 2000);
       }
 
@@ -1202,96 +1250,3 @@
 
       filterButtons.forEach(function (btn) {
         btn.addEventListener("click", function () {
-          const filter = btn.getAttribute("data-filter");
-
-          filterButtons.forEach(function (b) {
-            b.classList.remove("active");
-          });
-          btn.classList.add("active");
-
-          serviceCards.forEach(function (card) {
-            const category = card.getAttribute("data-category");
-            if (filter === "all" || category === filter) {
-              card.style.display = "";
-            } else {
-              card.style.display = "none";
-            }
-          });
-        });
-      });
-
-      // 5. Inquiry Form (WhatsApp & Email)
-      const inquiryForm = document.getElementById("inquiryForm");
-      const whatsappBtn = document.getElementById("whatsappSubmitBtn");
-      const formStatus = document.getElementById("formStatus");
-
-      function showStatus(msg, isError) {
-        if (!formStatus) return;
-        formStatus.textContent = msg;
-        formStatus.style.display = "block";
-        if (isError) {
-          formStatus.style.backgroundColor = "#fee2e2";
-          formStatus.style.color = "#991b1b";
-          formStatus.style.borderColor = "#fca5a5";
-        } else {
-          formStatus.style.backgroundColor = "#dcfce7";
-          formStatus.style.color = "#15803d";
-          formStatus.style.borderColor = "#86efac";
-        }
-      }
-
-      function getFormValues() {
-        const name = (document.getElementById("name")?.value || "").trim();
-        const contactInfo = (document.getElementById("contactInfo")?.value || "").trim();
-        const serviceType = (document.getElementById("serviceType")?.value || "").trim();
-        const message = (document.getElementById("message")?.value || "").trim();
-        return { name, contactInfo, serviceType, message };
-      }
-
-      function validateForm(data) {
-        if (!data.name || !data.contactInfo || !data.message) {
-          showStatus("Please fill in your name, contact info, and message details.", true);
-          return false;
-        }
-        return true;
-      }
-
-      if (whatsappBtn) {
-        whatsappBtn.addEventListener("click", function () {
-          const data = getFormValues();
-          if (!validateForm(data)) return;
-
-          const text =
-            "Hello Harrison, my name is " + data.name + ".\n" +
-            "Contact: " + data.contactInfo + "\n" +
-            "Service Needed: " + data.serviceType + "\n" +
-            "Details: " + data.message;
-
-          const waUrl = "https://wa.me/254705976233?text=" + encodeURIComponent(text);
-          window.open(waUrl, "_blank", "noopener,noreferrer");
-          showStatus("Opening WhatsApp with your inquiry pre-filled...", false);
-        });
-      }
-
-      if (inquiryForm) {
-        inquiryForm.addEventListener("submit", function (e) {
-          e.preventDefault();
-          const data = getFormValues();
-          if (!validateForm(data)) return;
-
-          const subject = encodeURIComponent("ICT Service Inquiry: " + data.serviceType);
-          const body = encodeURIComponent(
-            "Name: " + data.name + "\n" +
-            "Contact: " + data.contactInfo + "\n" +
-            "Service Needed: " + data.serviceType + "\n\n" +
-            "Message / Project Details:\n" + data.message
-          );
-
-          window.location.href = "mailto:njorogeharrisonwanjiru@gmail.com?subject=" + subject + "&body=" + body;
-          showStatus("Opening your email client with your inquiry ready to send...", false);
-        });
-      }
-    });
-  </script>
-</body>
-</html>
