@@ -242,6 +242,7 @@
       height: 155px;
       border-radius: 50%;
       object-fit: cover;
+      object-position: center 20%;
       border: 4px solid #ffffff;
       margin: 0 auto 1rem auto;
       background-color: #e0e7ff;
@@ -354,6 +355,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 25%;
       opacity: 0;
       transform: scale(1.04);
       transition: opacity 0.7s ease-in-out, transform 1.8s ease-in-out;
@@ -536,7 +538,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 25%;
+      object-position: center 20%;
       transition: opacity 0.35s ease-in-out;
     }
 
@@ -772,7 +774,8 @@
   <div class="top-banner">
     <img
       id="bannerBgImg"
-      src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80"
+      src="assets/profile-banner.jpg"
+      onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80';"
       alt=""
       aria-hidden="true"
       class="banner-bg-img"
@@ -780,7 +783,7 @@
     <div class="container">
       <img
         src="assets/profile-banner.jpg"
-        onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=400&q=80';"
+        onerror="if(!this.dataset.f){this.dataset.f=1;this.src='assets/about-photo.jpg';}else{this.onerror=null;this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=400&q=80';}"
         alt="Harrison Ndungu"
         class="profile-photo"
       >
@@ -809,9 +812,9 @@
         </div>
         <div class="hero-media">
           <div class="slideshow-container" id="heroSlideshow">
-            <img src="assets/CC.jpeg" class="slide-img active" alt="IT Setup 1" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80';">
-            <img src="assets/about-photo.jpg" class="slide-img" alt="IT Setup 2" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80';">
-            <img src="assets/profile-banner.jpg" class="slide-img" alt="IT Setup 3" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80';">
+            <img src="assets/profile-banner.jpg" class="slide-img active" alt="Harrison Ndungu - ICT Specialist" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80';">
+            <img src="assets/about-photo.jpg" class="slide-img" alt="Harrison Ndungu - Professional Consultations" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80';">
+            <img src="assets/CC.jpeg" class="slide-img" alt="IT Setup & Training" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80';">
             
             <button class="slide-btn prev" id="prevSlide" aria-label="Previous photo">❮</button>
             <button class="slide-btn next" id="nextSlide" aria-label="Next photo">❯</button>
@@ -936,7 +939,8 @@
           <div class="why-choose-box">
             <img
               id="whyChooseImg"
-              src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80"
+              src="assets/about-photo.jpg"
+              onerror="this.onerror=null;this.src='assets/profile-banner.jpg';"
               alt="Harrison Ndungu - Trusted ICT Partner"
               class="why-choose-photo"
             >
@@ -1075,13 +1079,18 @@
         }
       }
 
-      // 0a. Top Banner Background Image Rotation (every 2 seconds)
+      // 0a. Top Banner Background Image Rotation (every 2 seconds) using profile-banner.jpg & about-photo.jpg
       setupPhotoRotator(
         document.getElementById("bannerBgImg"),
         [
           {
             local: "assets/profile-banner.jpg",
             fallback: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80",
+            alt: ""
+          },
+          {
+            local: "assets/about-photo.jpg",
+            fallback: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80",
             alt: ""
           },
           {
@@ -1093,22 +1102,12 @@
             local: "assets/network-setup.jpg",
             fallback: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1600&q=80",
             alt: ""
-          },
-          {
-            local: "assets/project-showcase.jpg",
-            fallback: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
-            alt: ""
-          },
-          {
-            local: "assets/about-photo.jpg",
-            fallback: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80",
-            alt: ""
           }
         ],
         2000
       );
 
-      // 0b. "Why Choose Us" Photo Rotation (every 2 seconds)
+      // 0b. "Why Choose Us" Photo Rotation (every 2 seconds) using about-photo.jpg & profile-banner.jpg
       setupPhotoRotator(
         document.getElementById("whyChooseImg"),
         [
@@ -1118,19 +1117,19 @@
             alt: "Harrison Ndungu - Trusted ICT Partner"
           },
           {
-            local: "assets/CC.jpeg",
+            local: "assets/profile-banner.jpg",
             fallback: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
+            alt: "Harrison Ndungu - Open to Work & ICT Consulting"
+          },
+          {
+            local: "assets/CC.jpeg",
+            fallback: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
             alt: "Computer Repair & Software Support"
           },
           {
             local: "assets/network-setup.jpg",
             fallback: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80",
             alt: "Reliable Network & Wi-Fi Setup"
-          },
-          {
-            local: "assets/project-showcase.jpg",
-            fallback: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-            alt: "Systems, Data & Training Solutions"
           }
         ],
         2000
