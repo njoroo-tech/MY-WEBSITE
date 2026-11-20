@@ -221,6 +221,8 @@
     .cursor {
       display: inline-block;
       width: 3px;
+      height: 1.25rem;
+      vertical-align: -2px;
       background-color: #7dd3fc;
       margin-left: 3px;
       animation: blink 0.8s infinite;
@@ -1021,7 +1023,7 @@
   <div class="announcement-banner-bottom">
     <div class="container">
       <marquee behavior="scroll" direction="left" scrollamount="5">
-        Welcome to Harrison Ndungu ICT Solutions. Professional Computer Repair, Networking, Web Development, and Training in Sage, QuickBooks, SPSS, STATA, and ArchiCAD. Contact us today via WhatsApp or Email.
+        Welcome to Harrison Ndungu ICT Solutions. Professional Computer Repair, Networking, Web Development, and Training in Sage 50 Accounts, Pastel, QuickBooks, SPSS, STATA, AutoCAD, and ArchiCAD. Contact us today via WhatsApp or Email.
       </marquee>
     </div>
   </div>
@@ -1041,6 +1043,49 @@
       const yearSpan = document.getElementById("currentYear");
       if (yearSpan) {
         yearSpan.textContent = new Date().getFullYear();
+      }
+
+      // Continuous Typewriter Loop for Banner / Home Tagline
+      const typedRoleEl = document.getElementById("typedRole");
+      const phrases = [
+        "Empowering Businesses & Learners with Reliable Tech",
+        "AutoCAD & ArchiCAD Drafting & Software Setup",
+        "Sage 50 Accounts & Pastel Accounting Solutions",
+        "Computer Repair, Networking, SPSS, STATA & Web Development"
+      ];
+
+      if (typedRoleEl && phrases.length > 0) {
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function tickTypewriter() {
+          const currentPhrase = phrases[phraseIndex];
+
+          if (!isDeleting) {
+            charIndex++;
+            typedRoleEl.textContent = currentPhrase.slice(0, charIndex);
+            if (charIndex === currentPhrase.length) {
+              isDeleting = true;
+              setTimeout(tickTypewriter, 1800);
+              return;
+            }
+            setTimeout(tickTypewriter, 55);
+          } else {
+            charIndex--;
+            typedRoleEl.textContent = currentPhrase.slice(0, Math.max(charIndex, 0));
+            if (charIndex <= 0) {
+              isDeleting = false;
+              phraseIndex = (phraseIndex + 1) % phrases.length;
+              setTimeout(tickTypewriter, 350);
+              return;
+            }
+            setTimeout(tickTypewriter, 30);
+          }
+        }
+
+        typedRoleEl.textContent = "";
+        tickTypewriter();
       }
 
       // Helper: Rotate photos every intervalMs with reliable fallback
