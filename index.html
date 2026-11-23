@@ -1,3 +1,6 @@
+<?php
+declare(strict_types=1);
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -29,6 +32,10 @@
     img {
       display: block;
       max-width: 100%;
+    }
+
+    .card.hidden {
+      display: none;
     }
 
     /* Top Navigation Bar */
@@ -298,6 +305,12 @@
       background-color: #0077b6;
       transform: translateY(-2px);
       box-shadow: 0 6px 16px rgba(2, 62, 138, 0.4);
+    }
+
+    .button:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
     }
 
     .button-whatsapp {
@@ -673,19 +686,32 @@
       display: none;
     }
 
-    /* Scrolling Marquee Announcement Banner (Bottom) */
+    /* Scrolling Announcement Banner (Bottom) */
     .announcement-banner-bottom {
       background: linear-gradient(90deg, #023e8a, #0077b6, #03045e);
       color: #ffffff;
-      padding: 0.6rem 1rem;
+      padding: 0.6rem 0;
       font-weight: 600;
       font-size: 0.92rem;
       border-top: 2px solid rgba(255, 255, 255, 0.25);
       box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+      white-space: nowrap;
     }
 
-    .announcement-banner-bottom marquee {
-      width: 100%;
+    .ticker-track {
+      display: inline-block;
+      padding-left: 100%;
+      animation: ticker-scroll 26s linear infinite;
+    }
+
+    .announcement-banner-bottom:hover .ticker-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes ticker-scroll {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-100%, 0, 0); }
     }
 
     /* Footer Styling */
@@ -760,7 +786,7 @@
   <header class="site-header">
     <nav class="container nav" aria-label="Main navigation">
       <a class="brand" href="#home">Ndungu ICT Solutions<span>.</span></a>
-      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
+      <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
       <ul id="navLinks" class="nav-links">
         <li><a class="nav-link active" href="#home">Home</a></li>
         <li><a class="nav-link" href="#services">Services</a></li>
@@ -772,7 +798,7 @@
     </nav>
   </header>
 
-  <!-- Top Banner Section (Background rotates every 2 seconds) -->
+  <!-- Top Banner Section -->
   <div class="top-banner">
     <img
       id="bannerBgImg"
@@ -817,13 +843,13 @@
             <img src="assets/profile-banner.jpg" class="slide-img active" alt="Harrison Ndungu - ICT Specialist" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80';">
             <img src="assets/about-photo.jpg" class="slide-img" alt="Harrison Ndungu - Professional Consultations" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80';">
             <img src="assets/CC.jpeg" class="slide-img" alt="IT Setup & Training" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80';">
-            
-            <button class="slide-btn prev" id="prevSlide" aria-label="Previous photo">❮</button>
-            <button class="slide-btn next" id="nextSlide" aria-label="Next photo">❯</button>
+
+            <button type="button" class="slide-btn prev" id="prevSlide" aria-label="Previous photo">❮</button>
+            <button type="button" class="slide-btn next" id="nextSlide" aria-label="Next photo">❯</button>
             <div class="slide-dots" id="slideDots">
-              <button class="dot active" data-index="0" aria-label="Photo 1"></button>
-              <button class="dot" data-index="1" aria-label="Photo 2"></button>
-              <button class="dot" data-index="2" aria-label="Photo 3"></button>
+              <button type="button" class="dot active" data-index="0" aria-label="Photo 1"></button>
+              <button type="button" class="dot" data-index="1" aria-label="Photo 2"></button>
+              <button type="button" class="dot" data-index="2" aria-label="Photo 3"></button>
             </div>
           </div>
         </div>
@@ -835,12 +861,12 @@
       <p class="eyebrow">OUR SERVICES</p>
       <h2 class="section-heading">Professional IT &amp; Technical Offerings</h2>
       <p class="section-lead">Comprehensive tech solutions for businesses, institutions, and professionals.</p>
-      
+
       <div class="filter-bar" role="group" aria-label="Filter services">
-        <button class="filter-btn active" data-filter="all">All Services</button>
-        <button class="filter-btn" data-filter="technical">Hardware &amp; Networking</button>
-        <button class="filter-btn" data-filter="software">Software &amp; Applications</button>
-        <button class="filter-btn" data-filter="training">Training &amp; Advisory</button>
+        <button type="button" class="filter-btn active" data-filter="all">All Services</button>
+        <button type="button" class="filter-btn" data-filter="technical">Hardware &amp; Networking</button>
+        <button type="button" class="filter-btn" data-filter="software">Software &amp; Applications</button>
+        <button type="button" class="filter-btn" data-filter="training">Training &amp; Advisory</button>
       </div>
 
       <div class="cards three" id="servicesGrid">
@@ -935,472 +961,4 @@
           <h2 class="section-heading">Your Trusted ICT Partner in Kenya</h2>
           <p>Harrison Ndungu ICT Solutions is dedicated to delivering professional technology services, computer support, and quality technical training. With extensive expertise across system administration, networking, and application development, we solve everyday technology challenges for businesses and learners.</p>
           <p>Whether you need your office network upgraded, software installed, or specialized training in accounting and statistical packages, our mission is to make technology practical, accessible, and efficient.</p>
-          <a class="text-link" href="https://sites.google.com/view/ndush/home" target="_blank" rel="noopener noreferrer">View Professional E-Portfolio ↗</a>
-        </div>
-        <aside class="about-panel">
-          <div class="why-choose-box">
-            <img
-              id="whyChooseImg"
-              src="assets/about-photo.jpg"
-              onerror="this.onerror=null;this.src='assets/profile-banner.jpg';"
-              alt="Harrison Ndungu - Trusted ICT Partner"
-              class="why-choose-photo"
-            >
-          </div>
-          <h3>Why Choose Us?</h3>
-          <ul>
-            <li>7+ years of professional industry experience</li>
-            <li>Prompt, reliable technical support</li>
-            <li>Expertise in both hardware and software</li>
-            <li>Affordable solutions tailored to your needs</li>
-            <li>Dedicated client guidance and training</li>
-          </ul>
-        </aside>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section section-soft">
-      <div class="container">
-        <p class="eyebrow">GET IN TOUCH</p>
-        <h2 class="section-heading">Contact Us for Inquiries &amp; Quotations</h2>
-        <p class="section-lead">Reach out today and let us discuss how we can assist your business or institution.</p>
-        
-        <div class="contact-grid">
-          <div class="contact-card">
-            <h3>Direct Contact Details</h3>
-            <p><strong>Location:</strong> Thika, Kenya</p>
-            <p><strong>Postal Address:</strong> P.O. Box 6619, Thika</p>
-            <p><strong>Phone / WhatsApp:</strong> <a href="tel:+254705976233">+254 705 976 233</a></p>
-            <p><strong>Email:</strong> <a href="mailto:njorogeharrisonwanjiru@gmail.com">njorogeharrisonwanjiru@gmail.com</a></p>
-            <p style="margin-top: 1.25rem;">
-              <a class="whatsapp-badge" href="https://wa.me/254705976233?text=Hello%20Harrison,%20I%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer">
-                Direct WhatsApp Chat
-              </a>
-            </p>
-          </div>
-          
-          <div class="contact-card">
-            <h3>Send an Inquiry</h3>
-            <form id="inquiryForm">
-              <label for="name">Your Name *</label>
-              <input type="text" id="name" name="name" required placeholder="Enter your full name">
-              
-              <label for="contactInfo">Your Email or Phone Number *</label>
-              <input type="text" id="contactInfo" name="contactInfo" required placeholder="e.g. 0712 345 678 or name@email.com">
-              
-              <label for="serviceType">Service Needed</label>
-              <select id="serviceType" name="serviceType">
-                <option value="Computer Repair & Maintenance">Computer Repair &amp; Maintenance</option>
-                <option value="Network Setup & Wi-Fi">Network Setup &amp; Wi-Fi Configuration</option>
-                <option value="Software Installation (AutoCAD/ArchiCAD/etc.)">Software Installation (AutoCAD, ArchiCAD, etc.)</option>
-                <option value="Accounting & Statistical Packages Training">Accounting &amp; Statistical Packages (Sage, QuickBooks, SPSS, STATA)</option>
-                <option value="Web Design / Graphic Branding">Web Design &amp; Graphic Branding</option>
-                <option value="TVET / Corporate ICT Training">TVET / Corporate ICT Training</option>
-                <option value="General ICT Consultation">General ICT Consultation</option>
-              </select>
-
-              <label for="message">Message / Project Details *</label>
-              <textarea id="message" name="message" rows="4" required placeholder="Describe the service or quotation you need..."></textarea>
-              
-              <div class="form-buttons">
-                <button type="button" id="whatsappSubmitBtn" class="button button-whatsapp">
-                  Send via WhatsApp
-                </button>
-                <button type="submit" class="button">
-                  Send via Email
-                </button>
-              </div>
-              <div id="formStatus" class="form-status"></div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Scrolling Marquee Announcement Banner (Bottom) -->
-  <div class="announcement-banner-bottom">
-    <div class="container">
-      <marquee behavior="scroll" direction="left" scrollamount="5">
-        Welcome to Harrison Ndungu ICT Solutions. Computer Repair &amp; Maintenance, Network Setup &amp; Wi-Fi, AutoCAD &amp; ArchiCAD, Sage 50 Accounts, Pastel &amp; QuickBooks, SPSS, STATA &amp; Advanced Excel, TVET / CBET ICT Training, Web &amp; App Development, and Graphic Branding. Contact us today via WhatsApp or Email.
-      </marquee>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-inner">
-      <p>&copy; <span id="currentYear"></span> Harrison Ndungu ICT Solutions. All rights reserved.</p>
-      <p>Thika, Kenya | <a href="#home">Back to Top ↑</a></p>
-    </div>
-  </footer>
-
-  <!-- Combined JavaScript -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      // Set current year in footer
-      const yearSpan = document.getElementById("currentYear");
-      if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-      }
-
-      // Continuous Typewriter Loop Covering All Services
-      const typedRoleEl = document.getElementById("typedRole");
-      const phrases = [
-        "Empowering Businesses & Learners with Reliable Tech",
-        "Computer Repair, Diagnostics & OS Maintenance",
-        "Network Setup, LAN Cabling, Wi-Fi & Cisco Packet Tracer",
-        "AutoCAD & ArchiCAD Drafting & Software Setup",
-        "Sage 50 Accounts, Pastel & QuickBooks Solutions",
-        "SPSS, STATA & Advanced Excel Data Analysis",
-        "TVET / CBET ICT Training & Corporate Workshops",
-        "Websites, Mobile App Prototypes, Databases & Branding"
-      ];
-
-      if (typedRoleEl && phrases.length > 0) {
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        function tickTypewriter() {
-          const currentPhrase = phrases[phraseIndex];
-
-          if (!isDeleting) {
-            charIndex++;
-            typedRoleEl.textContent = currentPhrase.slice(0, charIndex);
-            if (charIndex === currentPhrase.length) {
-              isDeleting = true;
-              setTimeout(tickTypewriter, 1700);
-              return;
-            }
-            setTimeout(tickTypewriter, 50);
-          } else {
-            charIndex--;
-            typedRoleEl.textContent = currentPhrase.slice(0, Math.max(charIndex, 0));
-            if (charIndex <= 0) {
-              isDeleting = false;
-              phraseIndex = (phraseIndex + 1) % phrases.length;
-              setTimeout(tickTypewriter, 300);
-              return;
-            }
-            setTimeout(tickTypewriter, 25);
-          }
-        }
-
-        typedRoleEl.textContent = "";
-        tickTypewriter();
-      }
-
-      // Helper: Rotate photos every intervalMs with reliable fallback
-      function startRotator(imgId, slides, intervalMs, label) {
-        const img = document.getElementById(imgId);
-        if (!img || !slides.length) return;
-
-        let index = 0;
-
-        function renderSlide(i) {
-          const item = slides[i];
-          img.style.opacity = "0.25";
-          img.onerror = function () {
-            this.onerror = null;
-            this.src = item.fallback;
-            this.style.opacity = "1";
-          };
-          if (item.alt !== undefined) {
-            img.alt = item.alt;
-          }
-          img.src = item.local;
-          setTimeout(function () {
-            img.style.opacity = "1";
-          }, 120);
-          console.log(label + " -> slide " + (i + 1) + ":", item.local);
-        }
-
-        renderSlide(0);
-
-        if (slides.length > 1) {
-          setInterval(function () {
-            index = (index + 1) % slides.length;
-            renderSlide(index);
-          }, intervalMs);
-        }
-      }
-
-      // Top Banner Background Rotation (every 2 seconds)
-      startRotator(
-        "bannerBgImg",
-        [
-          {
-            local: "assets/profile-banner.jpg",
-            fallback: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80",
-            alt: ""
-          },
-          {
-            local: "assets/about-photo.jpg",
-            fallback: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80",
-            alt: ""
-          },
-          {
-            local: "assets/CC.jpeg",
-            fallback: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
-            alt: ""
-          },
-          {
-            local: "assets/network-setup.jpg",
-            fallback: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1600&q=80",
-            alt: ""
-          }
-        ],
-        2000,
-        "Banner BG"
-      );
-
-      // "Why Choose Us" Photo Rotation (every 2 seconds)
-      startRotator(
-        "whyChooseImg",
-        [
-          {
-            local: "assets/about-photo.jpg",
-            fallback: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80",
-            alt: "Harrison Ndungu - Trusted ICT Partner"
-          },
-          {
-            local: "assets/profile-banner.jpg",
-            fallback: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
-            alt: "Harrison Ndungu - Open to Work & ICT Consulting"
-          },
-          {
-            local: "assets/CC.jpeg",
-            fallback: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
-            alt: "Computer Repair & Software Support"
-          },
-          {
-            local: "assets/network-setup.jpg",
-            fallback: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80",
-            alt: "Reliable Network & Wi-Fi Setup"
-          }
-        ],
-        2000,
-        "Why Choose Us"
-      );
-
-      // 1. Mobile Menu Toggle
-      const menuToggle = document.getElementById("menuToggle");
-      const navLinks = document.getElementById("navLinks");
-
-      if (menuToggle && navLinks) {
-        menuToggle.addEventListener("click", function () {
-          const isOpen = navLinks.classList.toggle("open");
-          menuToggle.setAttribute("aria-expanded", String(isOpen));
-        });
-
-        navLinks.querySelectorAll("a").forEach(function (link) {
-          link.addEventListener("click", function () {
-            navLinks.classList.remove("open");
-            menuToggle.setAttribute("aria-expanded", "false");
-          });
-        });
-      }
-
-      // 2. Active Navigation Highlighting on Scroll
-      const sections = document.querySelectorAll("section[id]");
-      const navItems = document.querySelectorAll("#navLinks .nav-link:not(.cta-quote)");
-
-      function updateActiveNav() {
-        const scrollPos = window.scrollY + 140;
-        let currentId = "home";
-
-        sections.forEach(function (section) {
-          const top = section.offsetTop;
-          const height = section.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            currentId = section.getAttribute("id");
-          }
-        });
-
-        navItems.forEach(function (link) {
-          const href = link.getAttribute("href");
-          if (href === "#" + currentId) {
-            link.classList.add("active");
-          } else {
-            link.classList.remove("active");
-          }
-        });
-      }
-
-      window.addEventListener("scroll", updateActiveNav, { passive: true });
-      updateActiveNav();
-
-      // 3. Hero Slideshow
-      const slides = document.querySelectorAll("#heroSlideshow .slide-img");
-      const dots = document.querySelectorAll("#slideDots .dot");
-      const prevBtn = document.getElementById("prevSlide");
-      const nextBtn = document.getElementById("nextSlide");
-      let currentSlide = 0;
-      let slideTimer = null;
-
-      function showSlide(index) {
-        if (!slides.length) return;
-        currentSlide = (index + slides.length) % slides.length;
-
-        slides.forEach(function (slide, i) {
-          slide.classList.toggle("active", i === currentSlide);
-        });
-
-        dots.forEach(function (dot, i) {
-          dot.classList.toggle("active", i === currentSlide);
-        });
-      }
-
-      function nextSlide() {
-        showSlide(currentSlide + 1);
-      }
-
-      function prevSlide() {
-        showSlide(currentSlide - 1);
-      }
-
-      function startAutoSlide() {
-        stopAutoSlide();
-        slideTimer = setInterval(nextSlide, 5000);
-      }
-
-      function stopAutoSlide() {
-        if (slideTimer) {
-          clearInterval(slideTimer);
-          slideTimer = null;
-        }
-      }
-
-      if (nextBtn) {
-        nextBtn.addEventListener("click", function () {
-          nextSlide();
-          startAutoSlide();
-        });
-      }
-
-      if (prevBtn) {
-        prevBtn.addEventListener("click", function () {
-          prevSlide();
-          startAutoSlide();
-        });
-      }
-
-      dots.forEach(function (dot) {
-        dot.addEventListener("click", function () {
-          const idx = parseInt(dot.getAttribute("data-index"), 10);
-          if (!Number.isNaN(idx)) {
-            showSlide(idx);
-            startAutoSlide();
-          }
-        });
-      });
-
-      const slideshowEl = document.getElementById("heroSlideshow");
-      if (slideshowEl) {
-        slideshowEl.addEventListener("mouseenter", stopAutoSlide);
-        slideshowEl.addEventListener("mouseleave", startAutoSlide);
-      }
-
-      startAutoSlide();
-
-      // 4. Service Category Filtering
-      const filterButtons = document.querySelectorAll(".filter-btn");
-      const serviceCards = document.querySelectorAll("#servicesGrid .card");
-
-      filterButtons.forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          const filter = btn.getAttribute("data-filter");
-
-          filterButtons.forEach(function (b) {
-            b.classList.remove("active");
-          });
-          btn.classList.add("active");
-
-          serviceCards.forEach(function (card) {
-            const category = card.getAttribute("data-category");
-            if (filter === "all" || category === filter) {
-              card.style.display = "";
-            } else {
-              card.style.display = "none";
-            }
-          });
-        });
-      });
-
-      // 5. Inquiry Form (WhatsApp & Email)
-      const inquiryForm = document.getElementById("inquiryForm");
-      const whatsappBtn = document.getElementById("whatsappSubmitBtn");
-      const formStatus = document.getElementById("formStatus");
-
-      function showStatus(msg, isError) {
-        if (!formStatus) return;
-        formStatus.textContent = msg;
-        formStatus.style.display = "block";
-        if (isError) {
-          formStatus.style.backgroundColor = "#fee2e2";
-          formStatus.style.color = "#991b1b";
-          formStatus.style.borderColor = "#fca5a5";
-        } else {
-          formStatus.style.backgroundColor = "#dcfce7";
-          formStatus.style.color = "#15803d";
-          formStatus.style.borderColor = "#86efac";
-        }
-      }
-
-      function getFormValues() {
-        const name = (document.getElementById("name")?.value || "").trim();
-        const contactInfo = (document.getElementById("contactInfo")?.value || "").trim();
-        const serviceType = (document.getElementById("serviceType")?.value || "").trim();
-        const message = (document.getElementById("message")?.value || "").trim();
-        return { name, contactInfo, serviceType, message };
-      }
-
-      function validateForm(data) {
-        if (!data.name || !data.contactInfo || !data.message) {
-          showStatus("Please fill in your name, contact info, and message details.", true);
-          return false;
-        }
-        return true;
-      }
-
-      if (whatsappBtn) {
-        whatsappBtn.addEventListener("click", function () {
-          const data = getFormValues();
-          if (!validateForm(data)) return;
-
-          const text =
-            "Hello Harrison, my name is " + data.name + ".\n" +
-            "Contact: " + data.contactInfo + "\n" +
-            "Service Needed: " + data.serviceType + "\n" +
-            "Details: " + data.message;
-
-          const waUrl = "https://wa.me/254705976233?text=" + encodeURIComponent(text);
-          window.open(waUrl, "_blank", "noopener,noreferrer");
-          showStatus("Opening WhatsApp with your inquiry pre-filled...", false);
-        });
-      }
-
-      if (inquiryForm) {
-        inquiryForm.addEventListener("submit", function (e) {
-          e.preventDefault();
-          const data = getFormValues();
-          if (!validateForm(data)) return;
-
-          const subject = encodeURIComponent("ICT Service Inquiry: " + data.serviceType);
-          const body = encodeURIComponent(
-            "Name: " + data.name + "\n" +
-            "Contact: " + data.contactInfo + "\n" +
-            "Service Needed: " + data.serviceType + "\n\n" +
-            "Message / Project Details:\n" + data.message
-          );
-
-          window.location.href = "mailto:njorogeharrisonwanjiru@gmail.com?subject=" + subject + "&body=" + body;
-          showStatus("Opening your email client with your inquiry ready to send...", false);
-        });
-      }
-    });
-  </script>
-</body>
-</html>
+          <a class="text-
