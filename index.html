@@ -677,6 +677,12 @@
       display: none;
     }
 
+    .form-status.error {
+      background-color: #fee2e2;
+      color: #b91c1c;
+      border-color: #fca5a5;
+    }
+
     /* Scrolling Announcement Banner (Bottom) */
     .announcement-banner-bottom {
       background: linear-gradient(90deg, #023e8a, #0077b6, #03045e);
@@ -769,6 +775,22 @@
         gap: 0.5rem;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      .cursor,
+      .ticker-track {
+        animation: none;
+      }
+      .slide-img,
+      .button,
+      .card,
+      .nav-link {
+        transition: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -777,7 +799,7 @@
   <header class="site-header">
     <nav class="container nav" aria-label="Main navigation">
       <a class="brand" href="#home">Ndungu ICT Solutions<span>.</span></a>
-      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
+      <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">☰ Menu</button>
       <ul id="navLinks" class="nav-links">
         <li><a class="nav-link active" href="#home">Home</a></li>
         <li><a class="nav-link" href="#services">Services</a></li>
@@ -794,15 +816,16 @@
     <img
       id="bannerBgImg"
       src="assets/profile-banner.jpg"
-      onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80';"
+      data-fallback="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&amp;fit=crop&amp;w=1600&amp;q=80"
       alt=""
       aria-hidden="true"
       class="banner-bg-img"
     >
     <div class="container">
       <img
+        id="bannerProfileImg"
         src="assets/profile-banner.jpg"
-        onerror="if(!this.dataset.f){this.dataset.f=1;this.src='assets/about-photo.jpg';}else{this.onerror=null;this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=400&q=80';}"
+        data-fallback="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&amp;fit=crop&amp;w=400&amp;q=80"
         alt="Harrison Ndungu"
         class="profile-photo"
       >
@@ -831,16 +854,16 @@
         </div>
         <div class="hero-media">
           <div class="slideshow-container" id="heroSlideshow">
-            <img src="assets/profile-banner.jpg" class="slide-img active" alt="Harrison Ndungu - ICT Specialist" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80';">
-            <img src="assets/about-photo.jpg" class="slide-img" alt="Harrison Ndungu - Professional Consultations" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80';">
-            <img src="assets/CC.jpeg" class="slide-img" alt="IT Setup & Training" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80';">
+            <img src="assets/profile-banner.jpg" data-fallback="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&amp;fit=crop&amp;w=900&amp;q=80" class="slide-img active" alt="Harrison Ndungu - ICT Specialist">
+            <img src="assets/about-photo.jpg" data-fallback="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&amp;fit=crop&amp;w=900&amp;q=80" class="slide-img" alt="Harrison Ndungu - Professional Consultations">
+            <img src="assets/CC.jpeg" data-fallback="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&amp;fit=crop&amp;w=900&amp;q=80" class="slide-img" alt="IT Setup &amp; Training">
 
             <button type="button" class="slide-btn prev" id="prevSlide" aria-label="Previous photo">❮</button>
             <button type="button" class="slide-btn next" id="nextSlide" aria-label="Next photo">❯</button>
             <div class="slide-dots" id="slideDots">
-              <button type="button" class="dot active" data-index="0" aria-label="Photo 1"></button>
-              <button type="button" class="dot" data-index="1" aria-label="Photo 2"></button>
-              <button type="button" class="dot" data-index="2" aria-label="Photo 3"></button>
+              <button type="button" class="dot active" data-index="0" aria-label="Photo 1" aria-current="true"></button>
+              <button type="button" class="dot" data-index="1" aria-label="Photo 2" aria-current="false"></button>
+              <button type="button" class="dot" data-index="2" aria-label="Photo 3" aria-current="false"></button>
             </div>
           </div>
         </div>
@@ -926,17 +949,17 @@
         <p class="section-lead">Explore examples of our custom deployments and project implementations.</p>
         <div class="cards three">
           <article class="card project-card">
-            <img src="assets/CC.jpeg" alt="Web Development" class="project-img" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80';">
+            <img src="assets/CC.jpeg" data-fallback="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Web Development" class="project-img">
             <h3>Websites &amp; Portfolios</h3>
             <p>Responsive, fast-loading business and institutional websites built for maximum impact.</p>
           </article>
           <article class="card project-card">
-            <img src="assets/project-showcase.jpg" alt="Database Systems" class="project-img" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80';">
+            <img src="assets/project-showcase.jpg" data-fallback="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Database Systems" class="project-img">
             <h3>Management Systems</h3>
             <p>Custom library and school management databases built in Python, SQL, and PHP.</p>
           </article>
           <article class="card project-card">
-            <img src="assets/network-setup.jpg" alt="Network Setup" class="project-img" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80';">
+            <img src="assets/network-setup.jpg" data-fallback="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Network Setup" class="project-img">
             <h3>Office Networking</h3>
             <p>Reliable wired and wireless network deployments to keep your business connected.</p>
           </article>
@@ -959,7 +982,7 @@
             <img
               id="whyChooseImg"
               src="assets/about-photo.jpg"
-              onerror="this.onerror=null;this.src='assets/profile-banner.jpg';"
+              data-fallback="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&amp;fit=crop&amp;w=900&amp;q=80"
               alt="Harrison Ndungu - Trusted ICT Partner"
               class="why-choose-photo"
             >
@@ -1039,37 +1062,48 @@
   <!-- Scrolling Announcement Banner (Bottom) -->
   <div class="announcement-banner-bottom" aria-label="Service announcements">
     <div class="ticker-track">
-      Welcome to Harrison Ndungu ICT Solutions. Computer Repair &amp; Maintenance, Network Setup &amp; Wi-Fi, AutoCAD &amp; ArchiCAD, Sage 50 Accounts, Pastel &amp; QuickBooks, SPSS, STATA &amp; Advanced Excel, TVET / CBET ICT Training, Web &amp; App Development, and Graphic Branding. Contact us today via WhatsApp or Email.
+      Welcome to Harrison Ndungu ICT Solutions &bull; Computer Repair &amp; Maintenance &bull; Network Setup &amp; Wi-Fi &bull; AutoCAD &amp; ArchiCAD &bull; Sage 50 Accounts, Pastel &amp; QuickBooks &bull; SPSS &amp; STATA &bull; TVET / CBET ICT Training &amp; Web Design &bull; Call or WhatsApp +254 705 976 233
     </div>
   </div>
 
-  <!-- Footer -->
   <footer>
     <div class="footer-inner">
-      <p>&copy; <span id="currentYear"></span> Harrison Ndungu ICT Solutions. All rights reserved.</p>
-      <p>Thika, Kenya | <a href="#home">Back to Top ↑</a></p>
+      <p>&copy; <span id="year">2026</span> Harrison Ndungu ICT Solutions. All rights reserved.</p>
+      <p>Thika, Kenya &bull; <a href="mailto:njorogeharrisonwanjiru@gmail.com">njorogeharrisonwanjiru@gmail.com</a></p>
     </div>
   </footer>
 
   <script>
     (function () {
-      // Current year in footer
-      const yearEl = document.getElementById("currentYear");
+      const reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Safe image fallback helper
+      function attachFallback(img) {
+        if (!img || !img.dataset.fallback) return;
+        img.addEventListener("error", function handleErr() {
+          img.removeEventListener("error", handleErr);
+          img.src = img.dataset.fallback;
+        });
+      }
+      document.querySelectorAll("img[data-fallback]").forEach(attachFallback);
+
+      // Footer year
+      const yearEl = document.getElementById("year");
       if (yearEl) {
-        yearEl.textContent = new Date().getFullYear();
+        yearEl.textContent = String(new Date().getFullYear());
       }
 
       // Mobile menu toggle
       const menuToggle = document.getElementById("menuToggle");
       const navLinks = document.getElementById("navLinks");
       if (menuToggle && navLinks) {
-        menuToggle.addEventListener("click", () => {
+        menuToggle.addEventListener("click", function () {
           const isOpen = navLinks.classList.toggle("open");
           menuToggle.setAttribute("aria-expanded", String(isOpen));
         });
 
-        navLinks.querySelectorAll("a").forEach((link) => {
-          link.addEventListener("click", () => {
+        navLinks.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () {
             navLinks.classList.remove("open");
             menuToggle.setAttribute("aria-expanded", "false");
           });
@@ -1077,145 +1111,253 @@
       }
 
       // Active nav link highlight on scroll
-      const sections = document.querySelectorAll("main section[id]");
-      const navItems = document.querySelectorAll(".nav-links .nav-link:not(.cta-quote)");
-      window.addEventListener("scroll", () => {
-        const scrollPos = window.scrollY + 120;
-        sections.forEach((sec) => {
-          const top = sec.offsetTop;
-          const height = sec.offsetHeight;
-          const id = sec.getAttribute("id");
-          if (scrollPos >= top && scrollPos < top + height) {
-            navItems.forEach((a) => {
-              a.classList.toggle("active", a.getAttribute("href") === "#" + id);
-            });
-          }
-        });
-      });
+      const sections = Array.from(document.querySelectorAll("main section[id]"));
+      const navItems = Array.from(document.querySelectorAll(".nav-link[href^='#']:not(.cta-quote)"));
+      function updateActiveNav() {
+        if (!sections.length || !navItems.length) return;
+        const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 40;
+        let currentId = sections[0].id;
 
-      // Typewriter tagline effect
+        if (nearBottom) {
+          currentId = sections[sections.length - 1].id;
+        } else {
+          sections.forEach(function (sec) {
+            if (window.scrollY >= sec.offsetTop - 130) {
+              currentId = sec.id;
+            }
+          });
+        }
+
+        navItems.forEach(function (item) {
+          item.classList.toggle("active", item.getAttribute("href") === "#" + currentId);
+        });
+      }
+      window.addEventListener("scroll", updateActiveNav, { passive: true });
+      updateActiveNav();
+
+      // Typing effect in banner
       const typedEl = document.getElementById("typedRole");
       const phrases = [
         "Empowering Businesses & Learners with Reliable Tech",
         "Computer Repair, Networking & Software Setup",
-        "Sage, QuickBooks, SPSS, STATA & Excel Training"
+        "Sage, QuickBooks, SPSS, STATA & CBET ICT Training"
       ];
-      if (typedEl) {
-        let phraseIdx = 0;
-        let charIdx = phrases[0].length;
-        let deleting = true;
+      if (typedEl && !reducedMotion) {
+        let pIndex = 0;
+        let cIndex = phrases[0].length;
+        let deleting = false;
+        let pauseTicks = 24;
 
-        setInterval(() => {
-          const current = phrases[phraseIdx];
+        window.setInterval(function () {
+          if (pauseTicks > 0) {
+            pauseTicks--;
+            return;
+          }
+          const current = phrases[pIndex];
           if (!deleting) {
-            charIdx++;
-            typedEl.textContent = current.slice(0, charIdx);
-            if (charIdx === current.length) {
+            cIndex = Math.min(current.length, cIndex + 1);
+            typedEl.textContent = current.slice(0, cIndex);
+            if (cIndex === current.length) {
               deleting = true;
+              pauseTicks = 24;
             }
           } else {
-            charIdx--;
-            typedEl.textContent = current.slice(0, Math.max(0, charIdx));
-            if (charIdx <= 0) {
+            cIndex = Math.max(0, cIndex - 1);
+            typedEl.textContent = current.slice(0, cIndex);
+            if (cIndex === 0) {
               deleting = false;
-              phraseIdx = (phraseIdx + 1) % phrases.length;
+              pIndex = (pIndex + 1) % phrases.length;
+              pauseTicks = 5;
             }
           }
-        }, 90);
+        }, 70);
+      }
+
+      // Rotating banner background & "Why Choose Us" photo
+      const bannerBg = document.getElementById("bannerBgImg");
+      const whyChooseImg = document.getElementById("whyChooseImg");
+      const mediaCycle = [
+        {
+          local: "assets/profile-banner.jpg",
+          fallback: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80"
+        },
+        {
+          local: "assets/about-photo.jpg",
+          fallback: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80"
+        },
+        {
+          local: "assets/CC.jpeg",
+          fallback: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80"
+        }
+      ];
+      let cycleIdx = 0;
+
+      function swapImgWithFallback(imgEl, item) {
+        if (!imgEl || !item) return;
+        const probe = new Image();
+        probe.onload = function () {
+          imgEl.src = item.local;
+        };
+        probe.onerror = function () {
+          imgEl.src = item.fallback;
+        };
+        probe.src = item.local;
+      }
+
+      if ((bannerBg || whyChooseImg) && !reducedMotion) {
+        window.setInterval(function () {
+          cycleIdx = (cycleIdx + 1) % mediaCycle.length;
+          if (bannerBg) {
+            swapImgWithFallback(bannerBg, mediaCycle[cycleIdx]);
+          }
+          if (whyChooseImg) {
+            const nextItem = mediaCycle[(cycleIdx + 1) % mediaCycle.length];
+            swapImgWithFallback(whyChooseImg, nextItem);
+          }
+        }, 6500);
       }
 
       // Hero slideshow
-      const slides = document.querySelectorAll("#heroSlideshow .slide-img");
-      const dots = document.querySelectorAll("#slideDots .dot");
+      const slideshowEl = document.getElementById("heroSlideshow");
+      const slides = Array.from(document.querySelectorAll("#heroSlideshow .slide-img"));
+      const dots = Array.from(document.querySelectorAll("#slideDots .dot"));
       const prevBtn = document.getElementById("prevSlide");
       const nextBtn = document.getElementById("nextSlide");
-      let slideIndex = 0;
+      let activeSlide = 0;
+      let slideshowPaused = false;
 
-      function showSlide(idx) {
+      function showSlide(index) {
         if (!slides.length) return;
-        slideIndex = (idx + slides.length) % slides.length;
-        slides.forEach((img, i) => img.classList.toggle("active", i === slideIndex));
-        dots.forEach((dot, i) => dot.classList.toggle("active", i === slideIndex));
+        activeSlide = ((index % slides.length) + slides.length) % slides.length;
+        slides.forEach(function (img, i) {
+          img.classList.toggle("active", i === activeSlide);
+        });
+        dots.forEach(function (dot, i) {
+          const isCurrent = i === activeSlide;
+          dot.classList.toggle("active", isCurrent);
+          dot.setAttribute("aria-current", isCurrent ? "true" : "false");
+        });
       }
 
-      if (prevBtn) prevBtn.addEventListener("click", () => showSlide(slideIndex - 1));
-      if (nextBtn) nextBtn.addEventListener("click", () => showSlide(slideIndex + 1));
-      dots.forEach((dot) => {
-        dot.addEventListener("click", () => {
-          const index = Number(dot.getAttribute("data-index"));
-          if (!Number.isNaN(index)) showSlide(index);
+      if (prevBtn) {
+        prevBtn.addEventListener("click", function () {
+          showSlide(activeSlide - 1);
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener("click", function () {
+          showSlide(activeSlide + 1);
+        });
+      }
+      dots.forEach(function (dot) {
+        dot.addEventListener("click", function () {
+          showSlide(Number(dot.getAttribute("data-index")));
         });
       });
-
-      if (slides.length > 1) {
-        setInterval(() => showSlide(slideIndex + 1), 4500);
+      if (slideshowEl) {
+        slideshowEl.addEventListener("mouseenter", function () { slideshowPaused = true; });
+        slideshowEl.addEventListener("mouseleave", function () { slideshowPaused = false; });
+        slideshowEl.addEventListener("focusin", function () { slideshowPaused = true; });
+        slideshowEl.addEventListener("focusout", function () { slideshowPaused = false; });
+      }
+      if (slides.length > 1 && !reducedMotion) {
+        window.setInterval(function () {
+          if (!slideshowPaused) {
+            showSlide(activeSlide + 1);
+          }
+        }, 5000);
       }
 
-      // Service filter buttons
-      const filterBtns = document.querySelectorAll(".filter-btn");
-      const serviceCards = document.querySelectorAll("#servicesGrid .card");
-      filterBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
+      // Service category filter
+      const filterBtns = Array.from(document.querySelectorAll(".filter-btn"));
+      const serviceCards = Array.from(document.querySelectorAll("#servicesGrid .card"));
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener("click", function () {
           const filter = btn.getAttribute("data-filter");
-          filterBtns.forEach((b) => b.classList.toggle("active", b === btn));
-          serviceCards.forEach((card) => {
-            const cat = card.getAttribute("data-category");
-            const show = filter === "all" || cat === filter;
-            card.classList.toggle("hidden", !show);
+          filterBtns.forEach(function (b) {
+            b.classList.toggle("active", b === btn);
+          });
+          serviceCards.forEach(function (card) {
+            const match = filter === "all" || card.getAttribute("data-category") === filter;
+            card.classList.toggle("hidden", !match);
           });
         });
       });
 
-      // Inquiry form (WhatsApp & Email)
+      // Inquiry form: WhatsApp & Email handlers
       const form = document.getElementById("inquiryForm");
       const whatsappBtn = document.getElementById("whatsappSubmitBtn");
       const statusBox = document.getElementById("formStatus");
+      const nameEl = document.getElementById("name");
+      const contactEl = document.getElementById("contactInfo");
+      const serviceEl = document.getElementById("serviceType");
+      const msgEl = document.getElementById("message");
 
-      function showStatus(msg) {
-        if (!statusBox) return;
-        statusBox.textContent = msg;
-        statusBox.style.display = "block";
-      }
-
-      function getFormValues() {
+      function buildMessage() {
         return {
-          name: document.getElementById("name")?.value.trim() || "",
-          contactInfo: document.getElementById("contactInfo")?.value.trim() || "",
-          serviceType: document.getElementById("serviceType")?.value || "",
-          message: document.getElementById("message")?.value.trim() || ""
+          name: nameEl ? nameEl.value.trim() : "",
+          contactInfo: contactEl ? contactEl.value.trim() : "",
+          serviceType: serviceEl ? serviceEl.value : "General ICT Consultation",
+          message: msgEl ? msgEl.value.trim() : ""
         };
       }
 
+      function showStatus(text, isError) {
+        if (!statusBox) return;
+        statusBox.textContent = text;
+        statusBox.classList.toggle("error", Boolean(isError));
+        statusBox.style.display = "block";
+      }
+
+      [nameEl, contactEl, msgEl].forEach(function (field) {
+        if (!field || !statusBox) return;
+        field.addEventListener("input", function () {
+          statusBox.style.display = "none";
+          statusBox.classList.remove("error");
+        });
+      });
+
       if (whatsappBtn) {
-        whatsappBtn.addEventListener("click", () => {
-          const data = getFormValues();
+        whatsappBtn.addEventListener("click", function () {
+          if (form && typeof form.reportValidity === "function" && !form.reportValidity()) {
+            showStatus("Please complete all required fields before sending via WhatsApp.", true);
+            return;
+          }
+          const data = buildMessage();
           if (!data.name || !data.contactInfo || !data.message) {
-            showStatus("Please fill in your name, contact details, and message before sending via WhatsApp.");
+            showStatus("Please fill in your name, contact details, and message before sending via WhatsApp.", true);
             return;
           }
           const text =
-            `Hello Harrison, my name is ${data.name} (${data.contactInfo}).\n` +
-            `Service: ${data.serviceType}\n` +
-            `Details: ${data.message}`;
-          const url = `https://wa.me/254705976233?text=${encodeURIComponent(text)}`;
-          showStatus("Opening WhatsApp with your inquiry details...");
+            "Hello Harrison, my name is " + data.name + " (" + data.contactInfo + ").\n" +
+            "Service Needed: " + data.serviceType + "\n" +
+            "Details: " + data.message;
+          const url = "https://wa.me/254705976233?text=" + encodeURIComponent(text);
           window.open(url, "_blank", "noopener,noreferrer");
+          showStatus("Opening WhatsApp with your pre-filled inquiry...", false);
         });
       }
 
       if (form) {
-        form.addEventListener("submit", (e) => {
+        form.addEventListener("submit", function (e) {
           e.preventDefault();
-          const data = getFormValues();
-          const subject = encodeURIComponent(`ICT Service Inquiry: ${data.serviceType} - ${data.name}`);
-          const body = encodeURIComponent(
-            `Name: ${data.name}\n` +
-            `Contact: ${data.contactInfo}\n` +
-            `Service Needed: ${data.serviceType}\n\n` +
-            `Message:\n${data.message}`
-          );
-          showStatus("Opening your email client with your prepared inquiry...");
-          window.location.href = `mailto:njorogeharrisonwanjiru@gmail.com?subject=${subject}&body=${body}`;
+          const data = buildMessage();
+          if (!data.name || !data.contactInfo || !data.message) {
+            showStatus("Please fill in all required fields before sending via email.", true);
+            return;
+          }
+          const subject = "ICT Inquiry: " + data.serviceType + " — " + data.name;
+          const body =
+            "Name: " + data.name + "\n" +
+            "Contact: " + data.contactInfo + "\n" +
+            "Service Needed: " + data.serviceType + "\n\n" +
+            "Message:\n" + data.message;
+          window.location.href =
+            "mailto:njorogeharrisonwanjiru@gmail.com?subject=" +
+            encodeURIComponent(subject) +
+            "&body=" +
+            encodeURIComponent(body);
+          showStatus("Opening your email client to send the inquiry to njorogeharrisonwanjiru@gmail.com...", false);
         });
       }
     })();
