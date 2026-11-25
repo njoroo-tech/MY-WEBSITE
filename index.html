@@ -243,6 +243,14 @@
       font-weight: 500;
     }
 
+    .profile-wrapper {
+      position: relative;
+      width: 165px;
+      height: 165px;
+      margin: 0 auto 1rem auto;
+      cursor: pointer;
+    }
+
     .profile-photo {
       width: 165px;
       height: 165px;
@@ -250,9 +258,29 @@
       object-fit: cover;
       object-position: center 15%;
       border: 4px solid #ffffff;
-      margin: 0 auto 1rem auto;
       background-color: #e0e7ff;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .profile-wrapper:hover .profile-photo {
+      transform: scale(1.03);
+      border-color: #00b4d8;
+    }
+
+    .photo-badge {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      background: #03045e;
+      color: #ffffff;
+      border: 2px solid #ffffff;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      opacity: 0.92;
     }
 
     /* Hero Section */
@@ -815,20 +843,26 @@
   <div class="top-banner">
     <img
       id="bannerBgImg"
-      src="./assets/profile-banner.jpg"
-      data-fallback="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&amp;fit=crop&amp;w=1600&amp;q=80"
+      src="./assets/profile-banner_2.jpg"
+      data-candidates="./assets/profile-banner_2.jpg,./profile-banner_2.jpg,./assets/profile-banner.jpg,./profile-banner.jpg"
+      data-fallback="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80"
       alt=""
       aria-hidden="true"
       class="banner-bg-img"
     >
     <div class="container">
-      <img
-        id="bannerProfileImg"
-        src="./assets/profile-banner.jpg"
-        data-fallback="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&amp;fit=crop&amp;w=400&amp;q=80"
-        alt="Harrison Ndungu"
-        class="profile-photo"
-      >
+      <div class="profile-wrapper" id="profilePickerTrigger" title="Click to select your local profile photo (profile-banner_2.jpg)">
+        <img
+          id="bannerProfileImg"
+          src="./assets/profile-banner_2.jpg"
+          data-candidates="./assets/profile-banner_2.jpg,./profile-banner_2.jpg,./assets/profile-banner.jpg,./profile-banner.jpg"
+          data-fallback="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=400&q=80"
+          alt="Harrison Ndungu"
+          class="profile-photo"
+        >
+        <span class="photo-badge">Change Photo</span>
+        <input type="file" id="profileFileInput" accept="image/*" hidden>
+      </div>
       <p class="eyebrow" style="color:#7dd3fc;">Professional IT Services &amp; Tech Training</p>
       <h1>Harrison Ndungu ICT Solutions</h1>
       <p class="tagline"><span id="typedRole">Empowering Businesses &amp; Learners with Reliable Tech</span><span class="cursor">&nbsp;</span></p>
@@ -854,9 +888,28 @@
         </div>
         <div class="hero-media">
           <div class="slideshow-container" id="heroSlideshow">
-            <img src="./assets/profile-banner.jpg" data-fallback="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&amp;fit=crop&amp;w=900&amp;q=80" class="slide-img active" alt="Harrison Ndungu - ICT Specialist">
-            <img src="./assets/about-photo.jpg" data-fallback="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&amp;fit=crop&amp;w=900&amp;q=80" class="slide-img" alt="Harrison Ndungu - Professional Consultations">
-            <img src="./assets/CC.jpeg" data-fallback="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&amp;fit=crop&amp;w=900&amp;q=80" class="slide-img" alt="IT Setup &amp; Training">
+            <img
+              id="heroProfileSlide"
+              src="./assets/profile-banner_2.jpg"
+              data-candidates="./assets/profile-banner_2.jpg,./profile-banner_2.jpg,./assets/profile-banner.jpg,./profile-banner.jpg"
+              data-fallback="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80"
+              class="slide-img active"
+              alt="Harrison Ndungu - ICT Specialist"
+            >
+            <img
+              src="./assets/about-photo.jpg"
+              data-candidates="./assets/about-photo.jpg,./about-photo.jpg"
+              data-fallback="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80"
+              class="slide-img"
+              alt="Harrison Ndungu - Professional Consultations"
+            >
+            <img
+              src="./assets/CC.jpeg"
+              data-candidates="./assets/CC.jpeg,./CC.jpeg"
+              data-fallback="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80"
+              class="slide-img"
+              alt="IT Setup & Training"
+            >
 
             <button type="button" class="slide-btn prev" id="prevSlide" aria-label="Previous photo">❮</button>
             <button type="button" class="slide-btn next" id="nextSlide" aria-label="Next photo">❯</button>
@@ -949,17 +1002,17 @@
         <p class="section-lead">Explore examples of our custom deployments and project implementations.</p>
         <div class="cards three">
           <article class="card project-card">
-            <img src="./assets/CC.jpeg" data-fallback="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Web Development" class="project-img">
+            <img src="./assets/CC.jpeg" data-candidates="./assets/CC.jpeg,./CC.jpeg" data-fallback="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Web Development" class="project-img">
             <h3>Websites &amp; Portfolios</h3>
             <p>Responsive, fast-loading business and institutional websites built for maximum impact.</p>
           </article>
           <article class="card project-card">
-            <img src="./assets/project-showcase.jpg" data-fallback="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Database Systems" class="project-img">
+            <img src="./assets/project-showcase.jpg" data-candidates="./assets/project-showcase.jpg,./project-showcase.jpg" data-fallback="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80" alt="Database Systems" class="project-img">
             <h3>Management Systems</h3>
             <p>Custom library and school management databases built in Python, SQL, and PHP.</p>
           </article>
           <article class="card project-card">
-            <img src="./assets/network-setup.jpg" data-fallback="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Network Setup" class="project-img">
+            <img src="./assets/network-setup.jpg" data-candidates="./assets/network-setup.jpg,./network-setup.jpg" data-fallback="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80" alt="Network Setup" class="project-img">
             <h3>Office Networking</h3>
             <p>Reliable wired and wireless network deployments to keep your business connected.</p>
           </article>
@@ -982,7 +1035,8 @@
             <img
               id="whyChooseImg"
               src="./assets/about-photo.jpg"
-              data-fallback="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&amp;fit=crop&amp;w=900&amp;q=80"
+              data-candidates="./assets/about-photo.jpg,./about-photo.jpg"
+              data-fallback="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80"
               alt="Harrison Ndungu - Trusted ICT Partner"
               class="why-choose-photo"
             >
@@ -1076,20 +1130,79 @@
 
   <script>
     (function () {
+      const STORAGE_KEY = "harrison_profile_photo_dataurl";
+      const profileTargets = [
+        document.getElementById("bannerProfileImg"),
+        document.getElementById("bannerBgImg"),
+        document.getElementById("heroProfileSlide")
+      ].filter(Boolean);
+
+      function applyCustomProfilePhoto(dataUrl) {
+        if (!dataUrl) return;
+        profileTargets.forEach((img) => {
+          img.dataset.lockedCustom = "true";
+          img.src = dataUrl;
+        });
+      }
+
+      // 1. Restore saved profile photo if user picked one earlier
+      try {
+        const savedPhoto = localStorage.getItem(STORAGE_KEY);
+        if (savedPhoto) {
+          applyCustomProfilePhoto(savedPhoto);
+        }
+      } catch (err) {
+        // Ignore storage errors in restricted contexts
+      }
+
+      // 2. Click-to-set profile photo directly from local disk
+      const pickerTrigger = document.getElementById("profilePickerTrigger");
+      const fileInput = document.getElementById("profileFileInput");
+      if (pickerTrigger && fileInput) {
+        pickerTrigger.addEventListener("click", () => fileInput.click());
+        fileInput.addEventListener("change", (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = function (evt) {
+            const dataUrl = evt.target && evt.target.result;
+            if (typeof dataUrl === "string") {
+              applyCustomProfilePhoto(dataUrl);
+              try {
+                localStorage.setItem(STORAGE_KEY, dataUrl);
+              } catch (storageErr) {
+                // Continue even if image exceeds localStorage quota
+              }
+            }
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      // 3. Smart Multi-Path Resolver + Fallback Handler
+      document.querySelectorAll("img[data-fallback]").forEach((img) => {
+        const candidates = (img.dataset.candidates || "")
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean);
+        let attempt = 0;
+
+        img.addEventListener("error", function handleImgError() {
+          if (this.dataset.lockedCustom === "true") return;
+          attempt++;
+          if (attempt < candidates.length) {
+            this.src = candidates[attempt];
+          } else if (this.dataset.fallback && this.src !== this.dataset.fallback) {
+            this.src = this.dataset.fallback;
+          }
+        });
+      });
+
       // Dynamic copyright year
       const yearEl = document.getElementById("year");
       if (yearEl) {
         yearEl.textContent = new Date().getFullYear();
       }
-
-      // Image fallback handler for missing local assets
-      document.querySelectorAll("img[data-fallback]").forEach((img) => {
-        img.addEventListener("error", function handleImgError() {
-          if (this.dataset.fallback && this.src !== this.dataset.fallback) {
-            this.src = this.dataset.fallback;
-          }
-        });
-      });
 
       // Mobile Navigation Toggle
       const menuToggle = document.getElementById("menuToggle");
@@ -1242,34 +1355,6 @@
           });
         });
       });
-
-      // Rotating Banner Background & "Why Choose Us" Photo
-      const bannerBgImg = document.getElementById("bannerBgImg");
-      const whyChooseImg = document.getElementById("whyChooseImg");
-      const bannerSources = [
-        "./assets/profile-banner.jpg",
-        "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80",
-        "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1600&q=80"
-      ];
-      const whyChooseSources = [
-        "./assets/about-photo.jpg",
-        "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80",
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=80"
-      ];
-
-      if (!prefersReducedMotion) {
-        let bIdx = 0;
-        setInterval(() => {
-          bIdx = (bIdx + 1) % bannerSources.length;
-          if (bannerBgImg) bannerBgImg.src = bannerSources[bIdx];
-        }, 7000);
-
-        let wIdx = 0;
-        setInterval(() => {
-          wIdx = (wIdx + 1) % whyChooseSources.length;
-          if (whyChooseImg) whyChooseImg.src = whyChooseSources[wIdx];
-        }, 6000);
-      }
 
       // Inquiry Form Validation & WhatsApp / Email Dispatch
       const form = document.getElementById("inquiryForm");
