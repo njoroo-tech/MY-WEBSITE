@@ -1078,33 +1078,34 @@
             <h3>Send an Inquiry</h3>
             <form id="inquiryForm" novalidate>
               <label for="name">Your Name *</label>
-              <input type="text" id="name" name="name" required placeholder="Enter your full name">
+              <input type="text" id="name" name="name" placeholder="e.g., Jane Mwangi" required>
 
-              <label for="contactInfo">Your Email or Phone Number *</label>
-              <input type="text" id="contactInfo" name="contactInfo" required placeholder="e.g. 0712 345 678 or name@email.com">
+              <label for="phone">Phone / WhatsApp *</label>
+              <input type="tel" id="phone" name="phone" placeholder="e.g., +254 7XX XXX XXX" required>
 
-              <label for="serviceType">Service Needed</label>
-              <select id="serviceType" name="serviceType">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="e.g., name@example.com">
+
+              <label for="service">Service Needed *</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Select a service...</option>
                 <option value="Computer Repair & Maintenance">Computer Repair &amp; Maintenance</option>
-                <option value="Network Setup & Wi-Fi">Network Setup &amp; Wi-Fi Configuration</option>
-                <option value="Software Installation (AutoCAD/ArchiCAD/etc.)">Software Installation (AutoCAD, ArchiCAD, etc.)</option>
-                <option value="Accounting & Statistical Packages Training">Accounting &amp; Statistical Packages (Sage, QuickBooks, SPSS, STATA)</option>
-                <option value="Web Design / Graphic Branding">Web Design &amp; Graphic Branding</option>
-                <option value="TVET / Corporate ICT Training">TVET / Corporate ICT Training</option>
-                <option value="General ICT Consultation">General ICT Consultation</option>
+                <option value="Network Setup & Configuration">Network Setup &amp; Configuration</option>
+                <option value="Software Installation (AutoCAD, ArchiCAD, DB, Web)">Software Installation (AutoCAD, ArchiCAD, DB, Web)</option>
+                <option value="Accounting & Statistical Packages (Sage, QuickBooks, Pastel, SPSS, STATA, Excel)">Accounting &amp; Statistical Packages (Sage, QuickBooks, Pastel, SPSS, STATA, Excel)</option>
+                <option value="TVET / CBET ICT Training">TVET / CBET ICT Training</option>
+                <option value="Branding & Graphic Design">Branding &amp; Graphic Design</option>
+                <option value="General Quotation / Consultation">General Quotation / Consultation</option>
               </select>
 
-              <label for="message">Message / Project Details *</label>
-              <textarea id="message" name="message" rows="4" required placeholder="Describe the service or quotation you need..."></textarea>
+              <label for="message">Project or Training Details *</label>
+              <textarea id="message" name="message" rows="4" placeholder="Tell us about your issue, system requirements, or training goals..." required></textarea>
 
               <div class="form-buttons">
-                <button type="button" id="whatsappSubmitBtn" class="button button-whatsapp">
-                  Send via WhatsApp
-                </button>
-                <button type="submit" class="button">
-                  Send via Email
-                </button>
+                <button type="submit" class="button button-whatsapp" id="sendWhatsAppBtn">Send via WhatsApp</button>
+                <button type="button" class="button" id="sendEmailBtn">Send via Email</button>
               </div>
+
               <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
             </form>
           </div>
@@ -1113,10 +1114,10 @@
     </section>
   </main>
 
-  <!-- Scrolling Announcement Banner -->
-  <div class="announcement-banner-bottom" aria-label="Service announcements">
+  <!-- Scrolling Announcement Banner (Bottom) -->
+  <div class="announcement-banner-bottom" role="region" aria-label="Service announcements">
     <div class="ticker-track">
-      ★ Computer Repair, Windows &amp; Software Setup (AutoCAD, ArchiCAD, Sage, QuickBooks, SPSS, STATA) ★ Office LAN &amp; Wi-Fi Networking ★ TVET / CBET ICT Training &amp; Custom Web Systems ★ Call or WhatsApp +254 705 976 233 in Thika &amp; Across Kenya ★
+      ★ Harrison Ndungu ICT Solutions — Computer Repair, Windows &amp; Software Setup, LAN/Wi-Fi Networking, Web &amp; Database Systems ★ Training in Sage 50, QuickBooks, Pastel, SPSS, STATA &amp; Advanced Excel ★ TVET / CBET ICT Trainer • Call/WhatsApp +254 705 976 233 • Thika, Kenya ★
     </div>
   </div>
 
@@ -1124,89 +1125,27 @@
   <footer>
     <div class="footer-inner">
       <p>&copy; <span id="year">2026</span> Harrison Ndungu ICT Solutions. All rights reserved.</p>
-      <p><a href="#home">Back to Top ↑</a> &middot; <a href="https://sites.google.com/view/ndush/home" target="_blank" rel="noopener noreferrer">E-Portfolio</a></p>
+      <p>
+        <a href="https://sites.google.com/view/ndush/home" target="_blank" rel="noopener noreferrer">E-Portfolio</a> &bull;
+        <a href="mailto:njorogeharrisonwanjiru@gmail.com">Email</a> &bull;
+        <a href="https://wa.me/254705976233" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      </p>
     </div>
   </footer>
 
   <script>
     (function () {
-      const STORAGE_KEY = "harrison_profile_photo_dataurl";
-      const profileTargets = [
-        document.getElementById("bannerProfileImg"),
-        document.getElementById("bannerBgImg"),
-        document.getElementById("heroProfileSlide")
-      ].filter(Boolean);
-
-      function applyCustomProfilePhoto(dataUrl) {
-        if (!dataUrl) return;
-        profileTargets.forEach((img) => {
-          img.dataset.lockedCustom = "true";
-          img.src = dataUrl;
-        });
-      }
-
-      // 1. Restore saved profile photo if user picked one earlier
-      try {
-        const savedPhoto = localStorage.getItem(STORAGE_KEY);
-        if (savedPhoto) {
-          applyCustomProfilePhoto(savedPhoto);
-        }
-      } catch (err) {
-        // Ignore storage errors in restricted contexts
-      }
-
-      // 2. Click-to-set profile photo directly from local disk
-      const pickerTrigger = document.getElementById("profilePickerTrigger");
-      const fileInput = document.getElementById("profileFileInput");
-      if (pickerTrigger && fileInput) {
-        pickerTrigger.addEventListener("click", () => fileInput.click());
-        fileInput.addEventListener("change", (e) => {
-          const file = e.target.files && e.target.files[0];
-          if (!file) return;
-          const reader = new FileReader();
-          reader.onload = function (evt) {
-            const dataUrl = evt.target && evt.target.result;
-            if (typeof dataUrl === "string") {
-              applyCustomProfilePhoto(dataUrl);
-              try {
-                localStorage.setItem(STORAGE_KEY, dataUrl);
-              } catch (storageErr) {
-                // Continue even if image exceeds localStorage quota
-              }
-            }
-          };
-          reader.readAsDataURL(file);
-        });
-      }
-
-      // 3. Smart Multi-Path Resolver + Fallback Handler
-      document.querySelectorAll("img[data-fallback]").forEach((img) => {
-        const candidates = (img.dataset.candidates || "")
-          .split(",")
-          .map((s) => s.trim())
-          .filter(Boolean);
-        let attempt = 0;
-
-        img.addEventListener("error", function handleImgError() {
-          if (this.dataset.lockedCustom === "true") return;
-          attempt++;
-          if (attempt < candidates.length) {
-            this.src = candidates[attempt];
-          } else if (this.dataset.fallback && this.src !== this.dataset.fallback) {
-            this.src = this.dataset.fallback;
-          }
-        });
-      });
-
-      // Dynamic copyright year
+      // 1. Dynamic Year
       const yearEl = document.getElementById("year");
       if (yearEl) {
         yearEl.textContent = new Date().getFullYear();
       }
 
-      // Mobile Navigation Toggle
+      // 2. Mobile Navigation Toggle & Active Link Highlighting
       const menuToggle = document.getElementById("menuToggle");
       const navLinks = document.getElementById("navLinks");
+      const allNavLinks = document.querySelectorAll(".nav-link");
+
       if (menuToggle && navLinks) {
         menuToggle.addEventListener("click", () => {
           const isOpen = navLinks.classList.toggle("open");
@@ -1221,196 +1160,291 @@
         });
       }
 
-      // Active Nav Link Highlight on Scroll
       const sections = document.querySelectorAll("main section[id]");
-      const navItems = document.querySelectorAll(".nav-links .nav-link:not(.cta-quote)");
-
-      function updateActiveNav() {
+      window.addEventListener("scroll", () => {
         const scrollPos = window.scrollY + 140;
         sections.forEach((sec) => {
           const top = sec.offsetTop;
           const height = sec.offsetHeight;
+          const id = sec.getAttribute("id");
           if (scrollPos >= top && scrollPos < top + height) {
-            navItems.forEach((a) => {
-              a.classList.toggle("active", a.getAttribute("href") === "#" + sec.id);
+            allNavLinks.forEach((a) => {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + id);
             });
           }
         });
-      }
-      window.addEventListener("scroll", updateActiveNav, { passive: true });
+      }, { passive: true });
 
-      // Typing Tagline Effect
-      const typedRole = document.getElementById("typedRole");
+      // 3. Image Candidate Loader with Fallback
+      function setupImageFallbacks(root = document) {
+        root.querySelectorAll("img[data-candidates]").forEach((img) => {
+          if (img.dataset.customUploaded === "true") return;
+          const candidates = (img.dataset.candidates || "")
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean);
+          const fallback = img.dataset.fallback || "";
+          let idx = 0;
+
+          img.addEventListener("error", () => {
+            if (img.dataset.customUploaded === "true") return;
+            idx += 1;
+            if (idx < candidates.length) {
+              img.src = candidates[idx];
+            } else if (fallback && img.src !== fallback) {
+              img.src = fallback;
+            }
+          });
+        });
+      }
+      setupImageFallbacks();
+
+      // 4. Local Profile Photo Picker (Live Preview)
+      const profilePickerTrigger = document.getElementById("profilePickerTrigger");
+      const profileFileInput = document.getElementById("profileFileInput");
+      const bannerProfileImg = document.getElementById("bannerProfileImg");
+      const bannerBgImg = document.getElementById("bannerBgImg");
+      const heroProfileSlide = document.getElementById("heroProfileSlide");
+
+      if (profilePickerTrigger && profileFileInput) {
+        profilePickerTrigger.addEventListener("click", () => {
+          profileFileInput.click();
+        });
+
+        profileFileInput.addEventListener("change", (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            const dataUrl = ev.target.result;
+            [bannerProfileImg, bannerBgImg, heroProfileSlide].forEach((el) => {
+              if (el) {
+                el.dataset.customUploaded = "true";
+                el.src = dataUrl;
+              }
+            });
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      // 5. Typing Effect in Top Banner
+      const typedRoleEl = document.getElementById("typedRole");
       const phrases = [
         "Empowering Businesses & Learners with Reliable Tech",
         "Computer Repair, Networking & Software Setup",
-        "Sage, QuickBooks, SPSS, STATA & CBET Training"
+        "Sage 50, QuickBooks, Pastel, SPSS, STATA & Excel",
+        "Web Development, Databases & TVET / CBET Training"
       ];
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-      if (typedRole && !prefersReducedMotion) {
-        let phraseIndex = 0;
-        let charIndex = phrases[0].length;
-        let deleting = true;
+      if (typedRoleEl && !prefersReducedMotion) {
+        let phraseIdx = 0;
+        let charIdx = phrases[0].length;
+        let deleting = false;
 
-        function typeLoop() {
-          const current = phrases[phraseIndex];
+        function tickTypewriter() {
+          const current = phrases[phraseIdx];
           if (!deleting) {
-            charIndex++;
-            typedRole.textContent = current.slice(0, charIndex);
-            if (charIndex === current.length) {
+            charIdx += 1;
+            typedRoleEl.textContent = current.slice(0, charIdx);
+            if (charIdx === current.length) {
               deleting = true;
-              setTimeout(typeLoop, 2200);
+              setTimeout(tickTypewriter, 2400);
               return;
             }
-            setTimeout(typeLoop, 55);
+            setTimeout(tickTypewriter, 45);
           } else {
-            charIndex--;
-            typedRole.textContent = current.slice(0, charIndex);
-            if (charIndex === 0) {
+            charIdx -= 1;
+            typedRoleEl.textContent = current.slice(0, charIdx);
+            if (charIdx === 0) {
               deleting = false;
-              phraseIndex = (phraseIndex + 1) % phrases.length;
-              setTimeout(typeLoop, 350);
+              phraseIdx = (phraseIdx + 1) % phrases.length;
+              setTimeout(tickTypewriter, 350);
               return;
             }
-            setTimeout(typeLoop, 30);
+            setTimeout(tickTypewriter, 25);
           }
         }
-        setTimeout(typeLoop, 2200);
+        setTimeout(tickTypewriter, 2400);
       }
 
-      // Hero Slideshow
-      const slides = document.querySelectorAll("#heroSlideshow .slide-img");
-      const dots = document.querySelectorAll("#slideDots .dot");
+      // 6. Hero Slideshow Controls
+      const slides = Array.from(document.querySelectorAll("#heroSlideshow .slide-img"));
+      const dots = Array.from(document.querySelectorAll("#slideDots .dot"));
       const prevBtn = document.getElementById("prevSlide");
       const nextBtn = document.getElementById("nextSlide");
       let currentSlide = 0;
-      let slideTimer;
+      let slideTimer = null;
 
       function showSlide(index) {
         if (!slides.length) return;
         currentSlide = (index + slides.length) % slides.length;
-        slides.forEach((slide, i) => {
-          slide.classList.toggle("active", i === currentSlide);
-        });
-        dots.forEach((dot, i) => {
+        slides.forEach((s, i) => s.classList.toggle("active", i === currentSlide));
+        dots.forEach((d, i) => {
           const active = i === currentSlide;
-          dot.classList.toggle("active", active);
-          dot.setAttribute("aria-current", String(active));
+          d.classList.toggle("active", active);
+          d.setAttribute("aria-current", String(active));
         });
       }
 
-      function startSlideshow() {
-        stopSlideshow();
-        if (!prefersReducedMotion) {
+      function startAutoSlide() {
+        stopAutoSlide();
+        if (!prefersReducedMotion && slides.length > 1) {
           slideTimer = setInterval(() => showSlide(currentSlide + 1), 4500);
         }
       }
 
-      function stopSlideshow() {
-        if (slideTimer) clearInterval(slideTimer);
+      function stopAutoSlide() {
+        if (slideTimer) {
+          clearInterval(slideTimer);
+          slideTimer = null;
+        }
       }
 
       if (prevBtn) {
         prevBtn.addEventListener("click", () => {
           showSlide(currentSlide - 1);
-          startSlideshow();
+          startAutoSlide();
         });
       }
 
       if (nextBtn) {
         nextBtn.addEventListener("click", () => {
           showSlide(currentSlide + 1);
-          startSlideshow();
+          startAutoSlide();
         });
       }
 
-      dots.forEach((dot, idx) => {
+      dots.forEach((dot, i) => {
         dot.addEventListener("click", () => {
-          showSlide(idx);
-          startSlideshow();
+          showSlide(i);
+          startAutoSlide();
         });
       });
 
       const slideshowEl = document.getElementById("heroSlideshow");
       if (slideshowEl) {
-        slideshowEl.addEventListener("mouseenter", stopSlideshow);
-        slideshowEl.addEventListener("mouseleave", startSlideshow);
+        slideshowEl.addEventListener("mouseenter", stopAutoSlide);
+        slideshowEl.addEventListener("mouseleave", startAutoSlide);
       }
-      startSlideshow();
+      startAutoSlide();
 
-      // Service Category Filtering
-      const filterBtns = document.querySelectorAll(".filter-btn");
+      // 7. Rotate "Why Choose Us" Image Periodically
+      const whyChooseImg = document.getElementById("whyChooseImg");
+      if (whyChooseImg && !prefersReducedMotion) {
+        const whyPool = [
+          {
+            src: "./assets/about-photo.jpg",
+            fallback: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80",
+            alt: "Harrison Ndungu - Trusted ICT Partner"
+          },
+          {
+            src: "./assets/network-setup.jpg",
+            fallback: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=900&q=80",
+            alt: "Reliable Network & Hardware Deployment"
+          },
+          {
+            src: "./assets/CC.jpeg",
+            fallback: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80",
+            alt: "Technical Training & Software Solutions"
+          }
+        ];
+        let whyIdx = 0;
+
+        setInterval(() => {
+          if (whyChooseImg.dataset.customUploaded === "true") return;
+          whyIdx = (whyIdx + 1) % whyPool.length;
+          const item = whyPool[whyIdx];
+          const probe = new Image();
+          probe.onload = () => {
+            whyChooseImg.src = item.src;
+            whyChooseImg.alt = item.alt;
+          };
+          probe.onerror = () => {
+            whyChooseImg.src = item.fallback;
+            whyChooseImg.alt = item.alt;
+          };
+          probe.src = item.src;
+        }, 6000);
+      }
+
+      // 8. Service Category Filtering
+      const filterButtons = document.querySelectorAll(".filter-btn");
       const serviceCards = document.querySelectorAll("#servicesGrid .card");
 
-      filterBtns.forEach((btn) => {
+      filterButtons.forEach((btn) => {
         btn.addEventListener("click", () => {
           const filter = btn.dataset.filter;
-          filterBtns.forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
+          filterButtons.forEach((b) => b.classList.toggle("active", b === btn));
 
           serviceCards.forEach((card) => {
-            const matches = filter === "all" || card.dataset.category === filter;
-            card.classList.toggle("hidden", !matches);
+            const match = filter === "all" || card.dataset.category === filter;
+            card.classList.toggle("hidden", !match);
           });
         });
       });
 
-      // Inquiry Form Validation & WhatsApp / Email Dispatch
-      const form = document.getElementById("inquiryForm");
-      const whatsappBtn = document.getElementById("whatsappSubmitBtn");
-      const statusBox = document.getElementById("formStatus");
+      // 9. Inquiry Form Validation & WhatsApp / Email Dispatch
+      const inquiryForm = document.getElementById("inquiryForm");
+      const sendEmailBtn = document.getElementById("sendEmailBtn");
+      const formStatus = document.getElementById("formStatus");
 
-      function showStatus(msg, isError) {
-        if (!statusBox) return;
-        statusBox.textContent = msg;
-        statusBox.className = isError ? "form-status error" : "form-status";
-        statusBox.style.display = "block";
+      function showStatus(msg, isError = false) {
+        if (!formStatus) return;
+        formStatus.textContent = msg;
+        formStatus.classList.toggle("error", isError);
+        formStatus.style.display = "block";
       }
 
-      function getFormData() {
+      function validateAndCollect() {
         const name = document.getElementById("name").value.trim();
-        const contactInfo = document.getElementById("contactInfo").value.trim();
-        const serviceType = document.getElementById("serviceType").value;
+        const phone = document.getElementById("phone").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const service = document.getElementById("service").value;
         const message = document.getElementById("message").value.trim();
 
-        if (!name || !contactInfo || !message) {
-          showStatus("Please fill in your name, contact details, and project message.", true);
+        if (!name || !phone || !service || !message) {
+          showStatus("Please fill in all required fields (Name, Phone/WhatsApp, Service, and Details).", true);
           return null;
         }
-        return { name, contactInfo, serviceType, message };
+
+        return { name, phone, email, service, message };
       }
 
-      if (whatsappBtn) {
-        whatsappBtn.addEventListener("click", () => {
-          const data = getFormData();
+      function buildSummaryText(data) {
+        return [
+          "Hello Harrison, I would like to request a service/quotation:",
+          `Name: ${data.name}`,
+          `Phone/WhatsApp: ${data.phone}`,
+          data.email ? `Email: ${data.email}` : null,
+          `Service: ${data.service}`,
+          `Details: ${data.message}`
+        ].filter(Boolean).join("\n");
+      }
+
+      if (inquiryForm) {
+        inquiryForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const data = validateAndCollect();
           if (!data) return;
 
-          const text =
-            `Hello Harrison, my name is ${data.name} (${data.contactInfo}).\n` +
-            `Service Needed: ${data.serviceType}\n` +
-            `Details: ${data.message}`;
-          const waUrl = `https://wa.me/254705976233?text=${encodeURIComponent(text)}`;
-          showStatus("Opening WhatsApp with your inquiry details...", false);
+          const text = encodeURIComponent(buildSummaryText(data));
+          const waUrl = `https://wa.me/254705976233?text=${text}`;
           window.open(waUrl, "_blank", "noopener,noreferrer");
+          showStatus("Opening WhatsApp with your inquiry details. If WhatsApp didn't open, you can also click Send via Email.");
         });
       }
 
-      if (form) {
-        form.addEventListener("submit", (e) => {
-          e.preventDefault();
-          const data = getFormData();
+      if (sendEmailBtn) {
+        sendEmailBtn.addEventListener("click", () => {
+          const data = validateAndCollect();
           if (!data) return;
 
-          const subject = `ICT Inquiry: ${data.serviceType} — from ${data.name}`;
-          const body =
-            `Name: ${data.name}\n` +
-            `Contact: ${data.contactInfo}\n` +
-            `Service Needed: ${data.serviceType}\n\n` +
-            `Message:\n${data.message}`;
-          const mailtoUrl = `mailto:njorogeharrisonwanjiru@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-          showStatus("Opening your email client with the pre-filled inquiry...", false);
-          window.location.href = mailtoUrl;
+          const subject = encodeURIComponent(`ICT Inquiry: ${data.service} — ${data.name}`);
+          const body = encodeURIComponent(buildSummaryText(data));
+          window.location.href = `mailto:njorogeharrisonwanjiru@gmail.com?subject=${subject}&body=${body}`;
+          showStatus("Opening your email client with your inquiry pre-filled.");
         });
       }
     })();
