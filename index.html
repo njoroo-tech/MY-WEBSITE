@@ -168,7 +168,7 @@
       margin-bottom: 2rem;
     }
 
-    /* Top Banner Container & Background Image (Kenya School of TVET) */
+    /* Top Banner Container & Background Image */
     .top-banner {
       position: relative;
       overflow: hidden;
@@ -243,33 +243,11 @@
       font-weight: 500;
     }
 
-    .banner-bg-picker {
-      position: absolute;
-      bottom: 12px;
-      right: 16px;
-      z-index: 2;
-      background: rgba(3, 4, 94, 0.75);
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 0.3rem 0.75rem;
-      cursor: pointer;
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .banner-bg-picker:hover {
-      background: #0077b6;
-      border-color: #ffffff;
-    }
-
     .profile-wrapper {
       position: relative;
       width: 165px;
       height: 165px;
       margin: 0 auto 1rem auto;
-      cursor: pointer;
     }
 
     .profile-photo {
@@ -287,21 +265,6 @@
     .profile-wrapper:hover .profile-photo {
       transform: scale(1.03);
       border-color: #00b4d8;
-    }
-
-    .photo-badge {
-      position: absolute;
-      bottom: 4px;
-      right: 4px;
-      background: #03045e;
-      color: #ffffff;
-      border: 2px solid #ffffff;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 0.2rem 0.55rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-      opacity: 0.92;
     }
 
     /* Hero Section */
@@ -859,7 +822,7 @@
     </nav>
   </header>
 
-  <!-- Top Banner Section (Kenya School of TVET Background + hhn.jpeg Profile Photo) -->
+  <!-- Top Banner Section -->
   <div class="top-banner">
     <img
       id="bannerBgImg"
@@ -869,11 +832,9 @@
       alt="Kenya School of TVET Campus"
       class="banner-bg-img"
     >
-    <button type="button" class="banner-bg-picker" id="bannerBgPickerTrigger" title="Preview local background image (image_e30889.jpg)">Change Banner BG</button>
-    <input type="file" id="bannerBgFileInput" accept="image/*" hidden>
 
     <div class="container">
-      <div class="profile-wrapper" id="profilePickerTrigger" title="Click to select a local profile photo (hhn.jpeg)">
+      <div class="profile-wrapper">
         <img
           id="bannerProfileImg"
           src="./assets/hhn.jpeg"
@@ -882,8 +843,6 @@
           alt="Harrison Ndungu"
           class="profile-photo"
         >
-        <span class="photo-badge">Change Photo</span>
-        <input type="file" id="profileFileInput" accept="image/*" hidden>
       </div>
       <p class="eyebrow" style="color:#7dd3fc;">Professional IT Services &amp; Tech Training</p>
       <h1>Harrison Ndungu ICT Solutions</h1>
@@ -1200,7 +1159,6 @@
       // 3. Image Candidate Loader with Fallback
       function setupImageFallbacks(root = document) {
         root.querySelectorAll("img[data-candidates]").forEach((img) => {
-          if (img.dataset.customUploaded === "true") return;
           const candidates = (img.dataset.candidates || "")
             .split(",")
             .map((s) => s.trim())
@@ -1209,7 +1167,6 @@
           let idx = 0;
 
           img.addEventListener("error", () => {
-            if (img.dataset.customUploaded === "true") return;
             idx += 1;
             if (idx < candidates.length) {
               img.src = candidates[idx];
@@ -1221,56 +1178,7 @@
       }
       setupImageFallbacks();
 
-      // 4. Local Profile Photo & Banner Background Pickers (Live Preview)
-      const profilePickerTrigger = document.getElementById("profilePickerTrigger");
-      const profileFileInput = document.getElementById("profileFileInput");
-      const bannerProfileImg = document.getElementById("bannerProfileImg");
-      const heroProfileSlide = document.getElementById("heroProfileSlide");
-
-      if (profilePickerTrigger && profileFileInput) {
-        profilePickerTrigger.addEventListener("click", () => {
-          profileFileInput.click();
-        });
-
-        profileFileInput.addEventListener("change", (e) => {
-          const file = e.target.files && e.target.files[0];
-          if (!file) return;
-          const reader = new FileReader();
-          reader.onload = (ev) => {
-            const dataUrl = ev.target.result;
-            [bannerProfileImg, heroProfileSlide].forEach((el) => {
-              if (el) {
-                el.dataset.customUploaded = "true";
-                el.src = dataUrl;
-              }
-            });
-          };
-          reader.readAsDataURL(file);
-        });
-      }
-
-      const bannerBgPickerTrigger = document.getElementById("bannerBgPickerTrigger");
-      const bannerBgFileInput = document.getElementById("bannerBgFileInput");
-      const bannerBgImg = document.getElementById("bannerBgImg");
-
-      if (bannerBgPickerTrigger && bannerBgFileInput && bannerBgImg) {
-        bannerBgPickerTrigger.addEventListener("click", () => {
-          bannerBgFileInput.click();
-        });
-
-        bannerBgFileInput.addEventListener("change", (e) => {
-          const file = e.target.files && e.target.files[0];
-          if (!file) return;
-          const reader = new FileReader();
-          reader.onload = (ev) => {
-            bannerBgImg.dataset.customUploaded = "true";
-            bannerBgImg.src = ev.target.result;
-          };
-          reader.readAsDataURL(file);
-        });
-      }
-
-      // 5. Typing Effect in Top Banner (Active Immediately)
+      // 4. Typing Effect in Top Banner (Active Immediately)
       const typedRoleEl = document.getElementById("typedRole");
       const phrases = [
         "Empowering Businesses & Learners with Reliable Tech",
@@ -1317,7 +1225,7 @@
         tickTypewriter();
       }
 
-      // 6. Hero Slideshow Controls
+      // 5. Hero Slideshow Controls
       const slides = Array.from(document.querySelectorAll("#heroSlideshow .slide-img"));
       const dots = Array.from(document.querySelectorAll("#slideDots .dot"));
       const prevBtn = document.getElementById("prevSlide");
@@ -1378,7 +1286,7 @@
       }
       startAutoSlide();
 
-      // 7. Rotate "Why Choose Us" Image Periodically
+      // 6. Rotate "Why Choose Us" Image Periodically
       const whyChooseImg = document.getElementById("whyChooseImg");
       if (whyChooseImg && !prefersReducedMotion) {
         const whyPool = [
@@ -1401,7 +1309,6 @@
         let whyIdx = 0;
 
         setInterval(() => {
-          if (whyChooseImg.dataset.customUploaded === "true") return;
           whyIdx = (whyIdx + 1) % whyPool.length;
           const item = whyPool[whyIdx];
           const probe = new Image();
@@ -1417,7 +1324,7 @@
         }, 6000);
       }
 
-      // 8. Service Category Filtering
+      // 7. Service Category Filtering
       const filterButtons = document.querySelectorAll(".filter-btn");
       const serviceCards = document.querySelectorAll("#servicesGrid .card");
 
@@ -1433,7 +1340,7 @@
         });
       });
 
-      // 9. Inquiry Form Validation & WhatsApp / Email Dispatch
+      // 8. Inquiry Form Validation & WhatsApp / Email Dispatch
       const inquiryForm = document.getElementById("inquiryForm");
       const sendEmailBtn = document.getElementById("sendEmailBtn");
       const formStatus = document.getElementById("formStatus");
