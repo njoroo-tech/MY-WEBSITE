@@ -168,7 +168,7 @@
       margin-bottom: 2rem;
     }
 
-    /* Top Banner Container & Rotating Background */
+    /* Top Banner Container & Background Image (Kenya School of TVET) */
     .top-banner {
       position: relative;
       overflow: hidden;
@@ -185,9 +185,9 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 20%;
+      object-position: center 35%;
       z-index: -2;
-      filter: brightness(0.75) contrast(1.05);
+      filter: brightness(0.72) contrast(1.06);
       transition: opacity 0.35s ease-in-out;
     }
 
@@ -195,7 +195,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(3, 4, 94, 0.62) 0%, rgba(0, 119, 182, 0.48) 100%);
+      background: linear-gradient(135deg, rgba(3, 4, 94, 0.62) 0%, rgba(0, 119, 182, 0.45) 100%);
       z-index: -1;
       pointer-events: none;
     }
@@ -203,7 +203,7 @@
     .top-banner .container {
       position: relative;
       z-index: 1;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
     }
 
     .top-banner h1 {
@@ -241,6 +241,27 @@
       font-size: 1.05rem;
       color: #f1f5f9;
       font-weight: 500;
+    }
+
+    .banner-bg-picker {
+      position: absolute;
+      bottom: 12px;
+      right: 16px;
+      z-index: 2;
+      background: rgba(3, 4, 94, 0.75);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.3rem 0.75rem;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .banner-bg-picker:hover {
+      background: #0077b6;
+      border-color: #ffffff;
     }
 
     .profile-wrapper {
@@ -838,17 +859,19 @@
     </nav>
   </header>
 
-  <!-- Top Banner Section -->
+  <!-- Top Banner Section (Kenya School of TVET Background) -->
   <div class="top-banner">
     <img
       id="bannerBgImg"
-      src="./assets/profile-banner_2.jpg"
-      data-candidates="./assets/profile-banner_2.jpg,./profile-banner_2.jpg,./assets/profile-banner.jpg,./profile-banner.jpg"
+      src="./assets/image_e30889.jpg"
+      data-candidates="./assets/image_e30889.jpg,./image_e30889.jpg,./assets/kenya-school-of-tvet.jpg,./kenya-school-of-tvet.jpg"
       data-fallback="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1600&q=80"
-      alt=""
-      aria-hidden="true"
+      alt="Kenya School of TVET Campus"
       class="banner-bg-img"
     >
+    <button type="button" class="banner-bg-picker" id="bannerBgPickerTrigger" title="Preview local background image (image_e30889.jpg)">Change Banner BG</button>
+    <input type="file" id="bannerBgFileInput" accept="image/*" hidden>
+
     <div class="container">
       <div class="profile-wrapper" id="profilePickerTrigger" title="Click to select your local profile photo (profile-banner_2.jpg)">
         <img
@@ -903,11 +926,11 @@
               alt="Harrison Ndungu - Professional Consultations"
             >
             <img
-              src="./assets/CC.jpeg"
-              data-candidates="./assets/CC.jpeg,./CC.jpeg"
+              src="./assets/image_e30889.jpg"
+              data-candidates="./assets/image_e30889.jpg,./image_e30889.jpg,./assets/CC.jpeg,./CC.jpeg"
               data-fallback="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80"
               class="slide-img"
-              alt="IT Setup & Training"
+              alt="Kenya School of TVET & ICT Training"
             >
 
             <button type="button" class="slide-btn prev" id="prevSlide" aria-label="Previous photo">❮</button>
@@ -1198,11 +1221,10 @@
       }
       setupImageFallbacks();
 
-      // 4. Local Profile Photo Picker (Live Preview)
+      // 4. Local Profile Photo & Banner Background Pickers (Live Preview)
       const profilePickerTrigger = document.getElementById("profilePickerTrigger");
       const profileFileInput = document.getElementById("profileFileInput");
       const bannerProfileImg = document.getElementById("bannerProfileImg");
-      const bannerBgImg = document.getElementById("bannerBgImg");
       const heroProfileSlide = document.getElementById("heroProfileSlide");
 
       if (profilePickerTrigger && profileFileInput) {
@@ -1216,12 +1238,33 @@
           const reader = new FileReader();
           reader.onload = (ev) => {
             const dataUrl = ev.target.result;
-            [bannerProfileImg, bannerBgImg, heroProfileSlide].forEach((el) => {
+            [bannerProfileImg, heroProfileSlide].forEach((el) => {
               if (el) {
                 el.dataset.customUploaded = "true";
                 el.src = dataUrl;
               }
             });
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      const bannerBgPickerTrigger = document.getElementById("bannerBgPickerTrigger");
+      const bannerBgFileInput = document.getElementById("bannerBgFileInput");
+      const bannerBgImg = document.getElementById("bannerBgImg");
+
+      if (bannerBgPickerTrigger && bannerBgFileInput && bannerBgImg) {
+        bannerBgPickerTrigger.addEventListener("click", () => {
+          bannerBgFileInput.click();
+        });
+
+        bannerBgFileInput.addEventListener("change", (e) => {
+          const file = e.target.files && e.target.files[0];
+          if (!file) return;
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            bannerBgImg.dataset.customUploaded = "true";
+            bannerBgImg.src = ev.target.result;
           };
           reader.readAsDataURL(file);
         });
@@ -1350,9 +1393,9 @@
             alt: "Reliable Network & Hardware Deployment"
           },
           {
-            src: "./assets/CC.jpeg",
+            src: "./assets/image_e30889.jpg",
             fallback: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80",
-            alt: "Technical Training & Software Solutions"
+            alt: "Kenya School of TVET & Technical Training"
           }
         ];
         let whyIdx = 0;
