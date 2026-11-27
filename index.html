@@ -31,9 +31,8 @@
       max-width: 100%;
     }
 
-    .card.hidden,
-    .hidden-section {
-      display: none !important;
+    .card.hidden {
+      display: none;
     }
 
     /* Top Navigation Bar */
@@ -1082,56 +1081,40 @@
               <option value="sage50" data-file="Sage50-Accounts-Setup-v2026.exe" data-size="410 MB" data-os="Windows 10 / 11 (64-bit)" data-url="https://example.com/secure-downloads/sage50-installer.exe">Sage 50 Accounts Setup Installer (.exe)</option>
               <option value="spss" data-file="SPSS-Statistics-28-Installer.exe" data-size="980 MB" data-os="Windows 10 / 11 (64-bit)" data-url="https://example.com/secure-downloads/spss28-installer.exe">SPSS Statistics Installer (.exe)</option>
               <option value="autocad" data-file="AutoCAD-Drafting-Pack-2026.zip" data-size="1.4 GB" data-os="Windows 10 / 11 (64-bit)" data-url="https://example.com/secure-downloads/autocad-pack.zip">AutoCAD / ArchiCAD Setup &amp; Templates (.zip)</option>
-              <option value="custom_app" data-file="Client-System-Build-Package.zip" data-size="145 MB" data-os="Windows / Web / Android" data-url="https://example.com/secure-downloads/client-system-build.zip">Custom System / App Deliverable (.zip)</option>
+              <option value="custom_app" data-file="Client-System-Build-Package.zip" data-size="185 MB" data-os="Cross-Platform / Web / Android" data-url="https://example.com/secure-downloads/client-system-build.zip">Custom Project / System Deliverable (.zip)</option>
             </select>
 
             <label for="clientAccessCode">Client Access Code *</label>
-            <input type="text" id="clientAccessCode" name="clientAccessCode" placeholder="e.g. NDUNGU2026" autocomplete="off">
+            <input type="text" id="clientAccessCode" name="clientAccessCode" placeholder="Enter your payment-verified access code (e.g., HN-PAID-2026)" required>
 
             <div class="download-meta" id="packageMeta">
-              <p><strong>Selected File:</strong> <span id="metaFile">Sage50-Accounts-Setup-v2026.exe</span></p>
-              <p><strong>Package Size:</strong> <span id="metaSize">410 MB</span></p>
-              <p><strong>Compatibility:</strong> <span id="metaOs">Windows 10 / 11 (64-bit)</span></p>
+              <p><strong>File:</strong> <span id="metaFile">Sage50-Accounts-Setup-v2026.exe</span></p>
+              <p><strong>Size:</strong> <span id="metaSize">410 MB</span></p>
+              <p><strong>Platform:</strong> <span id="metaOs">Windows 10 / 11 (64-bit)</span></p>
             </div>
 
             <div class="form-buttons">
-              <button type="button" class="button" id="unlockDownloadBtn">Unlock Download</button>
-              <button type="button" class="button button-whatsapp" id="startDownloadBtn" disabled>Download Package</button>
+              <button type="button" id="verifyAccessBtn" class="button">Verify &amp; Unlock</button>
+              <button type="submit" id="downloadPackageBtn" class="button button-whatsapp" disabled>Download Package</button>
             </div>
 
             <div id="downloadStatus" class="form-status" role="status" aria-live="polite"></div>
-            <p class="helper-note">Need a software package or access code? Request payment details and installation support directly via WhatsApp.</p>
+            <p class="helper-note">Note: For client-side static hosting, configure your live CDN/cloud download URLs in the package options and rotate access codes per paid order.</p>
           </form>
         </div>
 
-        <!-- Add Software Package Card (Hidden from clients by default; add ?manage=1 to URL to reveal) -->
-        <div class="card hidden-section" id="addSoftwareCard" aria-hidden="true">
-          <h3>Add Software Package</h3>
-          <p>Add a new software installer or deliverable into the download selector above.</p>
-
-          <form id="addSoftwareForm" novalidate>
-            <label for="swTitle">Software Name *</label>
-            <input type="text" id="swTitle" name="swTitle" placeholder="e.g. QuickBooks Desktop Pro 2026 (.exe)" required>
-
-            <label for="swFile">File Name *</label>
-            <input type="text" id="swFile" name="swFile" placeholder="e.g. QuickBooks-Pro-2026-Setup.exe" required>
-
-            <label for="swSize">Package Size</label>
-            <input type="text" id="swSize" name="swSize" placeholder="e.g. 620 MB">
-
-            <label for="swOs">Compatibility</label>
-            <input type="text" id="swOs" name="swOs" placeholder="e.g. Windows 10 / 11 (64-bit)">
-
-            <label for="swUrl">Download URL</label>
-            <input type="url" id="swUrl" name="swUrl" placeholder="https://your-drive-or-host-link/file.exe">
-
-            <div class="form-buttons">
-              <button type="submit" class="button" id="addSoftwareBtn">Add to Download List</button>
-              <button type="button" class="button button-outline" id="resetSoftwareBtn">Reset Added Items</button>
-            </div>
-
-            <div id="addSoftwareStatus" class="form-status" role="status" aria-live="polite"></div>
-          </form>
+        <!-- How Paid Access Works -->
+        <div class="card">
+          <h3>How Paid Client Access Works</h3>
+          <ul>
+            <li><strong>Step 1 — Request &amp; Pay:</strong> Request your required software package, training kit, or custom system build via WhatsApp or the contact form.</li>
+            <li><strong>Step 2 — Payment Confirmation:</strong> Once payment is confirmed, you receive a unique client access code and direct package link.</li>
+            <li><strong>Step 3 — Unlock &amp; Download:</strong> Enter your access code in the download portal to unlock and download your package.</li>
+            <li><strong>Installation Support:</strong> Need help installing, activating, or configuring the software? Remote or on-site assistance is available.</li>
+          </ul>
+          <div class="actions">
+            <a class="button button-whatsapp" href="https://wa.me/254705976233?text=Hello%20Harrison,%20I%20would%20like%20to%20request%20a%20paid%20software%20package%20and%20client%20access%20code." target="_blank" rel="noopener noreferrer">Request Access Code</a>
+          </div>
         </div>
       </div>
     </section>
@@ -1141,33 +1124,29 @@
       <div class="container about-grid">
         <div>
           <p class="eyebrow">ABOUT HARRISON NDUNGU</p>
-          <h2 class="section-heading">Practical ICT Solutions &amp; Technical Training</h2>
-          <p>Harrison Ndungu ICT Solutions supports businesses, students, and institutions across Kenya with dependable hardware/software support, networking, web and application builds, and hands-on training in accounting, statistical, and CAD tools.</p>
-          <p>Whether you need a slow laptop restored, an office network configured, or practical guidance in Sage 50, QuickBooks, SPSS, STATA, Advanced Excel, or ArchiCAD, you get straightforward communication and reliable execution.</p>
-          <div class="actions">
-            <a class="button" href="#contact">Book a Session</a>
-            <a class="button button-outline" href="#portfolio">See Projects</a>
-          </div>
+          <h2 class="section-heading">Practical Technical Expertise &amp; Training</h2>
+          <p>Harrison Ndungu ICT Solutions supports businesses, students, and institutions across Kenya with dependable IT support, software installation, structured networking, web and system development, and hands-on training in accounting and statistical packages.</p>
+          <p>With a strong foundation in ICT and Technical Trainer Education (TVET/CBET), every engagement focuses on clear communication, practical results, and sustainable system performance.</p>
         </div>
 
         <div>
           <div class="why-choose-box">
             <img
-              id="whyChooseImg"
+              id="whyChoosePhoto"
               src="./assets/about-photo.jpg"
               data-candidates="./assets/about-photo.jpg,./about-photo.jpg,./assets/hhn.jpeg,./hhn.jpeg,https://njoroo-tech.github.io/all-ict-services-website/assets/about-photo.jpg"
-              data-fallback="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80"
-              data-svg-label="Why Choose Ndungu ICT"
-              alt="Why choose Harrison Ndungu ICT Solutions"
+              data-fallback="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80"
+              data-svg-label="Why Choose Us"
+              alt="Harrison Ndungu ICT Solutions Training and Support"
               class="why-choose-photo"
             >
           </div>
           <div class="about-panel">
             <h3>Why Clients Work With Us</h3>
             <ul>
-              <li>Hands-on technical and CBET/TVET training background</li>
-              <li>Clear diagnostics before recommending repairs or upgrades</li>
-              <li>Practical, step-by-step software walkthroughs</li>
+              <li>Fast diagnostics, OS setup, and network troubleshooting</li>
+              <li>Practical Sage 50, QuickBooks, SPSS, STATA &amp; Excel coaching</li>
+              <li>CAD &amp; database setup tailored to real workflows</li>
               <li>Responsive WhatsApp and direct consultation support</li>
             </ul>
           </div>
@@ -1178,47 +1157,47 @@
     <!-- Contact Section -->
     <section id="contact" class="section container">
       <p class="eyebrow">GET IN TOUCH</p>
-      <h2 class="section-heading">Request Service, Training, or a Quote</h2>
-      <p class="section-lead">Send your inquiry directly via WhatsApp or prepare an email message in seconds.</p>
+      <h2 class="section-heading">Request a Quote or Book a Session</h2>
+      <p class="section-lead">Send your inquiry directly or launch a pre-filled WhatsApp message for fast response.</p>
 
       <div class="contact-grid">
         <div class="contact-card">
           <h3>Direct Contact Details</h3>
           <p><strong>Specialist:</strong> Harrison Ndungu</p>
           <p><strong>Phone / WhatsApp:</strong> <a href="tel:+254705976233">+254 705 976 233</a></p>
-          <p><strong>Email:</strong> <a href="mailto:ndunguharrison68@gmail.com">ndunguharrison68@gmail.com</a></p>
-          <p><strong>Service Area:</strong> Kenya (On-site, Remote &amp; Training Sessions)</p>
-          <a class="whatsapp-badge" href="https://wa.me/254705976233?text=Hello%20Harrison,%20I%20need%20assistance%20with%20an%20ICT%20service." target="_blank" rel="noopener noreferrer">
-            Message on WhatsApp ↗
-          </a>
+          <p><strong>Location:</strong> Kenya (On-site &amp; Remote Support)</p>
+          <p><strong>Core Focus:</strong> Computer Repair, Networking, Web &amp; Systems, Sage / QuickBooks / SPSS / STATA / Excel, TVET/CBET Training</p>
+          <a class="whatsapp-badge" href="https://wa.me/254705976233?text=Hello%20Harrison,%20I%20need%20assistance%20with%20an%20ICT%20service." target="_blank" rel="noopener noreferrer">Chat Directly on WhatsApp ↗</a>
         </div>
 
         <div class="contact-card">
-          <h3>Quick Inquiry Form</h3>
-          <form id="inquiryForm" novalidate>
+          <h3>Inquiry &amp; Quote Form</h3>
+          <form id="contactForm" novalidate>
             <label for="clientName">Your Name *</label>
             <input type="text" id="clientName" name="clientName" placeholder="Enter your full name" required>
 
-            <label for="serviceType">Service Needed</label>
-            <select id="serviceType" name="serviceType">
+            <label for="clientContact">Phone or Email *</label>
+            <input type="text" id="clientContact" name="clientContact" placeholder="e.g., 0705 976 233 or name@example.com" required>
+
+            <label for="serviceTopic">Service Needed</label>
+            <select id="serviceTopic" name="serviceTopic">
               <option value="Computer Repair & Maintenance">Computer Repair &amp; Maintenance</option>
               <option value="Network Setup & Configuration">Network Setup &amp; Configuration</option>
               <option value="Software Installation">Software Installation</option>
               <option value="Accounting & Statistical Packages">Accounting &amp; Statistical Packages</option>
               <option value="TVET / CBET ICT Training">TVET / CBET ICT Training</option>
-              <option value="Branding & Graphic Design">Branding &amp; Graphic Design</option>
-              <option value="Web / App / Database Project">Web / App / Database Project</option>
+              <option value="Web / System Development & Branding">Web / System Development &amp; Branding</option>
             </select>
 
-            <label for="clientMessage">Details / Message *</label>
-            <textarea id="clientMessage" name="clientMessage" rows="4" placeholder="Describe your issue, software needed, or training goals..." required></textarea>
+            <label for="clientMessage">Project / Support Details *</label>
+            <textarea id="clientMessage" name="clientMessage" rows="4" placeholder="Tell us what you need help with..." required></textarea>
 
             <div class="form-buttons">
-              <button type="button" class="button button-whatsapp" id="sendWhatsAppBtn">Send via WhatsApp</button>
-              <button type="button" class="button" id="sendEmailBtn">Open Email Draft</button>
+              <button type="submit" class="button button-whatsapp">Send via WhatsApp</button>
+              <button type="button" id="emailFallbackBtn" class="button button-outline">Send via Email</button>
             </div>
 
-            <div id="inquiryStatus" class="form-status" role="status" aria-live="polite"></div>
+            <div id="contactStatus" class="form-status" role="status" aria-live="polite"></div>
           </form>
         </div>
       </div>
@@ -1226,31 +1205,103 @@
   </main>
 
   <!-- Scrolling Announcement Ticker -->
-  <div class="announcement-banner-bottom" aria-label="Announcements">
+  <div class="announcement-banner-bottom" aria-label="Service announcements">
     <div class="ticker-track">
-      ★ Harrison Ndungu ICT Solutions — Laptop &amp; PC Repair • LAN &amp; Wi-Fi Setup • Sage 50, QuickBooks &amp; Pastel • SPSS, STATA &amp; Advanced Excel • AutoCAD &amp; ArchiCAD • Web &amp; Database Systems • Call / WhatsApp +254 705 976 233 ★
+      ★ Harrison Ndungu ICT Solutions — Laptop &amp; Desktop Repair • LAN / Wi-Fi Setup • Web &amp; Database Systems • Sage 50, QuickBooks, SPSS, STATA &amp; Advanced Excel Training • TVET / CBET ICT Support • Call / WhatsApp +254 705 976 233 ★
     </div>
   </div>
 
   <!-- Footer -->
   <footer>
     <div class="footer-inner">
-      <p>&copy; <span id="year">2026</span> Harrison Ndungu ICT Solutions. All rights reserved.</p>
+      <p>&copy; <span id="yearSpan">2026</span> Harrison Ndungu ICT Solutions. All rights reserved.</p>
       <p><a href="#home">Back to Top ↑</a></p>
     </div>
   </footer>
 
   <script>
     (function () {
-      // Current year
-      const yearEl = document.getElementById("year");
-      if (yearEl) {
-        yearEl.textContent = new Date().getFullYear();
+      // Dynamic copyright year
+      const yearSpan = document.getElementById("yearSpan");
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
       }
 
-      // Build clean fallback SVG data URI when all image candidates fail
-      function makeFallbackSvg(label) {
-        const safeText = String(label || "ICT Solutions").slice(0, 32).replace(/[<>&"]/g, "");
+      // Mobile navigation toggle
+      const menuToggle = document.getElementById("menuToggle");
+      const navLinks = document.getElementById("navLinks");
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener("click", function () {
+          const isOpen = navLinks.classList.toggle("open");
+          menuToggle.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        navLinks.querySelectorAll("a").forEach(function (link) {
+          link.addEventListener("click", function () {
+            navLinks.classList.remove("open");
+            menuToggle.setAttribute("aria-expanded", "false");
+          });
+        });
+      }
+
+      // Active navigation link highlight on scroll
+      const sections = document.querySelectorAll("main section[id]");
+      const navItems = document.querySelectorAll(".nav-link:not(.cta-quote)");
+      window.addEventListener("scroll", function () {
+        let currentId = "home";
+        sections.forEach(function (sec) {
+          const top = sec.offsetTop - 120;
+          if (window.scrollY >= top) {
+            currentId = sec.getAttribute("id");
+          }
+        });
+        navItems.forEach(function (item) {
+          item.classList.toggle("active", item.getAttribute("href") === "#" + currentId);
+        });
+      }, { passive: true });
+
+      // Typing effect for banner tagline
+      const roles = [
+        "Computer Repair & IT Support",
+        "LAN & Wi-Fi Network Setup",
+        "Sage, QuickBooks, SPSS & STATA Training",
+        "Websites, Databases & CBET ICT Solutions"
+      ];
+      const typedRoleEl = document.getElementById("typedRole");
+      if (typedRoleEl) {
+        let roleIndex = 0;
+        let charIndex = 0;
+        let deleting = false;
+
+        function tickTyping() {
+          const current = roles[roleIndex];
+          if (!deleting) {
+            charIndex++;
+            typedRoleEl.textContent = current.slice(0, charIndex);
+            if (charIndex === current.length) {
+              deleting = true;
+              setTimeout(tickTyping, 1700);
+              return;
+            }
+            setTimeout(tickTyping, 65);
+          } else {
+            charIndex--;
+            typedRoleEl.textContent = current.slice(0, charIndex);
+            if (charIndex === 0) {
+              deleting = false;
+              roleIndex = (roleIndex + 1) % roles.length;
+              setTimeout(tickTyping, 350);
+              return;
+            }
+            setTimeout(tickTyping, 35);
+          }
+        }
+        tickTyping();
+      }
+
+      // Resilient image loader with candidate paths, external fallback, and SVG placeholder
+      function makeSvgFallback(label) {
+        const safeLabel = (label || "ICT Solutions").replace(/[<>&"]/g, "");
         const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
           <defs>
             <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
@@ -1259,428 +1310,266 @@
             </linearGradient>
           </defs>
           <rect width="800" height="450" fill="url(#g)"/>
-          <circle cx="400" cy="185" r="46" fill="rgba(255,255,255,0.16)"/>
-          <text x="400" y="265" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-size="26" font-weight="700">${safeText}</text>
+          <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#e0f2fe" font-family="system-ui, sans-serif" font-size="30" font-weight="700">${safeLabel}</text>
         </svg>`;
         return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
       }
 
-      // Resilient image loader across candidates -> fallback -> SVG
-      function initResilientImages() {
-        const imgs = document.querySelectorAll("img[data-candidates]");
-        imgs.forEach((img) => {
-          const rawCandidates = (img.getAttribute("data-candidates") || "")
-            .split(",")
-            .map((s) => s.trim())
-            .filter(Boolean);
-          const fallbackUrl = (img.getAttribute("data-fallback") || "").trim();
-          const svgFallback = makeFallbackSvg(img.getAttribute("data-svg-label") || img.alt);
+      function attachImageResilience(img) {
+        const rawCandidates = (img.getAttribute("data-candidates") || "").split(",").map(function (s) {
+          return s.trim();
+        }).filter(Boolean);
+        const fallbackUrl = img.getAttribute("data-fallback") || "";
+        const svgLabel = img.getAttribute("data-svg-label") || img.alt || "ICT Solutions";
 
-          const queue = [...rawCandidates];
-          if (fallbackUrl) queue.push(fallbackUrl);
+        const queue = [];
+        if (img.getAttribute("src")) queue.push(img.getAttribute("src"));
+        rawCandidates.forEach(function (c) {
+          if (queue.indexOf(c) === -1) queue.push(c);
+        });
+        if (fallbackUrl && queue.indexOf(fallbackUrl) === -1) queue.push(fallbackUrl);
+        queue.push(makeSvgFallback(svgLabel));
 
-          let idx = 0;
-          function tryNext() {
-            if (idx < queue.length) {
-              const nextSrc = queue[idx++];
-              if (img.getAttribute("src") !== nextSrc) {
-                img.src = nextSrc;
-              } else {
-                tryNext();
-              }
-            } else if (!img.dataset.svgApplied) {
-              img.dataset.svgApplied = "true";
-              img.src = svgFallback;
-            }
-          }
-
-          img.addEventListener("error", tryNext);
-
-          if (img.complete && img.naturalWidth === 0) {
-            tryNext();
+        let idx = 0;
+        img.addEventListener("error", function () {
+          idx++;
+          if (idx < queue.length) {
+            img.src = queue[idx];
           }
         });
       }
 
-      initResilientImages();
+      document.querySelectorAll("img").forEach(attachImageResilience);
 
-      // Mobile menu toggle
-      const menuToggle = document.getElementById("menuToggle");
-      const navLinks = document.getElementById("navLinks");
-      if (menuToggle && navLinks) {
-        menuToggle.addEventListener("click", () => {
-          const isOpen = navLinks.classList.toggle("open");
-          menuToggle.setAttribute("aria-expanded", String(isOpen));
-        });
-
-        navLinks.querySelectorAll("a").forEach((link) => {
-          link.addEventListener("click", () => {
-            navLinks.classList.remove("open");
-            menuToggle.setAttribute("aria-expanded", "false");
-          });
-        });
-      }
-
-      // Active nav highlight on scroll
-      const navItems = document.querySelectorAll(".nav-link:not(.cta-quote)");
-      const sections = document.querySelectorAll("main section[id]");
-      window.addEventListener("scroll", () => {
-        let currentId = "home";
-        sections.forEach((sec) => {
-          const top = sec.offsetTop - 120;
-          if (window.scrollY >= top) {
-            currentId = sec.id;
-          }
-        });
-        navItems.forEach((link) => {
-          const href = link.getAttribute("href");
-          link.classList.toggle("active", href === "#" + currentId);
-        });
-      }, { passive: true });
-
-      // Typed tagline effect
-      const typedEl = document.getElementById("typedRole");
-      const roles = [
-        "Computer Repair & Maintenance",
-        "LAN & Wi-Fi Network Setup",
-        "Sage 50, QuickBooks & SPSS Training",
-        "AutoCAD, ArchiCAD & Web Systems"
-      ];
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      if (typedEl) {
-        if (reducedMotion) {
-          typedEl.textContent = roles[0];
-        } else {
-          let roleIdx = 0;
-          let charIdx = 0;
-          let deleting = false;
-
-          function tickType() {
-            const current = roles[roleIdx];
-            if (!deleting) {
-              charIdx++;
-              typedEl.textContent = current.slice(0, charIdx);
-              if (charIdx === current.length) {
-                deleting = true;
-                setTimeout(tickType, 1800);
-                return;
-              }
-              setTimeout(tickType, 65);
-            } else {
-              charIdx--;
-              typedEl.textContent = current.slice(0, charIdx);
-              if (charIdx === 0) {
-                deleting = false;
-                roleIdx = (roleIdx + 1) % roles.length;
-                setTimeout(tickType, 350);
-                return;
-              }
-              setTimeout(tickType, 35);
-            }
-          }
-          tickType();
-        }
-      }
-
-      // Hero slideshow
-      const slides = document.querySelectorAll("#heroSlideshow .slide-img");
-      const dots = document.querySelectorAll("#slideDots .dot");
+      // Hero slideshow controls
+      const slides = Array.from(document.querySelectorAll("#heroSlideshow .slide-img"));
+      const dots = Array.from(document.querySelectorAll("#slideDots .dot"));
       const prevBtn = document.getElementById("prevSlide");
       const nextBtn = document.getElementById("nextSlide");
-      const slideshowEl = document.getElementById("heroSlideshow");
+      let activeSlide = 0;
+      let slideTimer = null;
 
-      if (slides.length > 0) {
-        let currentSlide = 0;
-        let slideTimer = null;
-
-        function showSlide(index) {
-          currentSlide = (index + slides.length) % slides.length;
-          slides.forEach((img, i) => img.classList.toggle("active", i === currentSlide));
-          dots.forEach((dot, i) => {
-            const active = i === currentSlide;
-            dot.classList.toggle("active", active);
-            dot.setAttribute("aria-current", String(active));
-          });
-        }
-
-        function startAutoSlide() {
-          stopAutoSlide();
-          if (!reducedMotion) {
-            slideTimer = setInterval(() => showSlide(currentSlide + 1), 4000);
-          }
-        }
-
-        function stopAutoSlide() {
-          if (slideTimer) clearInterval(slideTimer);
-        }
-
-        if (prevBtn) {
-          prevBtn.addEventListener("click", () => {
-            showSlide(currentSlide - 1);
-            startAutoSlide();
-          });
-        }
-
-        if (nextBtn) {
-          nextBtn.addEventListener("click", () => {
-            showSlide(currentSlide + 1);
-            startAutoSlide();
-          });
-        }
-
-        dots.forEach((dot) => {
-          dot.addEventListener("click", () => {
-            const idx = Number(dot.getAttribute("data-index"));
-            if (!Number.isNaN(idx)) {
-              showSlide(idx);
-              startAutoSlide();
-            }
-          });
+      function showSlide(index) {
+        if (!slides.length) return;
+        activeSlide = (index + slides.length) % slides.length;
+        slides.forEach(function (s, i) {
+          s.classList.toggle("active", i === activeSlide);
         });
-
-        if (slideshowEl) {
-          slideshowEl.addEventListener("mouseenter", stopAutoSlide);
-          slideshowEl.addEventListener("mouseleave", startAutoSlide);
-        }
-
-        startAutoSlide();
+        dots.forEach(function (d, i) {
+          const isCurrent = i === activeSlide;
+          d.classList.toggle("active", isCurrent);
+          d.setAttribute("aria-current", String(isCurrent));
+        });
       }
 
-      // Service filter buttons
-      const filterBtns = document.querySelectorAll(".filter-btn");
+      function startAutoSlide() {
+        stopAutoSlide();
+        slideTimer = setInterval(function () {
+          showSlide(activeSlide + 1);
+        }, 4200);
+      }
+
+      function stopAutoSlide() {
+        if (slideTimer) {
+          clearInterval(slideTimer);
+          slideTimer = null;
+        }
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener("click", function () {
+          showSlide(activeSlide - 1);
+          startAutoSlide();
+        });
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener("click", function () {
+          showSlide(activeSlide + 1);
+          startAutoSlide();
+        });
+      }
+      dots.forEach(function (dot) {
+        dot.addEventListener("click", function () {
+          const idx = Number(dot.getAttribute("data-index")) || 0;
+          showSlide(idx);
+          startAutoSlide();
+        });
+      });
+
+      const slideshowEl = document.getElementById("heroSlideshow");
+      if (slideshowEl) {
+        slideshowEl.addEventListener("mouseenter", stopAutoSlide);
+        slideshowEl.addEventListener("mouseleave", startAutoSlide);
+      }
+      startAutoSlide();
+
+      // Rotate "Why Choose Us" photo
+      const whyChoosePhoto = document.getElementById("whyChoosePhoto");
+      if (whyChoosePhoto) {
+        const whySources = [
+          "./assets/about-photo.jpg",
+          "./assets/hhn.jpeg",
+          "./assets/CC.jpeg"
+        ];
+        let whyIdx = 0;
+        setInterval(function () {
+          whyIdx = (whyIdx + 1) % whySources.length;
+          whyChoosePhoto.src = whySources[whyIdx];
+        }, 4500);
+      }
+
+      // Service category filtering
+      const filterButtons = document.querySelectorAll(".filter-btn");
       const serviceCards = document.querySelectorAll("#servicesGrid .card");
-      filterBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
+      filterButtons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
           const filter = btn.getAttribute("data-filter");
-          filterBtns.forEach((b) => b.classList.toggle("active", b === btn));
-          serviceCards.forEach((card) => {
-            const cat = card.getAttribute("data-category");
-            const show = filter === "all" || cat === filter;
-            card.classList.toggle("hidden", !show);
+          filterButtons.forEach(function (b) {
+            b.classList.toggle("active", b === btn);
+          });
+          serviceCards.forEach(function (card) {
+            const category = card.getAttribute("data-category");
+            const match = filter === "all" || category === filter;
+            card.classList.toggle("hidden", !match);
           });
         });
       });
 
-      // Reveal Add Software card only when ?manage=1 is in the URL
-      const addSoftwareCard = document.getElementById("addSoftwareCard");
-      const canManageSoftware = new URLSearchParams(window.location.search).get("manage") === "1";
-      if (addSoftwareCard && canManageSoftware) {
-        addSoftwareCard.classList.remove("hidden-section");
-        addSoftwareCard.setAttribute("aria-hidden", "false");
-      }
-
-      // Paid client download gate & dynamic software package management
-      const VALID_ACCESS_CODES = ["NDUNGU2026", "ICT-PAID", "CLIENT2026"];
-      const CUSTOM_PACKAGES_KEY = "ndungu_custom_software_packages_v1";
-
+      // Paid Client Download Portal logic
       const packageSelect = document.getElementById("packageSelect");
-      const accessCodeInput = document.getElementById("clientAccessCode");
-      const unlockBtn = document.getElementById("unlockDownloadBtn");
-      const startDownloadBtn = document.getElementById("startDownloadBtn");
-      const accessBadge = document.getElementById("accessBadge");
-      const downloadStatus = document.getElementById("downloadStatus");
       const metaFile = document.getElementById("metaFile");
       const metaSize = document.getElementById("metaSize");
       const metaOs = document.getElementById("metaOs");
+      const clientAccessCode = document.getElementById("clientAccessCode");
+      const verifyAccessBtn = document.getElementById("verifyAccessBtn");
+      const downloadPackageBtn = document.getElementById("downloadPackageBtn");
+      const accessBadge = document.getElementById("accessBadge");
+      const downloadStatus = document.getElementById("downloadStatus");
+      const clientDownloadForm = document.getElementById("clientDownloadForm");
 
-      const addSoftwareForm = document.getElementById("addSoftwareForm");
-      const swTitleInput = document.getElementById("swTitle");
-      const swFileInput = document.getElementById("swFile");
-      const swSizeInput = document.getElementById("swSize");
-      const swOsInput = document.getElementById("swOs");
-      const swUrlInput = document.getElementById("swUrl");
-      const resetSoftwareBtn = document.getElementById("resetSoftwareBtn");
-      const addSoftwareStatus = document.getElementById("addSoftwareStatus");
-
+      // Replace or extend valid client access codes as needed
+      const validAccessCodes = new Set(["HN-PAID-2026", "NDUNGU-ICT-PRO", "CLIENT-2026"]);
       let isUnlocked = false;
 
-      function updatePackageMeta() {
+      function syncPackageMeta() {
         if (!packageSelect) return;
         const opt = packageSelect.options[packageSelect.selectedIndex];
         if (!opt) return;
         if (metaFile) metaFile.textContent = opt.getAttribute("data-file") || "Package";
-        if (metaSize) metaSize.textContent = opt.getAttribute("data-size") || "—";
-        if (metaOs) metaOs.textContent = opt.getAttribute("data-os") || "—";
+        if (metaSize) metaSize.textContent = opt.getAttribute("data-size") || "N/A";
+        if (metaOs) metaOs.textContent = opt.getAttribute("data-os") || "Windows";
       }
 
-      function setStatus(el, message, isError) {
-        if (!el) return;
-        el.textContent = message;
-        el.classList.toggle("error", Boolean(isError));
-        el.style.display = "block";
-      }
-
-      function appendPackageOption(pkg, selectIt) {
-        if (!packageSelect) return;
-        const opt = document.createElement("option");
-        opt.value = pkg.value;
-        opt.textContent = pkg.label;
-        opt.dataset.custom = "true";
-        opt.setAttribute("data-file", pkg.file);
-        opt.setAttribute("data-size", pkg.size || "—");
-        opt.setAttribute("data-os", pkg.os || "Windows 10 / 11");
-        opt.setAttribute("data-url", pkg.url || "");
-        packageSelect.appendChild(opt);
-
-        if (selectIt) {
-          packageSelect.value = pkg.value;
-          updatePackageMeta();
+      function setUnlockedState(unlocked, message, isError) {
+        isUnlocked = unlocked;
+        if (downloadPackageBtn) downloadPackageBtn.disabled = !unlocked;
+        if (accessBadge) {
+          accessBadge.textContent = unlocked
+            ? "Unlocked — Access Verified"
+            : "Locked — Payment Access Required";
+          accessBadge.classList.toggle("locked", !unlocked);
+          accessBadge.classList.toggle("unlocked", unlocked);
+        }
+        if (downloadStatus && message) {
+          downloadStatus.textContent = message;
+          downloadStatus.style.display = "block";
+          downloadStatus.classList.toggle("error", Boolean(isError));
         }
       }
-
-      function loadCustomPackages() {
-        try {
-          const saved = JSON.parse(localStorage.getItem(CUSTOM_PACKAGES_KEY) || "[]");
-          if (Array.isArray(saved)) {
-            saved.forEach((pkg) => appendPackageOption(pkg, false));
-          }
-        } catch (_) {
-          // Ignore storage parse errors
-        }
-      }
-
-      loadCustomPackages();
 
       if (packageSelect) {
-        packageSelect.addEventListener("change", updatePackageMeta);
-        updatePackageMeta();
+        packageSelect.addEventListener("change", syncPackageMeta);
+        syncPackageMeta();
       }
 
-      if (unlockBtn) {
-        unlockBtn.addEventListener("click", () => {
-          const code = (accessCodeInput ? accessCodeInput.value : "").trim().toUpperCase();
+      if (verifyAccessBtn && clientAccessCode) {
+        verifyAccessBtn.addEventListener("click", function () {
+          const code = clientAccessCode.value.trim().toUpperCase();
           if (!code) {
-            setStatus(downloadStatus, "Please enter your client access code first.", true);
+            setUnlockedState(false, "Please enter your client access code first.", true);
             return;
           }
-          if (VALID_ACCESS_CODES.includes(code)) {
-            isUnlocked = true;
-            if (startDownloadBtn) startDownloadBtn.disabled = false;
-            if (accessBadge) {
-              accessBadge.textContent = "Unlocked — Access Verified";
-              accessBadge.classList.remove("locked");
-              accessBadge.classList.add("unlocked");
-            }
-            setStatus(downloadStatus, "Access verified. You can now download your selected package.", false);
+          if (validAccessCodes.has(code)) {
+            setUnlockedState(true, "Access code verified. You can now download your selected package.", false);
           } else {
-            isUnlocked = false;
-            if (startDownloadBtn) startDownloadBtn.disabled = true;
-            if (accessBadge) {
-              accessBadge.textContent = "Locked — Invalid Code";
-              accessBadge.classList.remove("unlocked");
-              accessBadge.classList.add("locked");
-            }
-            setStatus(downloadStatus, "Invalid client access code. Contact Harrison on WhatsApp to confirm payment and get a code.", true);
+            setUnlockedState(false, "Invalid or unconfirmed access code. Contact Harrison on WhatsApp to confirm payment.", true);
           }
         });
       }
 
-      if (startDownloadBtn) {
-        startDownloadBtn.addEventListener("click", () => {
-          if (!isUnlocked || !packageSelect) return;
-          const opt = packageSelect.options[packageSelect.selectedIndex];
-          const fileName = opt ? opt.getAttribute("data-file") : "package.zip";
-          const downloadUrl = opt ? opt.getAttribute("data-url") : "";
-          setStatus(downloadStatus, "Preparing download for " + fileName + "...", false);
-          if (downloadUrl && !downloadUrl.includes("example.com")) {
-            window.open(downloadUrl, "_blank", "noopener,noreferrer");
-          }
-        });
-      }
-
-      if (addSoftwareForm) {
-        addSoftwareForm.addEventListener("submit", (event) => {
-          event.preventDefault();
-          const label = (swTitleInput ? swTitleInput.value : "").trim();
-          const file = (swFileInput ? swFileInput.value : "").trim();
-          const size = (swSizeInput ? swSizeInput.value : "").trim() || "—";
-          const os = (swOsInput ? swOsInput.value : "").trim() || "Windows 10 / 11";
-          const url = (swUrlInput ? swUrlInput.value : "").trim();
-
-          if (!label || !file) {
-            setStatus(addSoftwareStatus, "Enter both a software name and file name.", true);
+      if (clientDownloadForm && packageSelect) {
+        clientDownloadForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          if (!isUnlocked) {
+            setUnlockedState(false, "Please verify a valid client access code before downloading.", true);
             return;
           }
-
-          const newPkg = {
-            value: "custom_" + Date.now(),
-            label,
-            file,
-            size,
-            os,
-            url
-          };
-
-          appendPackageOption(newPkg, true);
-
-          try {
-            const current = JSON.parse(localStorage.getItem(CUSTOM_PACKAGES_KEY) || "[]");
-            current.push(newPkg);
-            localStorage.setItem(CUSTOM_PACKAGES_KEY, JSON.stringify(current));
-          } catch (_) {
-            // Ignore storage quota/permission errors
+          const opt = packageSelect.options[packageSelect.selectedIndex];
+          const url = opt ? opt.getAttribute("data-url") : "";
+          const fileName = opt ? opt.getAttribute("data-file") : "package";
+          if (url) {
+            window.open(url, "_blank", "noopener,noreferrer");
           }
-
-          addSoftwareForm.reset();
-          setStatus(addSoftwareStatus, `Added "${label}" to the download selector.`, false);
+          setUnlockedState(true, "Starting download for " + fileName + "...", false);
         });
       }
 
-      if (resetSoftwareBtn && packageSelect) {
-        resetSoftwareBtn.addEventListener("click", () => {
-          localStorage.removeItem(CUSTOM_PACKAGES_KEY);
-          Array.from(packageSelect.options).forEach((opt) => {
-            if (opt.dataset.custom === "true") {
-              opt.remove();
-            }
-          });
-          packageSelect.selectedIndex = 0;
-          updatePackageMeta();
-          setStatus(addSoftwareStatus, "Removed custom software entries and restored default list.", false);
-        });
+      // Contact form WhatsApp & Email handlers
+      const contactForm = document.getElementById("contactForm");
+      const emailFallbackBtn = document.getElementById("emailFallbackBtn");
+      const contactStatus = document.getElementById("contactStatus");
+
+      function getFormValues() {
+        return {
+          name: (document.getElementById("clientName")?.value || "").trim(),
+          contact: (document.getElementById("clientContact")?.value || "").trim(),
+          topic: document.getElementById("serviceTopic")?.value || "ICT Service",
+          message: (document.getElementById("clientMessage")?.value || "").trim()
+        };
       }
 
-      // Inquiry form (WhatsApp & Email)
-      const clientNameInput = document.getElementById("clientName");
-      const serviceTypeSelect = document.getElementById("serviceType");
-      const clientMessageInput = document.getElementById("clientMessage");
-      const sendWhatsAppBtn = document.getElementById("sendWhatsAppBtn");
-      const sendEmailBtn = document.getElementById("sendEmailBtn");
-      const inquiryStatus = document.getElementById("inquiryStatus");
-
-      function validateInquiry() {
-        const name = (clientNameInput ? clientNameInput.value : "").trim();
-        const service = serviceTypeSelect ? serviceTypeSelect.value : "ICT Service";
-        const message = (clientMessageInput ? clientMessageInput.value : "").trim();
-
-        if (!name || !message) {
-          setStatus(inquiryStatus, "Please enter your name and message details before sending.", true);
-          return null;
-        }
-        return { name, service, message };
+      function showContactStatus(msg, isError) {
+        if (!contactStatus) return;
+        contactStatus.textContent = msg;
+        contactStatus.style.display = "block";
+        contactStatus.classList.toggle("error", Boolean(isError));
       }
 
-      if (sendWhatsAppBtn) {
-        sendWhatsAppBtn.addEventListener("click", () => {
-          const data = validateInquiry();
-          if (!data) return;
-          const text = `Hello Harrison, my name is ${data.name}. Service needed: ${data.service}. Details: ${data.message}`;
-          const waUrl = `https://wa.me/254705976233?text=${encodeURIComponent(text)}`;
-          setStatus(inquiryStatus, "Opening WhatsApp with your inquiry...", false);
+      if (contactForm) {
+        contactForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const data = getFormValues();
+          if (!data.name || !data.contact || !data.message) {
+            showContactStatus("Please fill in your name, contact details, and inquiry message.", true);
+            return;
+          }
+          const text = [
+            "Hello Harrison, I would like to inquire about your ICT services:",
+            "Name: " + data.name,
+            "Contact: " + data.contact,
+            "Service: " + data.topic,
+            "Details: " + data.message
+          ].join("\n");
+
+          const waUrl = "https://wa.me/254705976233?text=" + encodeURIComponent(text);
           window.open(waUrl, "_blank", "noopener,noreferrer");
+          showContactStatus("WhatsApp message prepared. If it did not open automatically, click the WhatsApp badge on the left.", false);
         });
       }
 
-      if (sendEmailBtn) {
-        sendEmailBtn.addEventListener("click", () => {
-          const data = validateInquiry();
-          if (!data) return;
-          const subject = `ICT Inquiry (${data.service}) — ${data.name}`;
-          const body = `Name: ${data.name}\nService Needed: ${data.service}\n\nDetails:\n${data.message}`;
-          const mailtoUrl = `mailto:ndunguharrison68@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-          setStatus(inquiryStatus, "Opening your default email client...", false);
-          window.location.href = mailtoUrl;
+      if (emailFallbackBtn) {
+        emailFallbackBtn.addEventListener("click", function () {
+          const data = getFormValues();
+          if (!data.name || !data.message) {
+            showContactStatus("Please enter your name and inquiry details before sending via email.", true);
+            return;
+          }
+          const subject = encodeURIComponent("ICT Inquiry: " + data.topic + " (" + data.name + ")");
+          const body = encodeURIComponent(
+            "Name: " + data.name + "\nContact: " + data.contact + "\nService: " + data.topic + "\n\n" + data.message
+          );
+          window.location.href = "mailto:harrison@example.com?subject=" + subject + "&body=" + body;
+          showContactStatus("Opening your email client...", false);
         });
       }
     })();
