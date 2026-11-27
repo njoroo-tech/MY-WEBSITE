@@ -589,17 +589,6 @@
       margin-top: 0.75rem;
     }
 
-    .download-card-img {
-      width: 100%;
-      height: 190px;
-      object-fit: cover;
-      object-position: center 20%;
-      border-radius: 8px;
-      margin-bottom: 1.25rem;
-      background-color: #023e8a;
-      border: 1px solid #e2e8f0;
-    }
-
     /* About Section Grid & Rotating "Why Choose Us" Photo */
     .about-grid {
       display: grid;
@@ -1116,15 +1105,6 @@
 
         <!-- How Paid Access Works -->
         <div class="card">
-          <img
-            id="downloadsPreviewImg"
-            src="./assets/DD.png"
-            data-candidates="./assets/DD.png,./DD.png,https://njoroo-tech.github.io/all-ict-services-website/assets/DD.png"
-            data-fallback="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80"
-            data-svg-label="Client Downloads & Training"
-            alt="Harrison Ndungu guiding students during an ICT practical session"
-            class="download-card-img"
-          >
           <h3>How Paid Client Access Works</h3>
           <ul>
             <li><strong>Step 1 — Request &amp; Pay:</strong> Request your required software package, training kit, or custom system build via WhatsApp or the contact form.</li>
@@ -1147,22 +1127,20 @@
           <h2 class="section-heading">Practical Technical Expertise &amp; Training</h2>
           <p>Harrison Ndungu ICT Solutions supports businesses, students, and institutions across Kenya with dependable IT support, software installation, structured networking, web and system development, and hands-on training in accounting and statistical packages.</p>
           <p>With a strong foundation in ICT and Technical Trainer Education (TVET/CBET), every engagement focuses on clear communication, practical results, and sustainable system performance.</p>
-
-          <div class="why-choose-box" style="margin-top: 1.5rem;">
-            <img
-              id="aboutPracticalPhoto"
-              src="./assets/AdobeExpressPhotos_3dca923a90bf45db95afef9e4c49f30d_CopyEdited.png"
-              data-candidates="./assets/AdobeExpressPhotos_3dca923a90bf45db95afef9e4c49f30d_CopyEdited.png,./AdobeExpressPhotos_3dca923a90bf45db95afef9e4c49f30d_CopyEdited.png,https://njoroo-tech.github.io/all-ict-services-website/assets/AdobeExpressPhotos_3dca923a90bf45db95afef9e4c49f30d_CopyEdited.png"
-              data-fallback="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80"
-              data-svg-label="Practical ICT Training"
-              alt="Harrison Ndungu guiding students during an ICT practical lesson"
-              class="why-choose-photo"
-              style="object-position: center 20%;"
-            >
-          </div>
         </div>
 
         <div>
+          <div class="why-choose-box">
+            <img
+              id="aboveWhyClientsPhoto"
+              src="./assets/DD.png"
+              data-candidates="./assets/DD.png,./DD.png,https://njoroo-tech.github.io/all-ict-services-website/assets/DD.png"
+              data-fallback="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80"
+              data-svg-label="Practical ICT Lab Training"
+              alt="Harrison Ndungu guiding students during an ICT practical session"
+              class="why-choose-photo"
+            >
+          </div>
           <div class="why-choose-box">
             <img
               id="whyChoosePhoto"
@@ -1440,8 +1418,8 @@
       const whyChoosePhoto = document.getElementById("whyChoosePhoto");
       if (whyChoosePhoto) {
         const whySources = [
-          "./assets/AdobeExpressPhotos_3dca923a90bf45db95afef9e4c49f30d_CopyEdited.png",
           "./assets/about-photo.jpg",
+          "./assets/AdobeExpressPhotos_3dca923a90bf45db95afef9e4c49f30d_CopyEdited.png",
           "./assets/hhn.jpeg",
           "./assets/CC.jpeg"
         ];
