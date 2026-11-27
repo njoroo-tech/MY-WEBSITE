@@ -589,7 +589,7 @@
       margin-top: 0.75rem;
     }
 
-    /* About Section Grid & Rotating "Why Choose Us" Photo */
+    /* About Section Grid & Training and Support Photo */
     .about-grid {
       display: grid;
       grid-template-columns: 1.2fr 0.8fr;
@@ -1135,13 +1135,14 @@
               <img
                 id="trainingSupportPhoto"
                 src="./assets/DD.png"
-                data-candidates="./assets/DD.png,./DD.png,./assets/about-photo.jpg,./about-photo.jpg,./assets/hhn.jpeg,./hhn.jpeg,https://njoroo-tech.github.io/all-ict-services-website/assets/DD.png"
+                data-candidates="./assets/DD.png,./DD.png,https://njoroo-tech.github.io/all-ict-services-website/assets/DD.png"
                 data-fallback="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80"
                 data-svg-label="Harrison Ndungu ICT Solutions Training and Support"
                 alt="Harrison Ndungu ICT Solutions Training and Support"
                 class="why-choose-photo"
               >
             </div>
+            <p id="ddImgDebugNote" style="font-size:0.78rem;color:#64748b;margin:-0.5rem 0 1rem 0;"></p>
             <h3>Why Clients Work With Us</h3>
             <ul>
               <li>Fast diagnostics, OS setup, and network troubleshooting</li>
@@ -1403,20 +1404,22 @@
       }
       startAutoSlide();
 
-      // Rotate Training and Support photo
+      // Debug & verify DD.png inside Training and Support panel
       const trainingSupportPhoto = document.getElementById("trainingSupportPhoto");
+      const ddImgDebugNote = document.getElementById("ddImgDebugNote");
       if (trainingSupportPhoto) {
-        const trainingSources = [
-          "./assets/DD.png",
-          "./assets/about-photo.jpg",
-          "./assets/hhn.jpeg",
-          "./assets/CC.jpeg"
-        ];
-        let trainIdx = 0;
-        setInterval(function () {
-          trainIdx = (trainIdx + 1) % trainingSources.length;
-          trainingSupportPhoto.src = trainingSources[trainIdx];
-        }, 4500);
+        trainingSupportPhoto.addEventListener("load", function () {
+          const isLocalDd = trainingSupportPhoto.currentSrc.endsWith("/assets/DD.png") || trainingSupportPhoto.currentSrc.endsWith("\\assets\\DD.png");
+          if (ddImgDebugNote) {
+            ddImgDebugNote.textContent = isLocalDd
+              ? "Loaded local ./assets/DD.png (" + trainingSupportPhoto.naturalWidth + "x" + trainingSupportPhoto.naturalHeight + ")"
+              : "Using fallback image — save your file as ./assets/DD.png to display the local photo.";
+          }
+        });
+
+        trainingSupportPhoto.addEventListener("error", function () {
+          console.warn("Image source failed:", trainingSupportPhoto.src);
+        });
       }
 
       // Service category filtering
