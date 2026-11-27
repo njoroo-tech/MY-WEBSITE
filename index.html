@@ -339,17 +339,6 @@
       color: #ffffff;
     }
 
-    .button-download {
-      background-color: #0077b6;
-      color: #ffffff;
-      box-shadow: 0 4px 12px rgba(0, 119, 182, 0.3);
-    }
-
-    .button-download:hover {
-      background-color: #0096c7;
-      box-shadow: 0 6px 16px rgba(0, 150, 199, 0.4);
-    }
-
     .quick-facts {
       display: flex;
       gap: 1rem;
@@ -872,7 +861,6 @@
           <div class="actions">
             <a class="button button-whatsapp" href="https://wa.me/254705976233?text=Hello%20Harrison,%20I%20visited%20your%20website%20and%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
             <a class="button" href="#contact">Request Service</a>
-            <button type="button" class="button button-download" id="downloadProfileBtn">⬇ Download Brochure</button>
             <a class="button button-outline" href="#services">View Services</a>
           </div>
           <div class="quick-facts">
@@ -1129,69 +1117,6 @@
         yearEl.textContent = new Date().getFullYear();
       }
 
-      // Download Brochure / Company Profile handler
-      const downloadBtn = document.getElementById("downloadProfileBtn");
-      if (downloadBtn) {
-        downloadBtn.addEventListener("click", () => {
-          const brochureContent = [
-            "====================================================================",
-            "               HARRISON NDUNGU ICT SOLUTIONS                        ",
-            "        Professional IT Services, Support & Tech Training           ",
-            "====================================================================",
-            "",
-            "CONTACT INFORMATION",
-            "-------------------",
-            "Location:       Thika, Kenya",
-            "Postal Address: P.O. Box 6619, Thika",
-            "Phone/WhatsApp: +254 705 976 233",
-            "Email:          njorogeharrisonwanjiru@gmail.com",
-            "E-Portfolio:    https://sites.google.com/view/ndush/home",
-            "Website:        https://njoroo-tech.github.io/all-ict-services-website/",
-            "",
-            "CORE SERVICES & OFFERINGS",
-            "-------------------------",
-            "1. Computer Repair & Maintenance",
-            "   - Hardware diagnostics and component upgrades",
-            "   - Operating system (Windows/Linux) & driver installation",
-            "   - Laptop and desktop troubleshooting & malware removal",
-            "",
-            "2. Network Setup & Configuration",
-            "   - LAN setup and structured cabling",
-            "   - Wi-Fi router, access point & switch configuration",
-            "   - Cisco Packet Tracer network simulation & security",
-            "",
-            "3. Software Installation & Web/Mobile Development",
-            "   - AutoCAD and ArchiCAD drafting software setup",
-            "   - Custom websites, e-portfolios & database systems",
-            "   - Android mobile application prototypes",
-            "",
-            "4. Accounting & Statistical Packages Training",
-            "   - Sage 50 Accounts, Pastel & QuickBooks",
-            "   - Statistical Data Analysis: SPSS & STATA",
-            "   - Advanced Microsoft Excel data modeling",
-            "",
-            "5. TVET / CBET ICT Training & Graphic Design",
-            "   - ICDL & Computer Packages training",
-            "   - CBET modularized ICT training & instructional materials",
-            "   - Business branding, flyers, brochures & posters",
-            "",
-            "====================================================================",
-            "  Contact us today on +254 705 976 233 for a customized quotation!  ",
-            "===================================================================="
-          ].join("\r\n");
-
-          const blob = new Blob([brochureContent], { type: "text/plain;charset=utf-8" });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement("a");
-          a.href = url;
-          a.download = "Harrison_Ndungu_ICT_Solutions_Brochure.txt";
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          URL.revokeObjectURL(url);
-        });
-      }
-
       // Image candidate fallback loader
       function setupImageFallbacks() {
         const imgs = document.querySelectorAll("img[data-candidates]");
@@ -1430,4 +1355,4 @@
     })();
   </script>
 </body>
-</htm
+</html>
