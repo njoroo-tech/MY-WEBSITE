@@ -1071,9 +1071,9 @@
       <div class="cards two">
         <!-- Client Download Box -->
         <div class="card">
-          <span id="accessBadge" class="status-pill locked">🔒 Locked — Payment Access Required</span>
+          <span id="accessBadge" class="status-pill locked">Locked — Payment Access Required</span>
           <h3>Client Download &amp; Installer Access</h3>
-          <p>Select your licensed software or file package and enter your unique client access key to unlock downloading.</p>
+          <p>Select your licensed software or file package and enter your unique client access code to unlock downloading.</p>
 
           <form id="clientDownloadForm" novalidate>
             <label for="packageSelect">Software / File Package *</label>
@@ -1084,7 +1084,7 @@
               <option value="custom_app" data-file="Client-System-Build-Package.zip" data-size="145 MB" data-os="Windows / Web / Android" data-url="https://example.com/secure-downloads/client-build.zip">Custom Database / App / System Package (.zip)</option>
             </select>
 
-            <label for="accessCodeInput">Client Access / License Code *</label>
+            <label for="accessCodeInput">Client Access Code *</label>
             <input type="text" id="accessCodeInput" name="accessCodeInput" placeholder="e.g., HDK-PAID-2026" autocomplete="off" required>
 
             <div class="download-meta" id="packageMeta">
@@ -1095,20 +1095,20 @@
 
             <div class="form-buttons">
               <button type="submit" class="button" id="unlockBtn">Verify &amp; Unlock Download</button>
-              <a class="button button-whatsapp" id="downloadActionBtn" href="#downloads" aria-disabled="true" style="pointer-events: none; opacity: 0.5;">⬇ Download Software</a>
+              <a class="button button-whatsapp" id="downloadActionBtn" href="#downloads" aria-disabled="true" style="pointer-events: none; opacity: 0.5;">Download Software</a>
             </div>
 
             <div id="downloadStatus" class="form-status" role="status" aria-live="polite"></div>
           </form>
 
           <p class="helper-note">
-            Need a license key after payment? <a href="https://wa.me/254705976233?text=Hello%20Harrison,%20I%20have%20completed%20payment%20and%20need%20my%20software%20download%20access%20code." target="_blank" rel="noopener noreferrer">Request access via WhatsApp</a>.
+            Need an access code after payment? <a href="https://wa.me/254705976233?text=Hello%20Harrison,%20I%20have%20completed%20payment%20and%20need%20my%20software%20download%20access%20code." target="_blank" rel="noopener noreferrer">Request access via WhatsApp</a>.
           </p>
         </div>
 
         <!-- Trainer / Admin Quick-Send Helper -->
         <div class="card">
-          <span class="status-pill unlocked">🔑 Admin / Trainer Dispatch Helper</span>
+          <span class="status-pill unlocked">Admin / Trainer Dispatch Helper</span>
           <h3>Send Download Access to a Paid Client</h3>
           <p>After confirming payment, generate a ready-to-send WhatsApp or Email message with the client's access code and download instructions.</p>
 
@@ -1125,7 +1125,7 @@
           </div>
 
           <label for="dispatchNotes">Installation / Activation Notes</label>
-          <textarea id="dispatchNotes" rows="3" placeholder="e.g., Run installer as Administrator, disable antivirus temporarily if flagged, and enter your license key during setup.">Run the downloaded installer as Administrator on Windows and contact me if you need remote setup support.</textarea>
+          <textarea id="dispatchNotes" rows="3" placeholder="e.g., Run installer as Administrator, disable antivirus temporarily if flagged, and enter your license details during setup.">Run the downloaded installer as Administrator on Windows and contact me if you need remote setup support.</textarea>
 
           <div class="form-buttons">
             <button type="button" class="button button-whatsapp" id="sendAccessWaBtn">Send via WhatsApp</button>
@@ -1285,12 +1285,9 @@
 
         function tryNext() {
           idx += 1;
-          if (idx < uniqueQueueLength()) {
+          if (idx < queue.length) {
             img.src = queue[idx];
           }
-        }
-        function uniqueQueueLength() {
-          return queue.length;
         }
 
         img.addEventListener("error", tryNext);
@@ -1483,8 +1480,6 @@
       }
 
       // 8. Paid Client Software Download Gate & Admin Dispatch Helper
-      // Replace these URLs with your actual private/signed download links after payment verification.
-      // For true non-public security, validate codes against a backend/Worker/Apps Script that issues a short-lived signed URL.
       const PAID_PACKAGES = {
         sage50: {
           title: "Sage 50 Accounts Setup Installer",
@@ -1539,7 +1534,7 @@
         }
         if (accessBadge) {
           accessBadge.className = "status-pill locked";
-          accessBadge.textContent = "🔒 Locked — Payment Access Required";
+          accessBadge.textContent = "Locked — Payment Access Required";
         }
         if (reasonText && downloadStatus) {
           downloadStatus.textContent = reasonText;
@@ -1592,7 +1587,7 @@
 
           if (accessBadge) {
             accessBadge.className = "status-pill unlocked";
-            accessBadge.textContent = "🔓 Unlocked — Licensed Client Download Ready";
+            accessBadge.textContent = "Unlocked — Licensed Client Download Ready";
           }
           if (downloadActionBtn) {
             downloadActionBtn.setAttribute("href", pkg.url);
