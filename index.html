@@ -76,7 +76,7 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.85rem;
       list-style: none;
       margin: 0;
       padding: 0;
@@ -86,8 +86,8 @@
       color: #e2e8f0;
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.95rem;
-      padding: 0.5rem 0.85rem;
+      font-size: 0.92rem;
+      padding: 0.5rem 0.75rem;
       border-radius: 6px;
       transition: all 0.25s ease-in-out;
     }
@@ -103,7 +103,7 @@
     .nav-link.cta-quote {
       background-color: #25D366;
       color: #ffffff !important;
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 0.95rem;
       border-radius: 6px;
       box-shadow: 0 2px 10px rgba(37, 211, 102, 0.4);
     }
@@ -310,10 +310,16 @@
       transition: all 0.25s ease;
     }
 
-    .button:hover {
+    .button:hover:not(:disabled) {
       background-color: #0077b6;
       transform: translateY(-2px);
       box-shadow: 0 6px 16px rgba(2, 62, 138, 0.4);
+    }
+
+    .button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      box-shadow: none;
     }
 
     .button-whatsapp {
@@ -322,7 +328,7 @@
       box-shadow: 0 4px 12px rgba(37, 211, 102, 0.35);
     }
 
-    .button-whatsapp:hover {
+    .button-whatsapp:hover:not(:disabled) {
       background-color: #1ebe5d;
       box-shadow: 0 6px 16px rgba(37, 211, 102, 0.45);
     }
@@ -334,7 +340,7 @@
       box-shadow: none;
     }
 
-    .button-outline:hover {
+    .button-outline:hover:not(:disabled) {
       background-color: #023e8a;
       color: #ffffff;
     }
@@ -483,6 +489,10 @@
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
 
+    .cards.two {
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    }
+
     .card {
       background: #ffffff;
       padding: 2rem;
@@ -533,6 +543,50 @@
     .text-link:hover {
       color: #0077b6;
       text-decoration: underline;
+    }
+
+    /* Download & Client Access Gate */
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      margin-bottom: 0.75rem;
+    }
+
+    .status-pill.locked {
+      background-color: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fcd34d;
+    }
+
+    .status-pill.unlocked {
+      background-color: #dcfce7;
+      color: #15803d;
+      border: 1px solid #86efac;
+    }
+
+    .download-meta {
+      font-size: 0.88rem;
+      color: #475569;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+    }
+
+    .download-meta p {
+      margin: 0.25rem 0;
+    }
+
+    .helper-note {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 0.75rem;
     }
 
     /* About Section Grid & Rotating "Why Choose Us" Photo */
@@ -816,6 +870,7 @@
         <li><a class="nav-link active" href="#home">Home</a></li>
         <li><a class="nav-link" href="#services">Services</a></li>
         <li><a class="nav-link" href="#portfolio">Solutions</a></li>
+        <li><a class="nav-link" href="#downloads">Downloads</a></li>
         <li><a class="nav-link" href="#about">About Us</a></li>
         <li><a class="nav-link" href="#contact">Contact</a></li>
         <li><a class="nav-link cta-quote" href="#contact">Get Quote ↗</a></li>
@@ -863,7 +918,7 @@
           <p>We deliver comprehensive IT services, software setup, hardware maintenance, and professional software training to businesses, institutions, and individuals.</p>
           <div class="actions">
             <a class="button button-whatsapp" href="https://wa.me/254705976233?text=Hello%20Harrison,%20I%20visited%20your%20website%20and%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
-            <a class="button" href="#contact">Request Service</a>
+            <a class="button" href="#downloads">Client Downloads</a>
             <a class="button button-outline" href="#services">View Services</a>
           </div>
           <div class="quick-facts">
@@ -1007,9 +1062,84 @@
       </div>
     </section>
 
+    <!-- Paid Client Software Download Portal Section -->
+    <section id="downloads" class="section container">
+      <p class="eyebrow">PAID CLIENT PORTAL</p>
+      <h2 class="section-heading">Licensed Software &amp; Deliverable Downloads</h2>
+      <p class="section-lead">Downloads are unlocked only after payment confirmation. Enter the client access code sent to you to enable your download button.</p>
+
+      <div class="cards two">
+        <!-- Client Download Box -->
+        <div class="card">
+          <span id="accessBadge" class="status-pill locked">🔒 Locked — Payment Access Required</span>
+          <h3>Client Download &amp; Installer Access</h3>
+          <p>Select your licensed software or file package and enter your unique client access key to unlock downloading.</p>
+
+          <form id="clientDownloadForm" novalidate>
+            <label for="packageSelect">Software / File Package *</label>
+            <select id="packageSelect" name="packageSelect">
+              <option value="sage50" data-file="Sage50-Accounts-Setup-v2026.exe" data-size="410 MB" data-os="Windows 10 / 11 (64-bit)" data-url="https://example.com/secure-downloads/sage50-installer.exe">Sage 50 Accounts Setup Installer (.exe)</option>
+              <option value="spss" data-file="SPSS-Statistics-28-Installer.exe" data-size="980 MB" data-os="Windows 10 / 11 (64-bit)" data-url="https://example.com/secure-downloads/spss28-installer.exe">SPSS Statistics Installer (.exe)</option>
+              <option value="autocad" data-file="AutoCAD-Drafting-Pack-2026.zip" data-size="1.4 GB" data-os="Windows 10 / 11 (64-bit)" data-url="https://example.com/secure-downloads/autocad-pack.zip">AutoCAD / ArchiCAD Setup &amp; Templates (.zip)</option>
+              <option value="custom_app" data-file="Client-System-Build-Package.zip" data-size="145 MB" data-os="Windows / Web / Android" data-url="https://example.com/secure-downloads/client-build.zip">Custom Database / App / System Package (.zip)</option>
+            </select>
+
+            <label for="accessCodeInput">Client Access / License Code *</label>
+            <input type="text" id="accessCodeInput" name="accessCodeInput" placeholder="e.g., HDK-PAID-2026" autocomplete="off" required>
+
+            <div class="download-meta" id="packageMeta">
+              <p><strong>Installer File:</strong> <span id="metaFile">Sage50-Accounts-Setup-v2026.exe</span></p>
+              <p><strong>Package Size:</strong> <span id="metaSize">410 MB</span> &bull; <strong>Platform:</strong> <span id="metaOs">Windows 10 / 11 (64-bit)</span></p>
+              <p><strong>Note:</strong> Replace placeholder URLs in <code>PAID_PACKAGES</code> with your private/expiring cloud or server links.</p>
+            </div>
+
+            <div class="form-buttons">
+              <button type="submit" class="button" id="unlockBtn">Verify &amp; Unlock Download</button>
+              <a class="button button-whatsapp" id="downloadActionBtn" href="#downloads" aria-disabled="true" style="pointer-events: none; opacity: 0.5;">⬇ Download Software</a>
+            </div>
+
+            <div id="downloadStatus" class="form-status" role="status" aria-live="polite"></div>
+          </form>
+
+          <p class="helper-note">
+            Need a license key after payment? <a href="https://wa.me/254705976233?text=Hello%20Harrison,%20I%20have%20completed%20payment%20and%20need%20my%20software%20download%20access%20code." target="_blank" rel="noopener noreferrer">Request access via WhatsApp</a>.
+          </p>
+        </div>
+
+        <!-- Trainer / Admin Quick-Send Helper -->
+        <div class="card">
+          <span class="status-pill unlocked">🔑 Admin / Trainer Dispatch Helper</span>
+          <h3>Send Download Access to a Paid Client</h3>
+          <p>After confirming payment, generate a ready-to-send WhatsApp or Email message with the client's access code and download instructions.</p>
+
+          <label for="dispatchClientName">Client Name *</label>
+          <input type="text" id="dispatchClientName" placeholder="e.g., Peter Kamau">
+
+          <label for="dispatchPackage">Software / Deliverable Sent *</label>
+          <input type="text" id="dispatchPackage" value="Sage 50 Accounts Setup Installer">
+
+          <label for="dispatchCode">Assigned Access Code *</label>
+          <div class="form-buttons" style="margin-bottom: 1rem;">
+            <input type="text" id="dispatchCode" value="HDK-SAGE50-2026" style="margin-bottom: 0; flex: 2;">
+            <button type="button" class="button button-outline" id="generateCodeBtn" style="flex: 1; min-width: 120px;">New Code</button>
+          </div>
+
+          <label for="dispatchNotes">Installation / Activation Notes</label>
+          <textarea id="dispatchNotes" rows="3" placeholder="e.g., Run installer as Administrator, disable antivirus temporarily if flagged, and enter your license key during setup.">Run the downloaded installer as Administrator on Windows and contact me if you need remote setup support.</textarea>
+
+          <div class="form-buttons">
+            <button type="button" class="button button-whatsapp" id="sendAccessWaBtn">Send via WhatsApp</button>
+            <button type="button" class="button" id="sendAccessEmailBtn">Send via Email</button>
+          </div>
+
+          <div id="dispatchStatus" class="form-status" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
     <!-- About Section -->
-    <section id="about" class="section container">
-      <div class="about-grid">
+    <section id="about" class="section section-soft">
+      <div class="container about-grid">
         <div>
           <p class="eyebrow">ABOUT US</p>
           <h2 class="section-heading">Your Trusted ICT Partner in Kenya</h2>
@@ -1042,60 +1172,58 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section section-soft">
-      <div class="container">
-        <p class="eyebrow">GET IN TOUCH</p>
-        <h2 class="section-heading">Contact Us for Inquiries &amp; Quotations</h2>
-        <p class="section-lead">Reach out today and let us discuss how we can assist your business or institution.</p>
+    <section id="contact" class="section container">
+      <p class="eyebrow">GET IN TOUCH</p>
+      <h2 class="section-heading">Contact Us for Inquiries &amp; Quotations</h2>
+      <p class="section-lead">Reach out today and let us discuss how we can assist your business or institution.</p>
 
-        <div class="contact-grid">
-          <div class="contact-card">
-            <h3>Direct Contact Details</h3>
-            <p><strong>Location:</strong> Thika, Kenya</p>
-            <p><strong>Postal Address:</strong> P.O. Box 6619, Thika</p>
-            <p><strong>Phone / WhatsApp:</strong> <a href="tel:+254705976233">+254 705 976 233</a></p>
-            <p><strong>Email:</strong> <a href="mailto:njorogeharrisonwanjiru@gmail.com">njorogeharrisonwanjiru@gmail.com</a></p>
-            <p style="margin-top: 1.25rem;">
-              <a class="whatsapp-badge" href="https://wa.me/254705976233?text=Hello%20Harrison,%20I%20visited%20your%20website%20and%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer">
-                Direct WhatsApp Chat
-              </a>
-            </p>
-          </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3>Direct Contact Details</h3>
+          <p><strong>Location:</strong> Thika, Kenya</p>
+          <p><strong>Postal Address:</strong> P.O. Box 6619, Thika</p>
+          <p><strong>Phone / WhatsApp:</strong> <a href="tel:+254705976233">+254 705 976 233</a></p>
+          <p><strong>Email:</strong> <a href="mailto:njorogeharrisonwanjiru@gmail.com">njorogeharrisonwanjiru@gmail.com</a></p>
+          <p style="margin-top: 1.25rem;">
+            <a class="whatsapp-badge" href="https://wa.me/254705976233?text=Hello%20Harrison,%20I%20visited%20your%20website%20and%20would%20like%20to%20inquire%20about%20your%20services." target="_blank" rel="noopener noreferrer">
+              Direct WhatsApp Chat
+            </a>
+          </p>
+        </div>
 
-          <div class="contact-card">
-            <h3>Send an Inquiry</h3>
-            <form id="inquiryForm" novalidate>
-              <label for="name">Your Name *</label>
-              <input type="text" id="name" name="name" placeholder="e.g., Jane Mwangi" required>
+        <div class="contact-card">
+          <h3>Send an Inquiry</h3>
+          <form id="inquiryForm" novalidate>
+            <label for="name">Your Name *</label>
+            <input type="text" id="name" name="name" placeholder="e.g., Jane Mwangi" required>
 
-              <label for="phone">Phone / WhatsApp *</label>
-              <input type="tel" id="phone" name="phone" placeholder="e.g., +254 7XX XXX XXX" required>
+            <label for="phone">Phone / WhatsApp *</label>
+            <input type="tel" id="phone" name="phone" placeholder="e.g., +254 7XX XXX XXX" required>
 
-              <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" placeholder="e.g., name@example.com">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="e.g., name@example.com">
 
-              <label for="service">Service Needed *</label>
-              <select id="service" name="service" required>
-                <option value="" disabled selected>Select a service...</option>
-                <option value="Computer Repair & Maintenance">Computer Repair &amp; Maintenance</option>
-                <option value="Network Setup & Configuration">Network Setup &amp; Configuration</option>
-                <option value="Software Installation">Software Installation (CAD, DB, Web, Apps)</option>
-                <option value="Accounting & Statistical Packages">Accounting &amp; Statistical Packages (Sage, QuickBooks, SPSS, Stata, Excel)</option>
-                <option value="TVET / CBET ICT Training">TVET / CBET ICT Training</option>
-                <option value="Branding & Graphic Design">Branding &amp; Graphic Design</option>
-              </select>
+            <label for="service">Service Needed *</label>
+            <select id="service" name="service" required>
+              <option value="" disabled selected>Select a service...</option>
+              <option value="Computer Repair & Maintenance">Computer Repair &amp; Maintenance</option>
+              <option value="Network Setup & Configuration">Network Setup &amp; Configuration</option>
+              <option value="Software Installation">Software Installation (CAD, DB, Web, Apps)</option>
+              <option value="Accounting & Statistical Packages">Accounting &amp; Statistical Packages (Sage, QuickBooks, SPSS, Stata, Excel)</option>
+              <option value="TVET / CBET ICT Training">TVET / CBET ICT Training</option>
+              <option value="Branding & Graphic Design">Branding &amp; Graphic Design</option>
+            </select>
 
-              <label for="message">Project or Support Details *</label>
-              <textarea id="message" name="message" rows="4" placeholder="Tell us what you need help with..." required></textarea>
+            <label for="message">Project or Support Details *</label>
+            <textarea id="message" name="message" rows="4" placeholder="Tell us what you need help with..." required></textarea>
 
-              <div class="form-buttons">
-                <button type="submit" class="button button-whatsapp">Send via WhatsApp</button>
-                <button type="button" class="button" id="emailSendBtn">Send via Email</button>
-              </div>
+            <div class="form-buttons">
+              <button type="submit" class="button button-whatsapp">Send via WhatsApp</button>
+              <button type="button" class="button" id="emailSendBtn">Send via Email</button>
+            </div>
 
-              <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
-            </form>
-          </div>
+            <div id="formStatus" class="form-status" role="status" aria-live="polite"></div>
+          </form>
         </div>
       </div>
     </section>
@@ -1124,7 +1252,7 @@
         yearEl.textContent = new Date().getFullYear();
       }
 
-      // 2. Reliable Image Loader (handles local files, GitHub Pages, Unsplash, and guaranteed inline SVG fallback)
+      // 2. Reliable Image Loader
       function makeSvgDataUri(label) {
         const safeText = String(label || "ICT Solutions").replace(/[<>&'"]/g, "");
         const svg =
@@ -1152,27 +1280,24 @@
         const fallback = img.getAttribute("data-fallback") || "";
         const svgFallback = makeSvgDataUri(img.getAttribute("data-svg-label") || img.alt);
 
-        const queue = [...candidates];
-        if (fallback) queue.push(fallback);
-        queue.push(svgFallback);
-
-        // Deduplicate while preserving order
-        const uniqueQueue = Array.from(new Set(queue));
+        const queue = Array.from(new Set([...candidates, ...(fallback ? [fallback] : []), svgFallback]));
         let idx = 0;
 
         function tryNext() {
           idx += 1;
-          if (idx < uniqueQueue.length) {
-            img.src = uniqueQueue[idx];
+          if (idx < uniqueQueueLength()) {
+            img.src = queue[idx];
           }
+        }
+        function uniqueQueueLength() {
+          return queue.length;
         }
 
         img.addEventListener("error", tryNext);
 
-        // Start from first candidate and immediately advance if browser already failed it before JS ran
-        if (uniqueQueue.length > 0) {
-          if (img.getAttribute("src") !== uniqueQueue[0]) {
-            img.src = uniqueQueue[0];
+        if (queue.length > 0) {
+          if (img.getAttribute("src") !== queue[0]) {
+            img.src = queue[0];
           } else if (img.complete && img.naturalWidth === 0) {
             tryNext();
           }
@@ -1341,7 +1466,7 @@
         });
       });
 
-      // 7. Rotate "Why Choose Us" Photo using already-loaded slide sources
+      // 7. Rotate "Why Choose Us" Photo
       const whyChooseImg = document.getElementById("whyChooseImg");
       if (whyChooseImg && !prefersReducedMotion && slides.length > 1) {
         let rotateIdx = 0;
@@ -1357,7 +1482,207 @@
         }, 4500);
       }
 
-      // 8. Inquiry Form Validation + WhatsApp & Email Actions
+      // 8. Paid Client Software Download Gate & Admin Dispatch Helper
+      // Replace these URLs with your actual private/signed download links after payment verification.
+      // For true non-public security, validate codes against a backend/Worker/Apps Script that issues a short-lived signed URL.
+      const PAID_PACKAGES = {
+        sage50: {
+          title: "Sage 50 Accounts Setup Installer",
+          file: "Sage50-Accounts-Setup-v2026.exe",
+          size: "410 MB",
+          os: "Windows 10 / 11 (64-bit)",
+          url: "https://example.com/secure-downloads/sage50-installer.exe",
+          validCodes: ["HDK-SAGE50-2026", "PAID-SAGE-2026"]
+        },
+        spss: {
+          title: "SPSS Statistics Installer",
+          file: "SPSS-Statistics-28-Installer.exe",
+          size: "980 MB",
+          os: "Windows 10 / 11 (64-bit)",
+          url: "https://example.com/secure-downloads/spss28-installer.exe",
+          validCodes: ["HDK-SPSS28-2026", "PAID-SPSS-2026"]
+        },
+        autocad: {
+          title: "AutoCAD / ArchiCAD Setup & Templates",
+          file: "AutoCAD-Drafting-Pack-2026.zip",
+          size: "1.4 GB",
+          os: "Windows 10 / 11 (64-bit)",
+          url: "https://example.com/secure-downloads/autocad-pack.zip",
+          validCodes: ["HDK-CAD2026-PRO", "PAID-CAD-2026"]
+        },
+        custom_app: {
+          title: "Custom Database / App / System Package",
+          file: "Client-System-Build-Package.zip",
+          size: "145 MB",
+          os: "Windows / Web / Android",
+          url: "https://example.com/secure-downloads/client-build.zip",
+          validCodes: ["HDK-CLIENT-2026", "PAID-BUILD-2026"]
+        }
+      };
+
+      const packageSelect = document.getElementById("packageSelect");
+      const accessCodeInput = document.getElementById("accessCodeInput");
+      const clientDownloadForm = document.getElementById("clientDownloadForm");
+      const downloadActionBtn = document.getElementById("downloadActionBtn");
+      const accessBadge = document.getElementById("accessBadge");
+      const downloadStatus = document.getElementById("downloadStatus");
+      const metaFile = document.getElementById("metaFile");
+      const metaSize = document.getElementById("metaSize");
+      const metaOs = document.getElementById("metaOs");
+
+      function lockDownloadButton(reasonText) {
+        if (downloadActionBtn) {
+          downloadActionBtn.setAttribute("href", "#downloads");
+          downloadActionBtn.setAttribute("aria-disabled", "true");
+          downloadActionBtn.style.pointerEvents = "none";
+          downloadActionBtn.style.opacity = "0.5";
+        }
+        if (accessBadge) {
+          accessBadge.className = "status-pill locked";
+          accessBadge.textContent = "🔒 Locked — Payment Access Required";
+        }
+        if (reasonText && downloadStatus) {
+          downloadStatus.textContent = reasonText;
+          downloadStatus.classList.add("error");
+          downloadStatus.style.display = "block";
+        }
+      }
+
+      function updatePackageMeta() {
+        const key = packageSelect ? packageSelect.value : "sage50";
+        const pkg = PAID_PACKAGES[key] || PAID_PACKAGES.sage50;
+        if (metaFile) metaFile.textContent = pkg.file;
+        if (metaSize) metaSize.textContent = pkg.size;
+        if (metaOs) metaOs.textContent = pkg.os;
+        lockDownloadButton();
+        if (downloadStatus) {
+          downloadStatus.style.display = "none";
+        }
+      }
+
+      if (packageSelect) {
+        packageSelect.addEventListener("change", updatePackageMeta);
+        updatePackageMeta();
+      }
+
+      if (accessCodeInput) {
+        accessCodeInput.addEventListener("input", () => {
+          lockDownloadButton();
+          if (downloadStatus) downloadStatus.style.display = "none";
+        });
+      }
+
+      if (clientDownloadForm) {
+        clientDownloadForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const key = packageSelect ? packageSelect.value : "sage50";
+          const pkg = PAID_PACKAGES[key];
+          const enteredCode = (accessCodeInput ? accessCodeInput.value : "").trim().toUpperCase();
+
+          if (!enteredCode) {
+            lockDownloadButton("Please enter your client access code after completing payment.");
+            return;
+          }
+
+          const allowed = pkg && pkg.validCodes.map((c) => c.toUpperCase()).includes(enteredCode);
+          if (!allowed) {
+            lockDownloadButton("Invalid or unassigned access code for " + (pkg ? pkg.title : "this package") + ". Contact Harrison to confirm payment and receive your code.");
+            return;
+          }
+
+          if (accessBadge) {
+            accessBadge.className = "status-pill unlocked";
+            accessBadge.textContent = "🔓 Unlocked — Licensed Client Download Ready";
+          }
+          if (downloadActionBtn) {
+            downloadActionBtn.setAttribute("href", pkg.url);
+            downloadActionBtn.setAttribute("download", pkg.file);
+            downloadActionBtn.setAttribute("target", "_blank");
+            downloadActionBtn.setAttribute("rel", "noopener noreferrer");
+            downloadActionBtn.setAttribute("aria-disabled", "false");
+            downloadActionBtn.style.pointerEvents = "auto";
+            downloadActionBtn.style.opacity = "1";
+          }
+          if (downloadStatus) {
+            downloadStatus.textContent = "Access verified for " + pkg.title + " (" + pkg.file + "). Click 'Download Software' to start.";
+            downloadStatus.classList.remove("error");
+            downloadStatus.style.display = "block";
+          }
+        });
+      }
+
+      // Admin / Trainer Helper: Generate Code & Dispatch via WhatsApp / Email
+      const generateCodeBtn = document.getElementById("generateCodeBtn");
+      const dispatchCodeEl = document.getElementById("dispatchCode");
+      const dispatchClientNameEl = document.getElementById("dispatchClientName");
+      const dispatchPackageEl = document.getElementById("dispatchPackage");
+      const dispatchNotesEl = document.getElementById("dispatchNotes");
+      const sendAccessWaBtn = document.getElementById("sendAccessWaBtn");
+      const sendAccessEmailBtn = document.getElementById("sendAccessEmailBtn");
+      const dispatchStatus = document.getElementById("dispatchStatus");
+
+      function showDispatchStatus(msg, isError) {
+        if (!dispatchStatus) return;
+        dispatchStatus.textContent = msg;
+        dispatchStatus.classList.toggle("error", Boolean(isError));
+        dispatchStatus.style.display = "block";
+      }
+
+      if (generateCodeBtn && dispatchCodeEl) {
+        generateCodeBtn.addEventListener("click", () => {
+          const rand = Math.random().toString(36).substring(2, 6).toUpperCase();
+          const yr = new Date().getFullYear();
+          dispatchCodeEl.value = "HDK-" + rand + "-" + yr;
+        });
+      }
+
+      function buildDispatchMessage() {
+        const clientName = (dispatchClientNameEl ? dispatchClientNameEl.value : "").trim();
+        const pkgName = (dispatchPackageEl ? dispatchPackageEl.value : "").trim();
+        const code = (dispatchCodeEl ? dispatchCodeEl.value : "").trim();
+        const notes = (dispatchNotesEl ? dispatchNotesEl.value : "").trim();
+
+        if (!clientName || !pkgName || !code) {
+          showDispatchStatus("Please enter Client Name, Software/Deliverable Sent, and Access Code.", true);
+          return null;
+        }
+
+        return {
+          clientName,
+          pkgName,
+          code,
+          text: [
+            "Hello " + clientName + ", thank you for your payment with Harrison Ndungu ICT Solutions.",
+            "Software / Package: " + pkgName,
+            "Your Client Access Code: " + code,
+            notes ? "Setup Notes: " + notes : null,
+            "Support: +254 705 976 233"
+          ].filter(Boolean).join("\n")
+        };
+      }
+
+      if (sendAccessWaBtn) {
+        sendAccessWaBtn.addEventListener("click", () => {
+          const payload = buildDispatchMessage();
+          if (!payload) return;
+          const waUrl = "https://wa.me/?text=" + encodeURIComponent(payload.text);
+          showDispatchStatus("Opening WhatsApp so you can select and message " + payload.clientName + "...", false);
+          window.open(waUrl, "_blank", "noopener,noreferrer");
+        });
+      }
+
+      if (sendAccessEmailBtn) {
+        sendAccessEmailBtn.addEventListener("click", () => {
+          const payload = buildDispatchMessage();
+          if (!payload) return;
+          const subject = encodeURIComponent("Your Software Download Access Code — " + payload.pkgName);
+          const body = encodeURIComponent(payload.text);
+          showDispatchStatus("Opening your email client with the access message for " + payload.clientName + "...", false);
+          window.location.href = "mailto:?subject=" + subject + "&body=" + body;
+        });
+      }
+
+      // 9. Inquiry Form Validation + WhatsApp & Email Actions
       const inquiryForm = document.getElementById("inquiryForm");
       const emailSendBtn = document.getElementById("emailSendBtn");
       const formStatus = document.getElementById("formStatus");
