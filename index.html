@@ -1130,29 +1130,18 @@
         </div>
 
         <div>
-          <div class="why-choose-box">
-            <img
-              id="aboveWhyClientsPhoto"
-              src="./assets/DD.png"
-              data-candidates="./assets/DD.png,./DD.png,https://njoroo-tech.github.io/all-ict-services-website/assets/DD.png"
-              data-fallback="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80"
-              data-svg-label="Practical ICT Lab Training"
-              alt="Harrison Ndungu guiding students during an ICT practical session"
-              class="why-choose-photo"
-            >
-          </div>
-          <div class="why-choose-box">
-            <img
-              id="whyChoosePhoto"
-              src="./assets/about-photo.jpg"
-              data-candidates="./assets/about-photo.jpg,./about-photo.jpg,./assets/AdobeExpressPhotos_3dca923a90bf45db95afef9e4c49f30d_CopyEdited.png,./assets/hhn.jpeg,./hhn.jpeg,https://njoroo-tech.github.io/all-ict-services-website/assets/about-photo.jpg"
-              data-fallback="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=80"
-              data-svg-label="Why Choose Us"
-              alt="Harrison Ndungu ICT Solutions Training and Support"
-              class="why-choose-photo"
-            >
-          </div>
           <div class="about-panel">
+            <div class="why-choose-box">
+              <img
+                id="trainingSupportPhoto"
+                src="./assets/DD.png"
+                data-candidates="./assets/DD.png,./DD.png,./assets/about-photo.jpg,./about-photo.jpg,./assets/hhn.jpeg,./hhn.jpeg,https://njoroo-tech.github.io/all-ict-services-website/assets/DD.png"
+                data-fallback="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80"
+                data-svg-label="Harrison Ndungu ICT Solutions Training and Support"
+                alt="Harrison Ndungu ICT Solutions Training and Support"
+                class="why-choose-photo"
+              >
+            </div>
             <h3>Why Clients Work With Us</h3>
             <ul>
               <li>Fast diagnostics, OS setup, and network troubleshooting</li>
@@ -1414,19 +1403,19 @@
       }
       startAutoSlide();
 
-      // Rotate "Why Choose Us" photo
-      const whyChoosePhoto = document.getElementById("whyChoosePhoto");
-      if (whyChoosePhoto) {
-        const whySources = [
+      // Rotate Training and Support photo
+      const trainingSupportPhoto = document.getElementById("trainingSupportPhoto");
+      if (trainingSupportPhoto) {
+        const trainingSources = [
+          "./assets/DD.png",
           "./assets/about-photo.jpg",
-          "./assets/AdobeExpressPhotos_3dca923a90bf45db95afef9e4c49f30d_CopyEdited.png",
           "./assets/hhn.jpeg",
           "./assets/CC.jpeg"
         ];
-        let whyIdx = 0;
+        let trainIdx = 0;
         setInterval(function () {
-          whyIdx = (whyIdx + 1) % whySources.length;
-          whyChoosePhoto.src = whySources[whyIdx];
+          trainIdx = (trainIdx + 1) % trainingSources.length;
+          trainingSupportPhoto.src = trainingSources[trainIdx];
         }, 4500);
       }
 
