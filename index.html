@@ -1103,17 +1103,34 @@
           </form>
         </div>
 
-        <!-- How Client Access Works -->
+        <!-- Add Software Package Card -->
         <div class="card">
-          <h3>How Paid Access &amp; Setup Works</h3>
-          <p>Every software setup or custom deliverable is verified before release so you receive clean files and clear guidance.</p>
-          <ul>
-            <li><strong>Step 1 — Request &amp; Quote:</strong> Confirm the exact software version, seat/device count, or project scope.</li>
-            <li><strong>Step 2 — Payment Confirmation:</strong> Complete payment via M-Pesa or agreed channel and share your reference.</li>
-            <li><strong>Step 3 — Access Code Issued:</strong> Receive your client download code and setup checklist.</li>
-            <li><strong>Step 4 — Installation Support:</strong> Optional remote/on-site setup, configuration, and training.</li>
-          </ul>
-          <a class="button button-whatsapp" href="https://wa.me/254705976233?text=Hello%20Harrison,%20I%20would%20like%20to%20request%20a%20software%20package%20and%20client%20access%20code." target="_blank" rel="noopener noreferrer">Request Access Code on WhatsApp</a>
+          <h3>Add Software Package</h3>
+          <p>Add a new software installer or deliverable into the download selector above.</p>
+
+          <form id="addSoftwareForm" novalidate>
+            <label for="swTitle">Software Name *</label>
+            <input type="text" id="swTitle" name="swTitle" placeholder="e.g. QuickBooks Desktop Pro 2026 (.exe)" required>
+
+            <label for="swFile">File Name *</label>
+            <input type="text" id="swFile" name="swFile" placeholder="e.g. QuickBooks-Pro-2026-Setup.exe" required>
+
+            <label for="swSize">Package Size</label>
+            <input type="text" id="swSize" name="swSize" placeholder="e.g. 620 MB">
+
+            <label for="swOs">Compatibility</label>
+            <input type="text" id="swOs" name="swOs" placeholder="e.g. Windows 10 / 11 (64-bit)">
+
+            <label for="swUrl">Download URL</label>
+            <input type="url" id="swUrl" name="swUrl" placeholder="https://your-drive-or-host-link/file.exe">
+
+            <div class="form-buttons">
+              <button type="submit" class="button" id="addSoftwareBtn">Add to Download List</button>
+              <button type="button" class="button button-outline" id="resetSoftwareBtn">Reset Added Items</button>
+            </div>
+
+            <div id="addSoftwareStatus" class="form-status" role="status" aria-live="polite"></div>
+          </form>
         </div>
       </div>
     </section>
@@ -1278,7 +1295,6 @@
 
           img.addEventListener("error", tryNext);
 
-          // If current src already failed before listener attached
           if (img.complete && img.naturalWidth === 0) {
             tryNext();
           }
@@ -1445,8 +1461,10 @@
         });
       });
 
-      // Paid client download gate
+      // Paid client download gate & dynamic software package management
       const VALID_ACCESS_CODES = ["NDUNGU2026", "ICT-PAID", "CLIENT2026"];
+      const CUSTOM_PACKAGES_KEY = "ndungu_custom_software_packages_v1";
+
       const packageSelect = document.getElementById("packageSelect");
       const accessCodeInput = document.getElementById("clientAccessCode");
       const unlockBtn = document.getElementById("unlockDownloadBtn");
@@ -1456,6 +1474,15 @@
       const metaFile = document.getElementById("metaFile");
       const metaSize = document.getElementById("metaSize");
       const metaOs = document.getElementById("metaOs");
+
+      const addSoftwareForm = document.getElementById("addSoftwareForm");
+      const swTitleInput = document.getElementById("swTitle");
+      const swFileInput = document.getElementById("swFile");
+      const swSizeInput = document.getElementById("swSize");
+      const swOsInput = document.getElementById("swOs");
+      const swUrlInput = document.getElementById("swUrl");
+      const resetSoftwareBtn = document.getElementById("resetSoftwareBtn");
+      const addSoftwareStatus = document.getElementById("addSoftwareStatus");
 
       let isUnlocked = false;
 
@@ -1474,6 +1501,37 @@
         el.classList.toggle("error", Boolean(isError));
         el.style.display = "block";
       }
+
+      function appendPackageOption(pkg, selectIt) {
+        if (!packageSelect) return;
+        const opt = document.createElement("option");
+        opt.value = pkg.value;
+        opt.textContent = pkg.label;
+        opt.dataset.custom = "true";
+        opt.setAttribute("data-file", pkg.file);
+        opt.setAttribute("data-size", pkg.size || "—");
+        opt.setAttribute("data-os", pkg.os || "Windows 10 / 11");
+        opt.setAttribute("data-url", pkg.url || "");
+        packageSelect.appendChild(opt);
+
+        if (selectIt) {
+          packageSelect.value = pkg.value;
+          updatePackageMeta();
+        }
+      }
+
+      function loadCustomPackages() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(CUSTOM_PACKAGES_KEY) || "[]");
+          if (Array.isArray(saved)) {
+            saved.forEach((pkg) => appendPackageOption(pkg, false));
+          }
+        } catch (_) {
+          // Ignore storage parse errors
+        }
+      }
+
+      loadCustomPackages();
 
       if (packageSelect) {
         packageSelect.addEventListener("change", updatePackageMeta);
@@ -1519,6 +1577,58 @@
           if (downloadUrl && !downloadUrl.includes("example.com")) {
             window.open(downloadUrl, "_blank", "noopener,noreferrer");
           }
+        });
+      }
+
+      if (addSoftwareForm) {
+        addSoftwareForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const label = (swTitleInput ? swTitleInput.value : "").trim();
+          const file = (swFileInput ? swFileInput.value : "").trim();
+          const size = (swSizeInput ? swSizeInput.value : "").trim() || "—";
+          const os = (swOsInput ? swOsInput.value : "").trim() || "Windows 10 / 11";
+          const url = (swUrlInput ? swUrlInput.value : "").trim();
+
+          if (!label || !file) {
+            setStatus(addSoftwareStatus, "Enter both a software name and file name.", true);
+            return;
+          }
+
+          const newPkg = {
+            value: "custom_" + Date.now(),
+            label,
+            file,
+            size,
+            os,
+            url
+          };
+
+          appendPackageOption(newPkg, true);
+
+          try {
+            const current = JSON.parse(localStorage.getItem(CUSTOM_PACKAGES_KEY) || "[]");
+            current.push(newPkg);
+            localStorage.setItem(CUSTOM_PACKAGES_KEY, JSON.stringify(current));
+          } catch (_) {
+            // Ignore storage quota/permission errors
+          }
+
+          addSoftwareForm.reset();
+          setStatus(addSoftwareStatus, `Added "${label}" to the download selector.`, false);
+        });
+      }
+
+      if (resetSoftwareBtn && packageSelect) {
+        resetSoftwareBtn.addEventListener("click", () => {
+          localStorage.removeItem(CUSTOM_PACKAGES_KEY);
+          Array.from(packageSelect.options).forEach((opt) => {
+            if (opt.dataset.custom === "true") {
+              opt.remove();
+            }
+          });
+          packageSelect.selectedIndex = 0;
+          updatePackageMeta();
+          setStatus(addSoftwareStatus, "Removed custom software entries and restored default list.", false);
         });
       }
 
