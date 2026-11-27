@@ -472,146 +472,167 @@ footer a:hover{text-decoration:underline}
         charIndex--;
         typedRoleEl.textContent=current.slice(0,charIndex);
         if(charIndex===0){deleting=false;roleIndex=(roleIndex+1)%roles.length;setTimeout(tickTyping,320);return;}
-        setTimeout(tickTyping,32);
+        setTimeout(tickTyping,35);
       }
     }
     tickTyping();
   }
 
-  function makeSvgFallback(label){
-    const safeLabel=(label||"ICT Solutions").replace(/[<>&"]/g,"");
-    const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#03045e"/><stop offset="100%" stop-color="#0077b6"/></linearGradient></defs><rect width="800" height="450" fill="url(#g)"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#e0f2fe" font-family="system-ui, sans-serif" font-size="30" font-weight="700">${safeLabel}</text></svg>`;
-    return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(svg);
-  }
-
-  function attachImageResilience(img){
-    const rawCandidates=(img.getAttribute("data-candidates")||"").split(",").map(s=>s.trim()).filter(Boolean);
-    const fallbackUrl=img.getAttribute("data-fallback")||"";
-    const svgLabel=img.getAttribute("data-svg-label")||img.alt||"ICT Solutions";
-    const queue=[];
-    if(img.getAttribute("src"))queue.push(img.getAttribute("src"));
-    rawCandidates.forEach(c=>{if(!queue.includes(c))queue.push(c);});
-    if(fallbackUrl&&!queue.includes(fallbackUrl))queue.push(fallbackUrl);
-    queue.push(makeSvgFallback(svgLabel));
+  document.querySelectorAll("img[data-candidates]").forEach(function(img){
+    const candidates=(img.getAttribute("data-candidates")||"").split(",").map(function(s){return s.trim();}).filter(Boolean);
+    const fallback=img.getAttribute("data-fallback")||"";
+    const label=img.getAttribute("data-svg-label")||"ICT Solutions";
     let idx=0;
-    img.addEventListener("error",function(){
-      idx++;
-      if(idx<queue.length)img.src=queue[idx];
-    });
-  }
-  document.querySelectorAll("img").forEach(attachImageResilience);
 
-  const slides=Array.from(document.querySelectorAll("#heroSlideshow .slide-img"));
-  const dots=Array.from(document.querySelectorAll("#slideDots .dot"));
+    function makeSvgPlaceholder(text){
+      const safe=text.replace(/[<>&"]/g,"");
+      const svg='<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#03045e"/><stop offset="100%" stop-color="#0077b6"/></linearGradient></defs><rect width="800" height="450" fill="url(#g)"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#ffffff" font-family="system-ui,sans-serif" font-size="32" font-weight="700">'+safe+'</text></svg>';
+      return "data:image/svg+xml;charset=UTF-8,"+encodeURIComponent(svg);
+    }
+
+    function tryNext(){
+      if(idx<candidates.length){
+        img.src=candidates[idx++];
+      }else if(fallback&&img.src!==fallback){
+        img.src=fallback;
+      }else{
+        img.onerror=null;
+        img.src=makeSvgPlaceholder(label);
+      }
+    }
+
+    img.addEventListener("error",tryNext);
+    if(img.complete&&img.naturalWidth===0)tryNext();
+  });
+
+  const slides=document.querySelectorAll("#heroSlideshow .slide-img");
+  const dots=document.querySelectorAll("#slideDots .dot");
   const prevBtn=document.getElementById("prevSlide");
   const nextBtn=document.getElementById("nextSlide");
-  let activeSlide=0,slideTimer=null;
+  let slideIdx=0;
+  let slideTimer=null;
 
   function showSlide(index){
     if(!slides.length)return;
-    activeSlide=(index+slides.length)%slides.length;
-    slides.forEach((s,i)=>s.classList.toggle("active",i===activeSlide));
-    dots.forEach((d,i)=>{
-      const isCurrent=i===activeSlide;
-      d.classList.toggle("active",isCurrent);
-      d.setAttribute("aria-current",String(isCurrent));
+    slideIdx=(index+slides.length)%slides.length;
+    slides.forEach(function(s,i){s.classList.toggle("active",i===slideIdx);});
+    dots.forEach(function(d,i){
+      const active=i===slideIdx;
+      d.classList.toggle("active",active);
+      d.setAttribute("aria-current",active?"true":"false");
     });
   }
-  function startAutoSlide(){stopAutoSlide();slideTimer=setInterval(()=>showSlide(activeSlide+1),4000);}
-  function stopAutoSlide(){if(slideTimer){clearInterval(slideTimer);slideTimer=null;}}
-  if(prevBtn)prevBtn.addEventListener("click",()=>{showSlide(activeSlide-1);startAutoSlide();});
-  if(nextBtn)nextBtn.addEventListener("click",()=>{showSlide(activeSlide+1);startAutoSlide();});
-  dots.forEach(dot=>dot.addEventListener("click",()=>{showSlide(Number(dot.getAttribute("data-index"))||0);startAutoSlide();}));
-  const slideshowEl=document.getElementById("heroSlideshow");
-  if(slideshowEl){
-    slideshowEl.addEventListener("mouseenter",stopAutoSlide);
-    slideshowEl.addEventListener("mouseleave",startAutoSlide);
-  }
-  startAutoSlide();
 
-  const trainingSupportPhoto=document.getElementById("trainingSupportPhoto");
-  const ddImgDebugNote=document.getElementById("ddImgDebugNote");
-  if(trainingSupportPhoto){
-    trainingSupportPhoto.addEventListener("load",function(){
-      const isLocalDd=trainingSupportPhoto.currentSrc.endsWith("/assets/DD.png")||trainingSupportPhoto.currentSrc.endsWith("\\assets\\DD.png");
-      if(ddImgDebugNote){
-        ddImgDebugNote.textContent=isLocalDd
-          ?"Loaded local ./assets/DD.png ("+trainingSupportPhoto.naturalWidth+"x"+trainingSupportPhoto.naturalHeight+")"
-          :"Using fallback image — save your file as ./assets/DD.png to display the local photo.";
-      }
-    });
-    trainingSupportPhoto.addEventListener("error",function(){
-      console.warn("Image source failed:",trainingSupportPhoto.src);
-    });
+  function startAutoSlide(){
+    stopAutoSlide();
+    slideTimer=setInterval(function(){showSlide(slideIdx+1);},4000);
   }
+
+  function stopAutoSlide(){
+    if(slideTimer){clearInterval(slideTimer);slideTimer=null;}
+  }
+
+  if(prevBtn)prevBtn.addEventListener("click",function(){showSlide(slideIdx-1);startAutoSlide();});
+  if(nextBtn)nextBtn.addEventListener("click",function(){showSlide(slideIdx+1);startAutoSlide();});
+  dots.forEach(function(dot){
+    dot.addEventListener("click",function(){
+      const idx=parseInt(dot.getAttribute("data-index"),10);
+      if(!Number.isNaN(idx)){showSlide(idx);startAutoSlide();}
+    });
+  });
+  startAutoSlide();
 
   const filterButtons=document.querySelectorAll(".filter-btn");
   const serviceCards=document.querySelectorAll("#servicesGrid .card");
-  filterButtons.forEach(btn=>{
+  filterButtons.forEach(function(btn){
     btn.addEventListener("click",function(){
       const filter=btn.getAttribute("data-filter");
-      filterButtons.forEach(b=>b.classList.toggle("active",b===btn));
-      serviceCards.forEach(card=>{
+      filterButtons.forEach(function(b){b.classList.toggle("active",b===btn);});
+      serviceCards.forEach(function(card){
         const match=filter==="all"||card.getAttribute("data-category")===filter;
         card.classList.toggle("hidden",!match);
       });
     });
   });
 
+  const VALID_CODES=["HN-PAID-2026","NDUNGU-VIP-2026","ICT-CLIENT-2026"];
   const packageSelect=document.getElementById("packageSelect");
-  const metaFile=document.getElementById("metaFile");
-  const metaSize=document.getElementById("metaSize");
-  const metaOs=document.getElementById("metaOs");
   const clientAccessCode=document.getElementById("clientAccessCode");
   const verifyAccessBtn=document.getElementById("verifyAccessBtn");
   const downloadPackageBtn=document.getElementById("downloadPackageBtn");
+  const clientDownloadForm=document.getElementById("clientDownloadForm");
   const accessBadge=document.getElementById("accessBadge");
   const downloadStatus=document.getElementById("downloadStatus");
-  const clientDownloadForm=document.getElementById("clientDownloadForm");
-
-  const validAccessCodes=new Set(["HN-PAID-2026","NDUNGU-ICT-PRO","CLIENT-2026"]);
+  const metaFile=document.getElementById("metaFile");
+  const metaSize=document.getElementById("metaSize");
+  const metaOs=document.getElementById("metaOs");
   let isUnlocked=false;
 
   function syncPackageMeta(){
     if(!packageSelect)return;
     const opt=packageSelect.options[packageSelect.selectedIndex];
     if(!opt)return;
-    if(metaFile)metaFile.textContent=opt.getAttribute("data-file")||"Package";
-    if(metaSize)metaSize.textContent=opt.getAttribute("data-size")||"N/A";
-    if(metaOs)metaOs.textContent=opt.getAttribute("data-os")||"Windows";
+    if(metaFile)metaFile.textContent=opt.getAttribute("data-file")||"";
+    if(metaSize)metaSize.textContent=opt.getAttribute("data-size")||"";
+    if(metaOs)metaOs.textContent=opt.getAttribute("data-os")||"";
   }
-  function setUnlockedState(unlocked,message,isError){
-    isUnlocked=unlocked;
-    if(downloadPackageBtn)downloadPackageBtn.disabled=!unlocked;
-    if(accessBadge){
-      accessBadge.textContent=unlocked?"Unlocked — Access Verified":"Locked — Payment Access Required";
-      accessBadge.classList.toggle("locked",!unlocked);
-      accessBadge.classList.toggle("unlocked",unlocked);
-    }
-    if(downloadStatus&&message){
-      downloadStatus.textContent=message;
-      downloadStatus.style.display="block";
-      downloadStatus.classList.toggle("error",Boolean(isError));
-    }
+
+  function showStatus(el,message,isError){
+    if(!el)return;
+    el.textContent=message;
+    el.classList.toggle("error",Boolean(isError));
+    el.style.display="block";
   }
-  if(packageSelect){packageSelect.addEventListener("change",syncPackageMeta);syncPackageMeta();}
+
+  if(packageSelect){
+    packageSelect.addEventListener("change",function(){
+      syncPackageMeta();
+      if(isUnlocked&&downloadStatus&&downloadStatus.style.display==="block"){
+        showStatus(downloadStatus,"Package updated. Ready to download.",false);
+      }
+    });
+    syncPackageMeta();
+  }
+
   if(verifyAccessBtn&&clientAccessCode){
     verifyAccessBtn.addEventListener("click",function(){
       const code=clientAccessCode.value.trim().toUpperCase();
-      if(!code){setUnlockedState(false,"Please enter your client access code first.",true);return;}
-      if(validAccessCodes.has(code)){setUnlockedState(true,"Access code verified. You can now download your selected package.",false);}
-      else{setUnlockedState(false,"Invalid or unconfirmed access code. Contact Harrison on WhatsApp to confirm payment.",true);}
+      if(VALID_CODES.indexOf(code)!==-1){
+        isUnlocked=true;
+        if(downloadPackageBtn)downloadPackageBtn.disabled=false;
+        if(accessBadge){
+          accessBadge.textContent="Unlocked — Verified Client Access";
+          accessBadge.className="status-pill unlocked";
+        }
+        showStatus(downloadStatus,"Access code verified. Click Download Package to start.",false);
+      }else{
+        isUnlocked=false;
+        if(downloadPackageBtn)downloadPackageBtn.disabled=true;
+        if(accessBadge){
+          accessBadge.textContent="Locked — Payment Access Required";
+          accessBadge.className="status-pill locked";
+        }
+        showStatus(downloadStatus,"Invalid or unverified access code. Request a code via WhatsApp after payment.",true);
+      }
     });
   }
+
   if(clientDownloadForm&&packageSelect){
     clientDownloadForm.addEventListener("submit",function(e){
       e.preventDefault();
-      if(!isUnlocked){setUnlockedState(false,"Please verify a valid client access code before downloading.",true);return;}
+      if(!isUnlocked){
+        showStatus(downloadStatus,"Please enter a valid client access code and click Verify & Unlock first.",true);
+        return;
+      }
       const opt=packageSelect.options[packageSelect.selectedIndex];
       const url=opt?opt.getAttribute("data-url"):"";
-      const fileName=opt?opt.getAttribute("data-file"):"package";
-      if(url)window.open(url,"_blank","noopener,noreferrer");
-      setUnlockedState(true,"Starting download for "+fileName+"...",false);
+      const file=opt?opt.getAttribute("data-file"):"package";
+      if(!url||url.indexOf("example.com")!==-1){
+        showStatus(downloadStatus,"Configure the live download URL for "+file+" before deploying to production.",true);
+        return;
+      }
+      showStatus(downloadStatus,"Starting download for "+file+"...",false);
+      window.open(url,"_blank","noopener,noreferrer");
     });
   }
 
@@ -619,38 +640,51 @@ footer a:hover{text-decoration:underline}
   const emailFallbackBtn=document.getElementById("emailFallbackBtn");
   const contactStatus=document.getElementById("contactStatus");
 
-  function getFormValues(){
-    return{
-      name:(document.getElementById("clientName")?.value||"").trim(),
-      contact:(document.getElementById("clientContact")?.value||"").trim(),
-      topic:document.getElementById("serviceTopic")?.value||"ICT Service",
-      message:(document.getElementById("clientMessage")?.value||"").trim()
-    };
+  function getInquiryPayload(){
+    const name=document.getElementById("clientName").value.trim();
+    const contact=document.getElementById("clientContact").value.trim();
+    const topic=document.getElementById("serviceTopic").value;
+    const message=document.getElementById("clientMessage").value.trim();
+    if(!name||!contact||!message){
+      return{ok:false,error:"Please fill in your name, phone/email, and project details."};
+    }
+    return{ok:true,name:name,contact:contact,topic:topic,message:message};
   }
-  function showContactStatus(msg,isError){
-    if(!contactStatus)return;
-    contactStatus.textContent=msg;
-    contactStatus.style.display="block";
-    contactStatus.classList.toggle("error",Boolean(isError));
-  }
+
   if(contactForm){
     contactForm.addEventListener("submit",function(e){
       e.preventDefault();
-      const data=getFormValues();
-      if(!data.name||!data.contact||!data.message){showContactStatus("Please fill in your name, contact details, and inquiry message.",true);return;}
-      const text=["Hello Harrison, I would like to inquire about your ICT services:","Name: "+data.name,"Contact: "+data.contact,"Service: "+data.topic,"Details: "+data.message].join("\n");
-      window.open("https://wa.me/254705976233?text="+encodeURIComponent(text),"_blank","noopener,noreferrer");
-      showContactStatus("WhatsApp message prepared. If it did not open automatically, click the WhatsApp badge on the left.",false);
+      const data=getInquiryPayload();
+      if(!data.ok){
+        showStatus(contactStatus,data.error,true);
+        return;
+      }
+      const text=encodeURIComponent(
+        "Hello Harrison, my name is "+data.name+" ("+data.contact+").\n"+
+        "Service: "+data.topic+"\n"+
+        "Details: "+data.message
+      );
+      showStatus(contactStatus,"Opening WhatsApp with your inquiry...",false);
+      window.open("https://wa.me/254705976233?text="+text,"_blank","noopener,noreferrer");
     });
   }
+
   if(emailFallbackBtn){
     emailFallbackBtn.addEventListener("click",function(){
-      const data=getFormValues();
-      if(!data.name||!data.message){showContactStatus("Please enter your name and inquiry details before sending via email.",true);return;}
-      const subject=encodeURIComponent("ICT Inquiry: "+data.topic+" ("+data.name+")");
-      const body=encodeURIComponent("Name: "+data.name+"\nContact: "+data.contact+"\nService: "+data.topic+"\n\n"+data.message);
-      window.location.href="mailto:harrison@example.com?subject="+subject+"&body="+body;
-      showContactStatus("Opening your email client...",false);
+      const data=getInquiryPayload();
+      if(!data.ok){
+        showStatus(contactStatus,data.error,true);
+        return;
+      }
+      const subject=encodeURIComponent("ICT Inquiry: "+data.topic+" — "+data.name);
+      const body=encodeURIComponent(
+        "Name: "+data.name+"\n"+
+        "Contact: "+data.contact+"\n"+
+        "Service Needed: "+data.topic+"\n\n"+
+        data.message
+      );
+      showStatus(contactStatus,"Opening your email client...",false);
+      window.location.href="mailto:harrisonndungu@example.com?subject="+subject+"&body="+body;
     });
   }
 })();
